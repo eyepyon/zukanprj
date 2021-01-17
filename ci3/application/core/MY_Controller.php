@@ -47,7 +47,7 @@ class MY_Controller extends CI_Controller {
 		//
 		if ( !$loggedIn && !strpos( $current_url, 'member' ) && !stripos( $current_url, 'reg' )&& !stripos( $current_url, 'info' )&& !stripos( $current_url, 'user_authentication' ) ) {
 			//
-			$redirectUrl = '/member/';
+			$redirectUrl = '/login/';
 			redirect($redirectUrl);
 			exit;
 		}
