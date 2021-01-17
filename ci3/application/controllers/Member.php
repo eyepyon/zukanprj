@@ -12,7 +12,7 @@
  * @property CI_Session $session
  * @property Facebook $facebook
  */
-class Login extends MY_Controller
+class Member extends MY_Controller
 {
 
     var $forms = array(
