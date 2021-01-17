@@ -14,6 +14,8 @@ class Info extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->data['base_url'] = $this->config->item('base_url');
 	}
 
 	public function index()

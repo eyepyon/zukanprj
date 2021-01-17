@@ -12,7 +12,7 @@ class MY_Controller extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$config['base_url'] = 'http://www.zukan.cloud/';
+//		$config['base_url'] = 'http://www.zukan.cloud/';
 
 		// ライブラリ群のロード
 //		$libraries = array( 'parser','session' );
