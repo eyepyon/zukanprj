@@ -139,8 +139,9 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+//$config['composer_autoload'] = FALSE;
 //$config['composer_autoload'] = TRUE;
+$config['composer_autoload'] = '/home/sites/www.zukan.cloud/wwwroot/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
