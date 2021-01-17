@@ -14,7 +14,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $hook['pre_system'] = function() {
 //    if(!defined(APPPATH)){
-	$APPPATH = '/home/sites/www.zukan.cloud/wwwroot/zukanprj/ci3/application/';
+//	$APPPATH = '/home/sites/www.zukan.cloud/wwwroot/zukanprj/ci3/application/';
+	$APPPATH = '/var/www/zukanprj/ci3/application/';
 //    }else{
 //        $APPPATH = APPPATH;
 //    }

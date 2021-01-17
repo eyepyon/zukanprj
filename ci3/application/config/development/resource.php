@@ -5,11 +5,11 @@
  * @author: aida
  * @version: 2019-03-16 14:33
  */
-$config['base_url'] = 'http://www.zukan.cloud/';
+$config['base_url'] = 'http://dev.zukan.cloud/';
 //$config['base_url'] = 'https://www.zukan.cloud/';
 // アップ用のディレクトリ
-$config['file_upload_dir'] = '/home/sites/www.zukan.cloud/wwwroot/zukanprj/html/files/';
-$config['apos_upload_dir'] = '/home/sites/www.zukan.cloud/wwwroot/zukanprj/html/apos/';
+//$config['file_upload_dir'] = '/home/sites/www.zukan.cloud/wwwroot/zukanprj/html/files/';
+$config['file_upload_dir'] = '/var/www/zukanprj/html/files/';
 
 $config['api_type_add_id'] = 1;
 

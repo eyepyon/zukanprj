@@ -141,7 +141,9 @@ $config['subclass_prefix'] = 'MY_';
 */
 //$config['composer_autoload'] = FALSE;
 //$config['composer_autoload'] = TRUE;
-$config['composer_autoload'] = '/home/sites/www.zukan.cloud/wwwroot/vendor/autoload.php';
+//$config['composer_autoload'] = '/home/sites/www.zukan.cloud/wwwroot/vendor/autoload.php';
+$config['composer_autoload'] = '/var/www/zukanprj/vendor/autoload.php';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -239,7 +241,8 @@ $config['log_threshold'] = 4;
 | application/logs/ directory. Use a full server path with trailing slash.
 |
 */
-$config['log_path'] = '/home/sites/www.zukan.cloud/wwwroot/zukanprj/ci3/application/logs/';
+//$config['log_path'] = '/home/sites/www.zukan.cloud/wwwroot/zukanprj/ci3/application/logs/';
+$config['log_path'] = '/var/www/zukanprj/ci3/application/logs/';
 
 /*
 |--------------------------------------------------------------------------

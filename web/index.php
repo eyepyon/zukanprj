@@ -98,7 +98,8 @@ switch (ENVIRONMENT)
  * Set the path if it is not in the same directory as this file.
  */
 //	$system_path = 'system';
-    $system_path = '/home/sites/www.zukan.cloud/wwwroot/zukanprj/ci3/system';
+//  $system_path = '/home/sites/www.zukan.cloud/wwwroot/zukanprj/ci3/system';
+    $system_path = '/var/www/zukanprj/ci3/system';
 
 /*
  *---------------------------------------------------------------
@@ -116,7 +117,8 @@ switch (ENVIRONMENT)
  * NO TRAILING SLASH!
  */
 //	$application_folder = 'application';
-    $application_folder = '/home/sites/www.zukan.cloud/wwwroot/zukanprj/ci3/application';
+//  $application_folder = '/home/sites/www.zukan.cloud/wwwroot/zukanprj/ci3/application';
+    $application_folder = '/var/www/zukanprj/ci3/application';
 
 /*
  *---------------------------------------------------------------
