@@ -46,7 +46,7 @@ class Member extends MY_Controller
     public function index()
     {
         $this->data['error_word'] = "";
-        $this->data['login_url'] = $this->facebook->login_url();
+//        $this->data['login_url'] = $this->facebook->login_url();
 
         $this->smarty->view('login.tpl', $this->data);
     }
