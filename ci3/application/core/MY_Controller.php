@@ -40,17 +40,17 @@ class MY_Controller extends CI_Controller {
 		//
 		$current_url = current_url();
 		//
-		if ( !$admin_login && !strpos( $current_url, 'login' ) && !strpos( $current_url, 'videopass' ) ) {
-
-			$uri = uri_string();
-			//
-			$redirectUrl = '/login/';
-			if ( $uri != "" ) {
-				$redirectUrl .= sprintf( "?u=%s", $uri );
-			}
-			redirect( $redirectUrl );
-			exit;
-		}
+//		if ( !$admin_login && !strpos( $current_url, 'login' ) && !strpos( $current_url, 'videopass' ) ) {
+//
+//			$uri = uri_string();
+//			//
+//			$redirectUrl = '/login/';
+//			if ( $uri != "" ) {
+//				$redirectUrl .= sprintf( "?u=%s", $uri );
+//			}
+//			redirect( $redirectUrl );
+//			exit;
+//		}
 
 		$this->data['admin_login'] = $admin_login;
 		$this->data['admin_name'] = $admin_name;
