@@ -4,7 +4,7 @@
  * user_model.php
  *
  * @author: aida
- * @version: 2021-01-16 21:37
+ * @version: 2019-03-16 21:37
  */
 class User_model extends CI_Model
 {
