@@ -7,7 +7,7 @@
  * @version: 2021-01-15 15:27
  */
 class MY_Controller extends CI_Controller {
-
+	protected $template;
 	var $data = array();
 
 	public function __construct() {
@@ -21,6 +21,10 @@ class MY_Controller extends CI_Controller {
 //		$helpers = array( 'cookie', 'url', 'form' );
 		$helpers = array( 'cookie', 'url', 'form');
 		$this->load->helper( $helpers );
+
+		$this->smarty->template_dir = APPPATH . 'templates';
+		$this->smarty->compile_dir  = APPPATH . 'cache/templates_c';
+		$this->template = 'layout.tpl';
 
 		if ( ENVIRONMENT == 'development' ) {
 //			$this->output->enable_profiler( true );
@@ -81,5 +85,18 @@ class MY_Controller extends CI_Controller {
 //		$this->parser->html_parse( $template_name, $this->data, $return_string, TRUE, HTML_ENCODING );
 //	}
 
+	public function view($template)
+	{
+		$this->template = $template;
+	}
+
+	public function _output($output)
+	{
+		if (strlen($output) > 0) {
+			echo $output;
+		} else {
+			$this->smarty->display($this->template);
+		}
+	}
 
 }
