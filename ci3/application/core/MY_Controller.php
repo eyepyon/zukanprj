@@ -22,8 +22,8 @@ class MY_Controller extends CI_Controller {
 		$helpers = array( 'cookie', 'url', 'form');
 		$this->load->helper( $helpers );
 
-		$this->smarty->template_dir = APPPATH . 'templates';
-		$this->smarty->compile_dir  = APPPATH . 'cache/templates_c';
+		$this->smarty->template_dir = APPPATH . 'templates/';
+		$this->smarty->compile_dir  = APPPATH . 'cache/templates_c/';
 		$this->template = 'layout.tpl';
 
 		if ( ENVIRONMENT == 'development' ) {
