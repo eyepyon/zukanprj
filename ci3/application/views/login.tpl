@@ -29,7 +29,7 @@
 						<div class="col-lg-6">
 							<div class="p-5">
 								<div class="text-center">
-									<h1 class="h4 text-gray-900 mb-4">ShukinPAY</h1>
+									<h1 class="h4 text-gray-900 mb-4">Zukan</h1>
 								</div>
 									<a href="{$login_url}" class="btn btn-facebook btn-user btn-block">
 										<i class="fab fa-facebook fa-fw"></i> Login with Facebook

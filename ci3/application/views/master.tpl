@@ -7,7 +7,7 @@
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="Expires" content="-1" />
-<title>{block name=title}{/block} | ShukinPAY</title>
+<title>{block name=title}{/block} | Zukan</title>
 {block name=javascript}{/block}
 <!-- Custom fonts for this template-->
 <link href="{$base_url}vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -41,7 +41,7 @@
 	<footer class="sticky-footer bg-white">
 		<div class="container my-auto">
 			<div class="copyright text-center my-auto">
-				<span>Copyright &copy; ShukinPAY 2019</span>
+				<span>Copyright &copy; Zukan 2021</span>
 			</div>
 		</div>
 	</footer>
