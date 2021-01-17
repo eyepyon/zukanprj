@@ -20,8 +20,9 @@ $hook['pre_system'] = function() {
 //    }
 
 	try {
-		$dotenv = Dotenv\Dotenv::create($APPPATH);
-//        $dotenv = new Dotenv\Dotenv($APPPATH);
+		$dotenv = Dotenv\Dotenv::createImmutable($APPPATH);
+//		$dotenv = Dotenv\Dotenv::create($APPPATH); // 旧ver
+//        $dotenv = new Dotenv\Dotenv($APPPATH); // 旧ver
 		$dotenv->load();
 	} catch (Exception $e) {
 		//
