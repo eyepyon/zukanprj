@@ -1,0 +1,21 @@
+
+Options +FollowSymLinks
+
+
+DirectoryIndex index.php index.html master.php
+
+RewriteEngine on
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ /master.php?/$1 [L]
+
+RewriteRule .*\.svn/.* - [F]
+
+SetEnv CI_ENV development
+
+<FilesMatch ".(eot|ttf|otf|woff)">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
