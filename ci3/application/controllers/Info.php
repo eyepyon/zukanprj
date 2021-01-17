@@ -15,7 +15,8 @@ class Info extends MY_Controller
 	{
 		parent::__construct();
 
-		$this->data['base_url'] = $this->config->item('base_url');
+//		$this->data['base_url'] = $this->config->item('base_url');
+		$this->data['base_url'] = "http://www.zukan.cloud/";
 	}
 
 	public function index()
@@ -46,6 +47,8 @@ class Info extends MY_Controller
 	{
 		$data = array();
 //		$this->smarty->view('info/privacy.tpl', $data);
+
+		$this->smarty->assign('data', $this->data);
 		$this->view('info/privacy.tpl');
 	}
 
