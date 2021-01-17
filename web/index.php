@@ -239,36 +239,36 @@ switch (ENVIRONMENT)
 	// Name of the "system" directory
 	define('SYSDIR', basename(BASEPATH));
 
-	// The path to the "application" directory
-	if (is_dir($application_folder))
-	{
-		if (($_temp = realpath($application_folder)) !== FALSE)
-		{
-			$application_folder = $_temp;
-		}
-		else
-		{
-			$application_folder = strtr(
-				rtrim($application_folder, '/\\'),
-				'/\\',
-				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
-			);
-		}
-	}
-	elseif (is_dir(BASEPATH.$application_folder.DIRECTORY_SEPARATOR))
-	{
-		$application_folder = BASEPATH.strtr(
-			trim($application_folder, '/\\'),
-			'/\\',
-			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
-		);
-	}
-	else
-	{
-		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
-		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
-		exit(3); // EXIT_CONFIG
-	}
+//	// The path to the "application" directory
+//	if (is_dir($application_folder))
+//	{
+//		if (($_temp = realpath($application_folder)) !== FALSE)
+//		{
+//			$application_folder = $_temp;
+//		}
+//		else
+//		{
+//			$application_folder = strtr(
+//				rtrim($application_folder, '/\\'),
+//				'/\\',
+//				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+//			);
+//		}
+//	}
+//	elseif (is_dir(BASEPATH.$application_folder.DIRECTORY_SEPARATOR))
+//	{
+//		$application_folder = BASEPATH.strtr(
+//			trim($application_folder, '/\\'),
+//			'/\\',
+//			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+//		);
+//	}
+//	else
+//	{
+//		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+//		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+//		exit(3); // EXIT_CONFIG
+//	}
 
 	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
 
