@@ -15,7 +15,7 @@
 {block name=javascript}
 <style type="text/css">
 .bg-detail-image {
-{if $roid_id > 0 && $roid.picture_file != ''}
+{if $record_id > 0 && $roid.picture_file != ''}
     background: url("https://shukin.pw/files/{$roid.picture_file}{$salt_wd}");
 {else}
     background: url("https://shukin.pw/img/pic1.jpg{$salt_wd}");
@@ -86,26 +86,26 @@
                         <hr/>
 
                         {if $roid.user_id == $user_id}
-                        <a href="/roid/edit/{$roid_id}/" class="btn btn-primary btn-user btn-block">
+                        <a href="/roid/edit/{$record_id}/" class="btn btn-primary btn-user btn-block">
                             <i class="fas fa-fw fa-cog"></i> 情報更新
                         </a>
                         <br/>
                         {if $roid.picture_file != ""}
-                        <a href="/roid/picture/{$roid_id}/" class="btn btn-primary btn-user btn-block">
+                        <a href="/roid/picture/{$record_id}/" class="btn btn-primary btn-user btn-block">
                             <i class="fas fa-camera fa-fw"></i> 画像更新
                         </a>
                             {else}
-                            <a href="/roid/picture/{$roid_id}/" class="btn btn-success btn-user btn-block">
+                            <a href="/roid/picture/{$record_id}/" class="btn btn-success btn-user btn-block">
                                 <i class="fas fa-camera fa-fw"></i> 画像追加
                             </a>
                         {/if}
                         <br/>
                         {if $roid.vrm_file != ""}
-                        <a href="/roid/vrm/{$roid_id}/" class="btn btn-primary btn-user btn-block">
+                        <a href="/roid/vrm/{$record_id}/" class="btn btn-primary btn-user btn-block">
                             <i class="fas fa-map fa-fw"></i> VRMファイル更新
                         </a>
                         {else}
-                            <a href="/roid/vrm/{$roid_id}/" class="btn btn-success btn-user btn-block">
+                            <a href="/roid/vrm/{$record_id}/" class="btn btn-success btn-user btn-block">
                                 <i class="fas fa-map fa-fw"></i> VRMファイル追加
                             </a>
                         {/if}

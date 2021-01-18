@@ -14,7 +14,7 @@
 {block name=javascript}
     <style type="text/css">
         .bg-detail-image {
-        {if $roid_id > 0 && $roid.picture_file != ''}
+        {if $record_id > 0 && $roid.picture_file != ''}
             background: url("https://shukin.pw/files/{$roid.picture_file}{$salt_wd}");
         {else}
             background: url("https://shukin.pw/img/pic2.jpg{$salt_wd}");
@@ -37,13 +37,13 @@
             <div class="col-lg-7">
                 <div class="p-5">
                     <div class="text-center">
-                        {if $roid_id > 0}
+                        {if $record_id > 0}
                             <h1 class="h4 text-gray-900 mb-4">図鑑更新</h1>
                         {else}
                             <h1 class="h4 text-gray-900 mb-4">図鑑作成</h1>
                         {/if}
                     </div>
-                    {form_open("roid/edit/$roid_id")}
+                    {form_open("roid/edit/$record_id")}
 
                     <div class="form-group">
                         図鑑名
