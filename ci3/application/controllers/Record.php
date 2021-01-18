@@ -62,8 +62,7 @@ class Record extends MY_Controller
     {
         parent::__construct();
 
-        $this->load->model('Nem_model', 'nemModel');
-        $this->load->model('Recordrecord_model', 'recordModel');
+        $this->load->model('Record_model', 'recordModel');
 
         $params = array();
         $this->load->library('Management', $params);
