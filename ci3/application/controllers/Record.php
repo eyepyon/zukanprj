@@ -7,7 +7,7 @@
  * @property CI_Pagination $pagination
  * @property Management $management
  * @property User_model $userModel
-
+ * @property Record_model $recordModel
  */
 
 class Record extends MY_Controller
@@ -129,8 +129,8 @@ class Record extends MY_Controller
         $search_val = $this->getSearchValue();
 
         $offset = $page * $this->data['page_limit'];
-        $list = $this->recordModel->getrecordList($offset, $this->data['page_limit'], $this->data["record_name"], $this->data["record_detail"], STATUS_FLAG_ON);
-        $total_rows = $this->recordModel->getRoidList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['record_name'], $this->data['record_detail'], STATUS_FLAG_ON);
+        $list = $this->recordModel->getRecordList($offset, $this->data['page_limit'], $this->data["record_name"], $this->data["record_detail"], STATUS_FLAG_ON);
+        $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['record_name'], $this->data['record_detail'], STATUS_FLAG_ON);
 
         foreach ($list as $key => $record){
             $list[$key]["popup_url"] = $this->getPopup($record['record_id'],IN_CODE_TYPE_ROID);
@@ -162,8 +162,8 @@ class Record extends MY_Controller
         $search_val = $this->getSearchValue();
 
         $offset = $page * $this->data['page_limit'];
-        $list = $this->recordModel->getRoidList($offset, $this->data['page_limit'], $this->data["record_name"], $this->data["record_detail"], STATUS_FLAG_ON);
-        $total_rows = $this->recordModel->getRoidList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['record_name'], $this->data['record_detail'], STATUS_FLAG_ON);
+        $list = $this->recordModel->getRecordList($offset, $this->data['page_limit'], $this->data["record_name"], $this->data["record_detail"], STATUS_FLAG_ON);
+        $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['record_name'], $this->data['record_detail'], STATUS_FLAG_ON);
 
         foreach ($list as $key => $record){
             $list[$key]["popup_url"] = $this->getPopup($record['record_id'],IN_CODE_TYPE_ROID);
@@ -198,7 +198,7 @@ class Record extends MY_Controller
         $mode = $this->input->post('mode');
 
         if ($record_id > 0) {
-            $record = $this->recordModel->getByRoidId($record_id);
+            $record = $this->recordModel->getByRecordId($record_id);
             $this->data['record'] = $record;
             //
             if ($mode != 'edit') {
@@ -231,7 +231,7 @@ class Record extends MY_Controller
             'status' => STATUS_FLAG_ON,
         );
 
-        $this->recordModel->setRoidData($record_id, $record);
+        $this->recordModel->setRecordData($record_id, $record);
 
         redirect('/record/complete/');
     }
@@ -358,7 +358,7 @@ class Record extends MY_Controller
             );
         }
 
-        $this->recordModel->setRoidData($record_id, $record);
+        $this->recordModel->setRecordData($record_id, $record);
 
         redirect('/record/picture_complete/');
     }
@@ -428,7 +428,7 @@ class Record extends MY_Controller
     public function detail($record_id = 0)
     {
         $this->data['record_id'] = $record_id;
-        $record = $this->recordModel->getByRoidId($record_id);
+        $record = $this->recordModel->getByRecordId($record_id);
         if (!$record) {
             redirect('/record/');
         }
@@ -449,7 +449,7 @@ class Record extends MY_Controller
                 $setData["wallet_pubkey"] = $public_key;
                 $setData["wallet_prikey"] = $private_key;
                 //
-                $this->recordModel->setRoidData($record["record_id"], $setData);
+                $this->recordModel->setRecordData($record["record_id"], $setData);
 
                 $record["wallet_address"] = $wallet_address;
                 $record["wallet_pubkey"] = $public_key;
@@ -539,7 +539,7 @@ class Record extends MY_Controller
         );
         $pop = anchor_popup(
             '/record/qr/'.$id,
-            'RoidQR',
+            'RecordQR',
             $attr
         );
         return $pop;
