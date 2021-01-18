@@ -47,9 +47,9 @@ class MY_Controller extends CI_Controller {
 		//
 		if ( !$loggedIn && !strpos( $current_url, 'member' ) && !stripos( $current_url, 'reg' )&& !stripos( $current_url, 'info' )&& !stripos( $current_url, 'user_authentication' ) ) {
 			//
-			$redirectUrl = '/login/';
-			redirect($redirectUrl);
-			exit;
+//			$redirectUrl = '/login/';
+//			redirect($redirectUrl);
+//			exit;
 		}
 
 		$this->data['loggedIn'] = $loggedIn;
