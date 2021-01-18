@@ -21,9 +21,9 @@ class Index extends MY_Controller {
 	}
 
 	public function index() {
-		$this->view('top.tpl');
+//		$this->view('top.tpl');
 
-//		$this->smarty->view('top.tpl',$this->data);
+		$this->smarty->view('top.tpl',$this->data);
 	}
 
 }
