@@ -21,8 +21,7 @@ class Top extends MY_Controller {
         // メッセージ未読数
         $this->data['message_count'] = 0;
 
-        $this->data["show_menu"]['roid'] = ' show';
-        $this->data["show_menu"]['currency'] = ' show';
+        $this->data["show_menu"]['record'] = ' show';
         $this->data["show_menu"]['project'] = ' show';
 		$this->data["show_menu"]['user'] = ' show';
 

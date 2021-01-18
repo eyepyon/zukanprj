@@ -22,8 +22,7 @@ class Logout extends MY_Controller {
         $this->data['message_count'] = 0;
 
         $this->data["show_menu"]['project'] = '';
-        $this->data["show_menu"]['roid'] = '';
-        $this->data["show_menu"]['currency'] = '';
+        $this->data["show_menu"]['record'] = '';
         $this->data["show_menu"]['user'] = '';
 	}
 

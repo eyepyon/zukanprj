@@ -31,31 +31,14 @@
 	<li class="nav-item">
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePrj" aria-expanded="true" aria-controls="collapsePrj">
 			<i class="fas fa-fw fa-cog"></i>
-			<span>ロイド</span>
+			<span>図鑑</span>
 		</a>
 		<div id="collapsePrj" class="collapse{$show_menu.roid}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<h6 class="collapse-header">Roid:</h6>
-				<a class="collapse-item" href="/roid/">ロイド一覧</a>
+				<h6 class="collapse-header">登録:</h6>
+				<a class="collapse-item" href="/record/">登録</a>
 				{if $loggedIn}
-				<a class="collapse-item" href="/roid/edit/">新規作成</a>
-				{/if}
-			</div>
-		</div>
-	</li>
-
-	<!-- Nav Item - Pages Collapse Menu -->
-	<li class="nav-item">
-		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePrj" aria-expanded="true" aria-controls="collapsePrj">
-			<i class="fas fa-fw fa-cog"></i>
-			<span>通貨</span>
-		</a>
-		<div id="collapsePrj" class="collapse{$show_menu.currency}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-			<div class="bg-white py-2 collapse-inner rounded">
-				<h6 class="collapse-header">Currency:</h6>
-				<a class="collapse-item" href="/currency/">通貨一覧</a>
-				{if $loggedIn}
-					<a class="collapse-item" href="/currency/edit/">新規作成</a>
+				<a class="collapse-item" href="/record/edit/">新規作成</a>
 				{/if}
 			</div>
 		</div>
