@@ -441,27 +441,6 @@ class Record extends MY_Controller
         $this->data["wallet_address"] = '';
         $this->data["wallet_url"] = "";
 
-        if (!isset($record["wallet_address"]) || $record["wallet_address"] == "") {
-
-            $wallet = $this->nemModel->account_generate();
-            if ($wallet) {
-                $wallet_address = $wallet["address"];
-                $public_key = $wallet["publicKey"];
-                $private_key = $wallet["privateKey"];
-
-                $setData = array();
-                $setData["wallet_address"] = $wallet_address;
-                $setData["wallet_pubkey"] = $public_key;
-                $setData["wallet_prikey"] = $private_key;
-                //
-                $this->recordModel->setRecordData($record["record_id"], $setData);
-
-                $record["wallet_address"] = $wallet_address;
-                $record["wallet_pubkey"] = $public_key;
-                $record["wallet_prikey"] = $private_key;
-            }
-        }
-
         $this->data['record'] = $record;
 
         $this->data["wallet_json"] = '';
@@ -485,9 +464,9 @@ class Record extends MY_Controller
 //        }
         $this->data["goal_list"] = $goalList;
 
-        $walletData = $this->nemModel->account_get($record["wallet_address"]);
-        //
-        $mosaic_all = $this->nemModel->account_mosaic($record["wallet_address"]);
+//        $walletData = $this->nemModel->account_get($record["wallet_address"]);
+//        //
+//        $mosaic_all = $this->nemModel->account_mosaic($record["wallet_address"]);
 
         if (isset($mosaic_all["data"])) {
             foreach ($mosaic_all["data"] as $record) {
@@ -499,7 +478,7 @@ class Record extends MY_Controller
             }
         }
 
-        $this->data["walletData"] = $walletData;
+//        $this->data["walletData"] = $walletData;
         $this->data["popup_url"] = $this->getPopup($record_id,PRJ_MEMBER_TYPE_CHALLENGE);
 
         $this->smarty->view('record/record_detail.tpl', $this->data);
