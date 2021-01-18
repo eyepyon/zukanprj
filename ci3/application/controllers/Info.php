@@ -46,17 +46,17 @@ class Info extends MY_Controller
 	public function privacy()
 	{
 		$data = array();
-//		$this->smarty->view('info/privacy.tpl', $data);
+		$this->smarty->view('info/privacy.tpl', $data);
 
-		$this->smarty->assign('data', $this->data);
-		$this->view('info/privacy.tpl');
+//		$this->smarty->assign('data', $this->data);
+//		$this->view('info/privacy.tpl');
 	}
 
 	public function kiyaku()
 	{
 		$data = array();
-//		$this->smarty->view('info/kiyaku.tpl', $data);
-		$this->view('info/kiyaku.tpl');
+		$this->smarty->view('info/kiyaku.tpl', $data);
+//		$this->view('info/kiyaku.tpl');
 
 	}
 
