@@ -41,7 +41,9 @@ class Login extends MY_Controller
         $u = $this->input->get_post('u');
         //
         $this->data['u'] = $u;
-    }
+		$this->data['base_url'] = "https://dev.zukan.cloud/";
+
+	}
 
     public function index()
     {
