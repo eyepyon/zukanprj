@@ -3,7 +3,7 @@
  * define.php
  *
  * @author: aida
- * @version: 2018-05-01 12:40
+ * @version: 2021-01-11 12:40
  */
 
 define( "HTML_ENCODING", 'utf-8' );

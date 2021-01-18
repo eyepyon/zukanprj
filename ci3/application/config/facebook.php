@@ -19,15 +19,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |  facebook_auth_on_load         boolean  Set to TRUE to have the library to check for valid access token on every page load.
 */
 
-$config['facebook_app_id']              = getenv('FACEBOOK_APP_ID');
-$config['facebook_app_secret']          = getenv('FACEBOOK_APP_SECRET');
+//$config['facebook_app_id']              = getenv('FACEBOOK_APP_ID');
+//$config['facebook_app_secret']          = getenv('FACEBOOK_APP_SECRET');
+$config['facebook_app_id']              = DOTENV_FACEBOOK_APP_ID;
+$config['facebook_app_secret']          = DOTENV_FACEBOOK_APP_SECRET;
 
 $config['facebook_login_type']          = 'web';
 //$config['facebook_login_redirect_url']  = 'member/mypage';
-$config['facebook_login_redirect_url']  = 'member/fb_callback';
+$config['facebook_login_redirect_url']  = 'login/fb_callback';
 $config['facebook_logout_redirect_url'] = 'member/logout';
 //$config['facebook_permissions']         = array('public_profile','user_friends');
 $config['facebook_permissions']         = array('public_profile');
-//$config['facebook_graph_version']       = 'v2.9';
-$config['facebook_graph_version']       = getenv('FACEBOOK_API_VERSION');
+$config['facebook_graph_version']       = 'v9.0';
+//$config['facebook_graph_version']       = getenv('FACEBOOK_API_VERSION');
 $config['facebook_auth_on_load']        = TRUE;

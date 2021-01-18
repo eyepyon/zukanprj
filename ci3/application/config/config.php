@@ -532,3 +532,5 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 require_once('define.php');
+// 何故かdotENV読まないので
+require_once('define_dotenv.php');
