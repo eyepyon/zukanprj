@@ -14,8 +14,8 @@ class MY_Controller extends CI_Controller {
 		parent::__construct();
 
 		// ライブラリ群のロード
-//		$libraries = array( 'parser', 'session', 'facebook' );
-		$libraries = array( 'parser','session' );
+		$libraries = array( 'parser', 'session', 'facebook' );
+//		$libraries = array( 'parser','session' );
 		$this->load->library( $libraries );
 		//
 		$helpers = array( 'cookie', 'url', 'form');
