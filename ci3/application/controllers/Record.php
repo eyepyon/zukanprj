@@ -506,10 +506,10 @@ class Record extends MY_Controller
      * @param int $code_type
      * @return string
      */
-    private function getPopup($id = 0,$code_type=IN_CODE_TYPE_USER)
+    private function getPopup($id = 0,$code_type=PRJ_MEMBER_TYPE_SUPPORT)
     {
-        if($code_type == IN_CODE_TYPE_USER){
-            $id += IN_CODE_ADD_ID;
+        if($code_type == PRJ_MEMBER_TYPE_SUPPORT){
+//            $id += IN_CODE_ADD_ID;
         }
 
         $attr = array(
