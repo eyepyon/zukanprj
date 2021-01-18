@@ -3,13 +3,14 @@
 /**
  * password.php
  *
+ * @access public
  * @author: aida
  * @version: 2020-01-16 15:09
+ * @copyright FrogCompany Inc. All Rights Reserved
  *
  * @property User_model $userModel
  * @property Management $management
  * @property CI_Form_validation form_validation
- *
  */
 
 class Password extends MY_Controller

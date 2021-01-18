@@ -3,12 +3,15 @@
 /**
  * top.php
  *
+ * @access public
  * @author: aida
- * @version: 2020-01-16 15:11
+ * @version: 2021-01-16 15:11
+ * @copyright FrogCompany Inc. All Rights Reserved
  *
  * @property User_model $userModel
  * @property Management $management
  */
+
 class Top extends MY_Controller {
 
 	public function __construct() {

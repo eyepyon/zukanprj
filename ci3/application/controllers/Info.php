@@ -1,13 +1,15 @@
 <?php
 
 /**
- *
+ * Info.php
  *
  * @access public
  * @author aida
- * @copyright  FrogCompany Inc. All Rights Reserved
+ * @version: 2021-01-16 20:02
+ * @copyright FrogCompany Inc. All Rights Reserved
  *
  */
+
 class Info extends MY_Controller
 {
 
@@ -21,10 +23,8 @@ class Info extends MY_Controller
 
 	public function index()
 	{
-//        redirect("/info/about");
 		$data = array();
-//		$this->smarty->view('info/info.tpl', $data);
-		$this->view('info/info.tpl');
+		$this->smarty->view('info/info.tpl', $data);
 	}
 
 	public function about()

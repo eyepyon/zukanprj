@@ -1,7 +1,12 @@
 <?php
+
 /**
+ * record.php
+ *
+ * @access public
  * @author: aida
  * @version: 2021-01-16 11:11
+ * @copyright FrogCompany Inc. All Rights Reserved
  *
  * @property CI_Form_validation form_validation
  * @property CI_Pagination $pagination

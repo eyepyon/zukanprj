@@ -3,13 +3,16 @@
 /**
  * logout.php
  *
+ * @access public
  * @author: aida
- * @version: 2020-01-16 19:47
+ * @version: 2021-01-16 19:47
+ * @copyright FrogCompany Inc. All Rights Reserved
  *
  * @property User_model $userModel
  * @property Management $management
  *
  */
+
 class Logout extends MY_Controller {
 
 	public function __construct() {

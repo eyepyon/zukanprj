@@ -1,11 +1,14 @@
 <?php
 
 /**
- * prj.MY_controller.php
+ * MY_controller.php
  *
+ * @access public
  * @author: aida
  * @version: 2021-01-15 15:27
+ * @copyright FrogCompany Inc. All Rights Reserved
  */
+
 class MY_Controller extends CI_Controller {
 
 	var $data = array();

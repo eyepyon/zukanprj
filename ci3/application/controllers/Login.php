@@ -3,8 +3,10 @@
 /**
  * login.php
  *
+ * @access public
  * @author: aida
  * @version: 2021-01-16 20:02
+ * @copyright FrogCompany Inc. All Rights Reserved
  *
  * @property User_model $userModel
  * @property Management $management
@@ -12,6 +14,7 @@
  * @property CI_Session $session
  * @property Facebook $facebook
  */
+
 class Login extends MY_Controller
 {
 

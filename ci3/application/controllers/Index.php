@@ -3,9 +3,12 @@
 /**
  * Index.php
  *
+ * @access public
  * @author: aida
  * @version: 2020-01-16 14:22
+ * @copyright FrogCompany Inc. All Rights Reserved
  */
+
 class Index extends MY_Controller {
 
 	public function __construct() {

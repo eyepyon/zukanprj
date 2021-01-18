@@ -3,14 +3,17 @@
 /**
  * user.php
  *
+ * @access public
  * @author: aida
- * @version: 2031-01-15 20:57
+ * @version: 2021-01-15 20:57
+ * @copyright FrogCompany Inc. All Rights Reserved
  *
  * @property user_model $userModel
  * @property Management $management
  * @property CI_Form_validation form_validation
  * @property CI_Pagination $pagination
  */
+
 class User extends MY_Controller
 {
 

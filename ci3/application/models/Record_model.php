@@ -1,12 +1,13 @@
 <?php
+
 /**
- *
  *  Record_model
  *
+ * @access public
  * @author: aida
- * @version 2031-01-16 8:55
+ * @version 2021-01-16 8:55
+ * @copyright FrogCompany Inc. All Rights Reserved
  */
-
 
 class Record_model extends CI_Model
 {

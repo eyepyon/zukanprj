@@ -52,7 +52,7 @@
 
                     <div class="form-group">
                         図鑑詳細
-                        <textarea name="record_detail" class="form-control form-control-user" placeholder="図鑑詳細">{$roid_detail|escape:'html'}</textarea>
+                        <textarea name="record_detail" class="form-control form-control-user" placeholder="図鑑詳細">{$record_detail|escape:'html'}</textarea>
                     </div>
 
                     {*<div class="form-group row">*}
