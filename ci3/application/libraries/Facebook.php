@@ -20,7 +20,7 @@
  * @version     3.0.0
  */
 //require_once( '/home/sites/www.zukan.cloud/wwwroot/vendor/autoload.php' );
-require_once( '/var/www/vendor/autoload.php' );
+require_once( '/var/www/zukanprj/vendor/autoload.php' );
 
 use Facebook\Facebook as FB;
 use Facebook\Authentication\AccessToken;
