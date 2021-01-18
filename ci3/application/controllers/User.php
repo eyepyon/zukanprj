@@ -130,7 +130,7 @@ class User extends MY_Controller
         $this->load->library('form_validation');
         $this->load->library('pagination');
 
-        $this->data['wi2_page_limit_array'] = $this->config->item('wi2_page_limit_array');
+        $this->data['site_page_limit_array'] = $this->config->item('site_page_limit_array');
 
         $ck_page_limit = $this->session->userdata('page_limit');
         if ((int)sprintf("%d", $ck_page_limit) < 1) {

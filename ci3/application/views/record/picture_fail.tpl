@@ -18,7 +18,7 @@
 
     <div class="text-center">
         <p class="lead text-gray-800 mb-5">アップロードが失敗しました</p>
-        <a href="/roid/" class="btn btn-primary btn-lg">図鑑一覧</a>
+        <a href="/record/" class="btn btn-primary btn-lg">図鑑一覧</a>
     </div>
 
 {/block}

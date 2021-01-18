@@ -20,7 +20,7 @@
 
     <div class="text-center">
         <p class="lead text-gray-800 mb-5">登録が完了しました</p>
-        <a href="/roid/" class="btn btn-primary btn-lg">図鑑一覧</a>
+        <a href="/record/" class="btn btn-primary btn-lg">図鑑一覧</a>
     </div>
 
 

@@ -70,7 +70,7 @@ class Record extends MY_Controller
         $this->load->library('pagination');
 
         $this->data['base_url'] = $this->config->item('base_url');
-        $this->data['page_limit_array'] = $this->config->item('page_limit_array');
+        $this->data['site_page_limit_array'] = $this->config->item('site_page_limit_array');
 
         if ($this->session->userdata('loggedIn') == true) {
             // ログイン済み

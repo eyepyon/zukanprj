@@ -22,7 +22,7 @@
 
         <p class="lead text-gray-800 mb-5">こちらをアップします。よろしいですか？</p>
 
-        {form_open("/roid/picture_action/$record_id")}
+        {form_open("/record/picture_action/$record_id")}
         <input type="hidden" name="file_name" value="{$file_name}"/>
         <br/>
         <input type="submit" value="アップロード" class="btn btn-lg btn-primary btn-block"/>

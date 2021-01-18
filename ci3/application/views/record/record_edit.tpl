@@ -14,10 +14,10 @@
 {block name=javascript}
     <style type="text/css">
         .bg-detail-image {
-        {if $record_id > 0 && $roid.picture_file != ''}
-            background: url("https://shukin.pw/files/{$roid.picture_file}{$salt_wd}");
+        {if $record_id > 0 && $record.picture_file != ''}
+            background: url("https://dev.zukan.cloud/files/{$record.picture_file}{$salt_wd}");
         {else}
-            background: url("https://shukin.pw/img/pic2.jpg{$salt_wd}");
+            background: url("https://dev.zukan.cloud/img/pic2.jpg{$salt_wd}");
         {/if}
             background-position: center;
             background-size: cover;
@@ -43,16 +43,16 @@
                             <h1 class="h4 text-gray-900 mb-4">図鑑作成</h1>
                         {/if}
                     </div>
-                    {form_open("roid/edit/$record_id")}
+                    {form_open("record/edit/$record_id")}
 
                     <div class="form-group">
                         図鑑名
-                        <input type="text" name="roid_name"  value="{set_value('roid_name',$roid_name)|escape:'html'}" class="form-control form-control-user" placeholder="図鑑名" required>
+                        <input type="text" name="record_name"  value="{set_value('record_name',$record_name)|escape:'html'}" class="form-control form-control-user" placeholder="図鑑名" required>
                     </div>
 
                     <div class="form-group">
                         図鑑詳細
-                        <textarea name="roid_detail" class="form-control form-control-user" placeholder="図鑑詳細">{$roid_detail|escape:'html'}</textarea>
+                        <textarea name="record_detail" class="form-control form-control-user" placeholder="図鑑詳細">{$roid_detail|escape:'html'}</textarea>
                     </div>
 
                     {*<div class="form-group row">*}

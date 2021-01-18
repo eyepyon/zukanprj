@@ -74,7 +74,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         {form_open('user/')}
-                        {form_dropdown('page_limit', $wi2_page_limit_array,$page_limit)}
+                        {form_dropdown('page_limit', $site_page_limit_array,$page_limit)}
                         {*{form_hidden('isp_code',$isp_code)}*}
                         {*{form_hidden('id_status',$id_status)}*}
                         {*{form_hidden('rs_date',$rs_date)}*}

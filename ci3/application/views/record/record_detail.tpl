@@ -15,10 +15,10 @@
 {block name=javascript}
 <style type="text/css">
 .bg-detail-image {
-{if $record_id > 0 && $roid.picture_file != ''}
-    background: url("https://shukin.pw/files/{$roid.picture_file}{$salt_wd}");
+{if $record_id > 0 && $record.picture_file != ''}
+    background: url("https://dev.zukan.cloud/files/{$record.picture_file}{$salt_wd}");
 {else}
-    background: url("https://shukin.pw/img/pic1.jpg{$salt_wd}");
+    background: url("https://dev.zukan.cloud/img/pic1.jpg{$salt_wd}");
 {/if}
     background-position: center;
     background-size: cover;
@@ -44,28 +44,28 @@
 
                         <div class="form-group">
                             図鑑名
-                            <p>{$roid.roid_name|escape:'html'}</p>
+                            <p>{$record.record_name|escape:'html'}</p>
                         </div>
 
                         <div class="form-group">
                             図鑑詳細
-                            <p>{$roid.roid_detail|nl2br}</p>
+                            <p>{$record.record_detail|nl2br}</p>
                         </div>
 
                         {*<div class="form-group row">*}
                             {*<div class="col-sm-6 mb-3 mb-sm-0">*}
                                 {*受付開始日*}
-                                {*<p>{$roid.start_date|escape:'html'}</p>*}
+                                {*<p>{$record.start_date|escape:'html'}</p>*}
                             {*</div>*}
                             {*<div class="col-sm-6">*}
                                 {*受付終了日*}
-                                {*<p>{$roid.end_date|escape:'html'}</p>*}
+                                {*<p>{$record.end_date|escape:'html'}</p>*}
                             {*</div>*}
                         {*</div>*}
 
                         {*<div class="form-group">*}
                             {*実行可能額*}
-                            {*<p>{$roid.amount|escape:'html'}xem / 1回</p>*}
+                            {*<p>{$record.amount|escape:'html'}xem / 1回</p>*}
                         {*</div>*}
 
                         <hr/>
@@ -85,27 +85,27 @@
 
                         <hr/>
 
-                        {if $roid.user_id == $user_id}
-                        <a href="/roid/edit/{$record_id}/" class="btn btn-primary btn-user btn-block">
+                        {if $record.user_id == $user_id}
+                        <a href="/record/edit/{$record_id}/" class="btn btn-primary btn-user btn-block">
                             <i class="fas fa-fw fa-cog"></i> 情報更新
                         </a>
                         <br/>
-                        {if $roid.picture_file != ""}
-                        <a href="/roid/picture/{$record_id}/" class="btn btn-primary btn-user btn-block">
+                        {if $record.picture_file != ""}
+                        <a href="/record/picture/{$record_id}/" class="btn btn-primary btn-user btn-block">
                             <i class="fas fa-camera fa-fw"></i> 画像更新
                         </a>
                             {else}
-                            <a href="/roid/picture/{$record_id}/" class="btn btn-success btn-user btn-block">
+                            <a href="/record/picture/{$record_id}/" class="btn btn-success btn-user btn-block">
                                 <i class="fas fa-camera fa-fw"></i> 画像追加
                             </a>
                         {/if}
                         <br/>
-                        {if $roid.vrm_file != ""}
-                        <a href="/roid/vrm/{$record_id}/" class="btn btn-primary btn-user btn-block">
+                        {if $record.vrm_file != ""}
+                        <a href="/record/vrm/{$record_id}/" class="btn btn-primary btn-user btn-block">
                             <i class="fas fa-map fa-fw"></i> VRMファイル更新
                         </a>
                         {else}
-                            <a href="/roid/vrm/{$record_id}/" class="btn btn-success btn-user btn-block">
+                            <a href="/record/vrm/{$record_id}/" class="btn btn-success btn-user btn-block">
                                 <i class="fas fa-map fa-fw"></i> VRMファイル追加
                             </a>
                         {/if}

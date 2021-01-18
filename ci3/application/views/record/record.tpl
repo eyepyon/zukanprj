@@ -22,7 +22,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             {form_open('record/')}
-            {form_dropdown('page_limit', $page_limit_array,$page_limit)}
+            {form_dropdown('page_limit', $site_page_limit_array,$page_limit)}
             {form_hidden('record_name',$record_name)}
             <button type="submit" class="btn btn-primary">表示</button>
             {form_close()}

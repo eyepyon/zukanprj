@@ -7,10 +7,10 @@
 {block name=javascript}
     <style type="text/css">
         .bg-detail-image {
-        {if $record_id > 0 && $roid.picture_file != ''}
-            background: url("https://shukin.pw/files/{$roid.picture_file}{$salt_wd}");
+        {if $record_id > 0 && $record.picture_file != ''}
+            background: url("https://dev.zukan.cloud/files/{$record.picture_file}{$salt_wd}");
         {else}
-            background: url("https://shukin.pw/img/pic2.jpg{$salt_wd}");
+            background: url("https://dev.zukan.cloud/img/pic2.jpg{$salt_wd}");
         {/if}
             background-position: center;
             background-size: cover;
@@ -43,17 +43,17 @@
                                 <h1 class="h4 text-gray-900 mb-4">図鑑作成内容確認</h1>
                             {/if}
                         </div>
-                        {form_open("roid/action/$record_id")}
+                        {form_open("record/action/$record_id")}
                             <div class="form-group">
                                 図鑑名
-                                <p>{$roid_name|escape:'html'}</p>
-                                <input type="hidden" name="roid_name" value="{$roid_name|escape:'html'}">
+                                <p>{$record_name|escape:'html'}</p>
+                                <input type="hidden" name="record_name" value="{$record_name|escape:'html'}">
                             </div>
 
                         <div class="form-group">
                             図鑑詳細
-                            <p>{$roid_detail|nl2br}</p>
-                            <input type="hidden" name="roid_detail" value="{$roid_detail|escape:'html'}">
+                            <p>{$record_detail|nl2br}</p>
+                            <input type="hidden" name="record_detail" value="{$record_detail|escape:'html'}">
                         </div>
 
                         {*<div class="form-group row">*}
