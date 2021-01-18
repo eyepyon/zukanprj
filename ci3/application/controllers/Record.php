@@ -138,7 +138,7 @@ class Record extends MY_Controller
         $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['record_name'], $this->data['record_detail'], STATUS_FLAG_ON);
 
         foreach ($list as $key => $record){
-            $list[$key]["popup_url"] = $this->getPopup($record['record_id'],IN_CODE_TYPE_ROID);
+            $list[$key]["popup_url"] = $this->getPopup($record['record_id'],PRJ_MEMBER_TYPE_CHALLENGE);
         }
 
         $this->data["list"] = $list;
@@ -171,7 +171,7 @@ class Record extends MY_Controller
         $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['record_name'], $this->data['record_detail'], STATUS_FLAG_ON);
 
         foreach ($list as $key => $record){
-            $list[$key]["popup_url"] = $this->getPopup($record['record_id'],IN_CODE_TYPE_ROID);
+            $list[$key]["popup_url"] = $this->getPopup($record['record_id'],PRJ_MEMBER_TYPE_CHALLENGE);
         }
 
         $this->data["list"] = $list;
@@ -500,7 +500,7 @@ class Record extends MY_Controller
         }
 
         $this->data["walletData"] = $walletData;
-        $this->data["popup_url"] = $this->getPopup($record_id,IN_CODE_TYPE_ROID);
+        $this->data["popup_url"] = $this->getPopup($record_id,PRJ_MEMBER_TYPE_CHALLENGE);
 
         $this->smarty->view('record/record_detail.tpl', $this->data);
     }

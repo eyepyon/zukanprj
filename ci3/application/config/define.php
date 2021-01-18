@@ -84,6 +84,18 @@ define( 'BATCH_SEM_TARGET_ID_REPORT',50  );//
 define( 'BATCH_SEM_TARGET_ID_ID_REGISTER',24  );//
 
 
+define( 'PRJ_MEMBER_TYPE_NONE', 0 );//
+define( 'PRJ_MEMBER_TYPE_CHALLENGE', 1 );//
+define( 'PRJ_MEMBER_TYPE_SUPPORT', 2 );//
+define( 'PRJ_MEMBER_TYPE_CHALLENGE_NAME', '挑戦者'  );// アクティブ
+define( 'PRJ_MEMBER_TYPE_SUPPORT_NAME', '支援者'  );//　非アクティブ
+$config['prj_member_type_array'] = array(
+	''=>'---',
+	PRJ_MEMBER_TYPE_CHALLENGE => PRJ_MEMBER_TYPE_CHALLENGE_NAME,
+	PRJ_MEMBER_TYPE_SUPPORT => PRJ_MEMBER_TYPE_SUPPORT_NAME,
+);
+
+
 define( 'PRJ_ACTIVE_STATUS_USED', 1 );// active_status
 define( 'PRJ_ACTIVE_STATUS_NONE', 2 );//
 define( 'PRJ_ACTIVE_STATUS_USED_NAME', 'アクティブ'  );// アクティブ
