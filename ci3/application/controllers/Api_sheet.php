@@ -5,9 +5,9 @@ require_once '/var/www/zukanprj/vendor/autoload.php';
 define('SPREADSHEET_ID', '1tIAX3TAvsJWJRQ4XFl7GENGzIbBFJFm37WgD3-tILxU');
 define('CLIENT_SECRET_PATH', APPPATH . 'config/development/weintech-2de74aca5c3b.json');
 // スコープの設定
-define('SCOPES', implode(' ', array(
-		Google_Service_Sheets::SPREADSHEETS)
-));
+//define('SCOPES', implode(' ', array(
+//		Google_Service_Sheets::SPREADSHEETS)
+//));
 
 class Api_sheet extends CI_Controller
 {
