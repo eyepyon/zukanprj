@@ -29,7 +29,7 @@ class Api_sheet extends CI_Controller
 		$this->load->model('User_model', 'userModel');
 
 		$credentialsPath = CLIENT_SECRET_PATH;
-		putenv('GOOGLE_APPLICATION_CREDENTIALS=' . dirname(__FILE__) . '/' . $credentialsPath);
+		putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $credentialsPath);
 
 		$this->spreadsheetId = SPREADSHEET_ID;
 
