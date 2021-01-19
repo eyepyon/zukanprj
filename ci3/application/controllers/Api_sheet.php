@@ -2,7 +2,7 @@
 
 require_once '/var/www/zukanprj/vendor/autoload.php';
 
-define('APPLICATION_NAME', '1tIAX3TAvsJWJRQ4XFl7GENGzIbBFJFm37WgD3-tILxU');
+define('SPREADSHEET_ID', '1tIAX3TAvsJWJRQ4XFl7GENGzIbBFJFm37WgD3-tILxU');
 define('CLIENT_SECRET_PATH', APPPATH . 'config/development/weintech-2de74aca5c3b.json');
 // スコープの設定
 define('SCOPES', implode(' ', array(
@@ -11,6 +11,15 @@ define('SCOPES', implode(' ', array(
 
 class Api_sheet extends CI_Controller
 {
+	/**
+	 * @var Google_Service_Sheets
+	 */
+	protected $service;
+
+	/**
+	 * @var array|false|string
+	 */
+	protected $spreadsheetId;
 
 	public function __construct()
 	{
@@ -18,6 +27,45 @@ class Api_sheet extends CI_Controller
 
 		$this->load->library('Mmapi');
 		$this->load->model('User_model', 'userModel');
+
+		$credentialsPath = CLIENT_SECRET_PATH;
+		putenv('GOOGLE_APPLICATION_CREDENTIALS=' . dirname(__FILE__) . '/' . $credentialsPath);
+
+		$this->spreadsheetId = SPREADSHEET_ID;
+
+		$client = new Google_Client();
+		$client->useApplicationDefaultCredentials();
+		$client->addScope(Google_Service_Sheets::SPREADSHEETS);
+		$client->setApplicationName('test');
+
+		$this->service = new Google_Service_Sheets($client);
+
+	}
+
+	/**
+	 * @param string $date
+	 * @param string $name
+	 * @param string $comment
+	 */
+	public function append(string $date, string $name, string $comment)
+	{
+		$value = new Google_Service_Sheets_ValueRange();
+		$value->setValues(['values' => [$date, $name, $comment]]);
+		$response = $this->service->spreadsheets_values->append($this->spreadsheetId, 'シート1!A1', $value, ['valueInputOption' => 'USER_ENTERED']);
+
+		var_dump($response);
+	}
+
+
+	public function test()
+	{
+		$sample = $this->service;
+
+		$date = date('Y/m/d');
+		$name = '山川のりを';
+		$comment = 'ギターうまい';
+		$sample->append($date, $name, $comment);
+
 	}
 
 
@@ -62,4 +110,8 @@ class Api_sheet extends CI_Controller
 		}
 
 	}
+
 }
+
+
+
