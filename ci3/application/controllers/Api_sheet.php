@@ -64,7 +64,7 @@ class Api_sheet extends CI_Controller
 		$date = date('Y/m/d');
 		$name = '山川のりを';
 		$comment = 'ギターうまい';
-		$sample->append($date, $name, $comment);
+		$this->append($date, $name, $comment);
 
 	}
 
