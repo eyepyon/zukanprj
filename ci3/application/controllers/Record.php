@@ -30,22 +30,56 @@ class Record extends MY_Controller
             'label' => 'record詳細',
             'rules' => 'trim|max_length[1500]'
         ),
-//        array(
-//            'field' => 'start_date',
-//            'label' => '受付開始日',
-//            'rules' => 'trim|required|max_length[128]'
-//        ),
-//        array(
-//            'field' => 'end_date',
-//            'label' => '受付終了日',
-//            'rules' => 'trim|required|max_length[128]'
-//        ),
-//        array(
-//            'field' => 'amount',
-//            'label' => '実行可能額',
-//            'rules' => 'trim|required|max_length[10]|numeric'
-//        ),
-
+        array(
+            'field' => 'email',
+            'label' => 'email',
+            'rules' => 'trim|required|max_length[128]'
+        ),
+        array(
+            'field' => 'facebook_account',
+            'label' => 'facebook',
+            'rules' => 'trim|required|max_length[128]'
+        ),
+        array(
+            'field' => 'twitter_account',
+            'label' => 'twitter',
+            'rules' => 'trim|max_length[128]'
+        ),
+		array(
+			'field' => 'name_kana',
+			'label' => '名前（カタカナ）',
+			'rules' => 'trim|required|max_length[100]'
+		),
+		array(
+			'field' => 'qualification',
+			'label' => '保有する資格',
+			'rules' => 'trim|max_length[1000]'
+		),
+		array(
+			'field' => 'community',
+			'label' => '所属団体/コミュニティ（会社以外）',
+			'rules' => 'trim|max_length[1000]'
+		),
+		array(
+			'field' => 'study',
+			'label' => '学びたいことやってみたいこと',
+			'rules' => 'trim|max_length[1000]'
+		),
+		array(
+			'field' => 'contribute',
+			'label' => '教えられること貢献できること',
+			'rules' => 'trim|max_length[1000]'
+		),
+		array(
+			'field' => 'most_area',
+			'label' => '最も取り組みたい領域・分野',
+			'rules' => 'trim|max_length[1000]'
+		),
+		array(
+			'field' => 'enthusiasm',
+			'label' => '頑張りたいこと＆意気込み',
+			'rules' => 'trim|max_length[1000]'
+		),
     );
 
 //    var $form_spot = array(
@@ -202,7 +236,18 @@ class Record extends MY_Controller
         //
         $mode = $this->input->post('mode');
 
-        if ($record_id > 0) {
+		$this->data['email'] = "";//
+		$this->data['facebook_account'] = "";//
+		$this->data['twitter_account'] = "";//
+		$this->data['name_kana'] = "";// 名前（カタカナ）
+		$this->data['qualification'] = "";// 保有する資格
+		$this->data['community'] = "";// 所属団体/コミュニティ（会社以外）
+		$this->data['study'] = "";// 学びたいことやってみたいこと
+		$this->data['contribute'] = "";// 教えられること貢献できること
+		$this->data['most_area'] = "";// 最も取り組みたい領域・分野
+		$this->data['enthusiasm'] = "";// 頑張りたいこと＆意気込み
+
+		if ($record_id > 0) {
             $record = $this->recordModel->getByRecordId($record_id);
             $this->data['record'] = $record;
             //
