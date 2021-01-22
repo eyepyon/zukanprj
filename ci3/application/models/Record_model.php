@@ -25,11 +25,11 @@ class Record_model extends CI_Model
      * @param int $offset
      * @param int $limit
      * @param string $name
-     * @param string $record_detail
+     * @param string $detail
      * @param int $status
      * @return int|array
      */
-    function getRecordList($offset = 0, $limit = 0, $name = "", $record_detail = "", $status = STATUS_FLAG_OFF)
+    function getRecordList($offset = 0, $limit = 0, $name = "", $detail = "", $status = STATUS_FLAG_OFF)
     {
 
         $this->db->select('*');
@@ -40,8 +40,8 @@ class Record_model extends CI_Model
         if ($name != "") {
             $this->db->like('name', $name, 'both');
         }
-        if ($record_detail != "") {
-            $this->db->like('record_detail', $record_detail, 'both');
+        if ($detail != "") {
+            $this->db->like('detail', $detail, 'both');
         }
 
         if ($limit > 0 && $limit != ALL_COUNT_FLAG_AT_LIMIT) {

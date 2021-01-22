@@ -22,26 +22,26 @@ class Record extends MY_Controller
     var $forms = array(
         array(
             'field' => 'name',
-            'label' => 'record名',
+            'label' => '名前',
             'rules' => 'trim|required|max_length[250]'
         ),
         array(
-            'field' => 'record_detail',
-            'label' => 'record詳細',
+            'field' => 'detail',
+            'label' => '詳細',
             'rules' => 'trim|max_length[1500]'
         ),
         array(
-            'field' => 'email',
+            'field' => 'メールアドレス',
             'label' => 'email',
             'rules' => 'trim|required|max_length[128]'
         ),
         array(
-            'field' => 'facebook_account',
+            'field' => 'Facebookアカウント',
             'label' => 'facebook',
             'rules' => 'trim|required|max_length[128]'
         ),
         array(
-            'field' => 'twitter_account',
+            'field' => 'Twitterアカウント',
             'label' => 'twitter',
             'rules' => 'trim|max_length[128]'
         ),
@@ -131,16 +131,20 @@ class Record extends MY_Controller
         $this->data["salt_wd"] = '?dmy='.date('U');
 
         $name = $this->input->post_get('name');
-        $record_detail = $this->input->post_get('record_detail');
-//        $start_date = $this->input->post_get('start_date');
-//        $end_date = $this->input->post_get('end_date');
-//        $amount = $this->input->post_get('amount');
+        $detail = $this->input->post_get('detail');
+		$name_kana = $this->input->post_get('name_kana');
+		$facebook_account = $this->input->post_get('facebook_account');
+		$twitter_account = $this->input->post_get('twitter_account');
+		$qualification = $this->input->post_get('qualification');
+		$community = $this->input->post_get('community');
 
         $this->data['name'] = $name;
-        $this->data['record_detail'] = $record_detail;
-//        $this->data['start_date'] = $start_date;
-//        $this->data['end_date'] = $end_date;
-//        $this->data['amount'] = $amount;
+        $this->data['detail'] = $detail;
+		$this->data['$name_kana'] = $name_kana;
+		$this->data['facebook_account'] = $facebook_account;
+		$this->data['twitter_account'] = $twitter_account;
+		$this->data['qualification'] = $qualification;
+		$this->data['community'] = $community;
 
         // ページ表示数設定
         $ck_page_limit = $this->session->userdata('page_limit');
@@ -168,8 +172,8 @@ class Record extends MY_Controller
         $search_val = $this->getSearchValue();
 
         $offset = $page * $this->data['page_limit'];
-        $list = $this->recordModel->getRecordList($offset, $this->data['page_limit'], $this->data["name"], $this->data["record_detail"], STATUS_FLAG_ON);
-        $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['name'], $this->data['record_detail'], STATUS_FLAG_ON);
+        $list = $this->recordModel->getRecordList($offset, $this->data['page_limit'], $this->data["name"], $this->data["detail"], STATUS_FLAG_ON);
+        $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['name'], $this->data['detail'], STATUS_FLAG_ON);
 
         foreach ($list as $key => $record){
             $list[$key]["popup_url"] = $this->getPopup($record['id'],PRJ_MEMBER_TYPE_CHALLENGE);
@@ -201,8 +205,8 @@ class Record extends MY_Controller
         $search_val = $this->getSearchValue();
 
         $offset = $page * $this->data['page_limit'];
-        $list = $this->recordModel->getRecordList($offset, $this->data['page_limit'], $this->data["name"], $this->data["record_detail"], STATUS_FLAG_ON);
-        $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['name'], $this->data['record_detail'], STATUS_FLAG_ON);
+        $list = $this->recordModel->getRecordList($offset, $this->data['page_limit'], $this->data["name"], $this->data["detail"], STATUS_FLAG_ON);
+        $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['name'], $this->data['detail'], STATUS_FLAG_ON);
 
         foreach ($list as $key => $record){
             $list[$key]["popup_url"] = $this->getPopup($record['id'],PRJ_MEMBER_TYPE_CHALLENGE);
@@ -253,7 +257,7 @@ class Record extends MY_Controller
             //
             if ($mode != 'edit') {
                 $this->data['name'] = $record['name'];//
-                $this->data['record_detail'] = $record['record_detail'];//
+                $this->data['detail'] = $record['detail'];//
 				$this->data['email'] = $record['email'];//
 				$this->data['facebook_account'] = $record['facebook_account'];//
 				$this->data['twitter_account'] = $record['twitter_account'];//
@@ -287,7 +291,7 @@ class Record extends MY_Controller
         $record = array(
             'user_id' => (int)sprintf('%d', $this->data['user_id']),
             'name' => $this->data['name'],
-            'record_detail' => $this->data['record_detail'],
+            'detail' => $this->data['detail'],
             'status' => STATUS_FLAG_ON,
         );
 
@@ -536,7 +540,7 @@ class Record extends MY_Controller
 //        $this->data["walletData"] = $walletData;
         $this->data["popup_url"] = $this->getPopup($id,PRJ_MEMBER_TYPE_CHALLENGE);
 
-        $this->smarty->view('record/record_detail.tpl', $this->data);
+        $this->smarty->view('record/detail.tpl', $this->data);
     }
 
     /**
@@ -595,8 +599,8 @@ class Record extends MY_Controller
         if ($this->data["name"] != "") {
             $search["name"] = $this->data["name"];
         }
-        if ($this->data["record_detail"] != "") {
-            $search["record_detail"] = $this->data["record_detail"];
+        if ($this->data["detail"] != "") {
+            $search["detail"] = $this->data["detail"];
         }
         return $search;
     }

@@ -49,7 +49,7 @@
 
                         <div class="form-group">
                             図鑑詳細
-                            <p>{$record.record_detail|nl2br}</p>
+                            <p>{$record.detail|nl2br}</p>
                         </div>
 
                         {*<div class="form-group row">*}

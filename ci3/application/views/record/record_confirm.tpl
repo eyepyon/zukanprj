@@ -48,8 +48,8 @@
 
 						<div class="form-group">
 							図鑑詳細
-							<p>{$record_detail|nl2br}</p>
-							<input type="hidden" name="record_detail" value="{$record_detail|escape:'html'}">
+							<p>{$detail|nl2br}</p>
+							<input type="hidden" name="detail" value="{$detail|escape:'html'}">
 						</div>
 
 						<div class="form-group">

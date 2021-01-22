@@ -50,11 +50,7 @@
                     <tbody>
                     {foreach from=$list item=item}
                         <tr>
-                        {if $item.lat != ''}
                             <td rowspan="2">{$item.id|escape:'html'}</td>
-                        {else}
-                            <td>{$item.id|escape:'html'}</td>
-                        {/if}
                             <td><a href="/record/detail/{$item.id|escape:'html'}/">{$item.name|escape:'html'}</a></td>
 							<td>{$item.name_kana|escape:'html'}</td>
 							<td>{$item.facebook_account|escape:'html'}</td>
@@ -65,7 +61,7 @@
 							<td>{$item.contribute|escape:'html'}</td>
 							<td>{$item.most_area|escape:'html'}</td>
 							<td>{$item.enthusiasm|escape:'html'}</td>
-							<td>{$item.enthusiasm|escape:'html'}</td>
+							<td>{$item.created_at|escape:'html'}</td>
 {*                            <td><a href="/record/picture/{$item.id|escape:'html'}/">{if $item.picture_file != ''}<button class="btn btn-primary">画像更新</button>{else}<button class="btn btn-success">画像登録</button>{/if}</a></td>*}
 {*                            <td><a href="/record/vrm/{$item.id|escape:'html'}/">{if $item.vrm_file != ''}<button class="btn btn-primary">VRM更新</button>{else}<button class="btn btn-success">VRM登録</button>{/if}</a></td>*}
 {*                            <td>{$item.popup_url}</td>*}
