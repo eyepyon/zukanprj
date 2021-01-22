@@ -36,12 +36,12 @@ class Record extends MY_Controller
             'rules' => 'trim|required|max_length[128]'
         ),
         array(
-            'field' => 'facebook',
+            'field' => 'facebook_account',
             'label' => 'Facebookアカウント',
             'rules' => 'trim|required|max_length[128]'
         ),
         array(
-            'field' => 'twitter',
+            'field' => 'twitter_account',
             'label' => 'Twitterアカウント',
             'rules' => 'trim|max_length[128]'
         ),
