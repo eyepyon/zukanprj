@@ -50,7 +50,7 @@
                     <tbody>
                     {foreach from=$list item=item}
                         <tr>
-                            <td rowspan="2">{$item.id|escape:'html'}</td>
+                            <td>{$item.id|escape:'html'}</td>
                             <td><a href="/record/detail/{$item.id|escape:'html'}/">{$item.name|escape:'html'}</a></td>
 							<td>{$item.name_kana|escape:'html'}</td>
 							<td>{$item.facebook_account|escape:'html'}</td>
