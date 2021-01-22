@@ -21,7 +21,7 @@ class Record extends MY_Controller
 
     var $forms = array(
         array(
-            'field' => 'record_name',
+            'field' => 'name',
             'label' => 'record名',
             'rules' => 'trim|required|max_length[250]'
         ),
@@ -130,13 +130,13 @@ class Record extends MY_Controller
 
         $this->data["salt_wd"] = '?dmy='.date('U');
 
-        $record_name = $this->input->post_get('record_name');
+        $name = $this->input->post_get('name');
         $record_detail = $this->input->post_get('record_detail');
 //        $start_date = $this->input->post_get('start_date');
 //        $end_date = $this->input->post_get('end_date');
 //        $amount = $this->input->post_get('amount');
 
-        $this->data['record_name'] = $record_name;
+        $this->data['name'] = $name;
         $this->data['record_detail'] = $record_detail;
 //        $this->data['start_date'] = $start_date;
 //        $this->data['end_date'] = $end_date;
@@ -168,11 +168,11 @@ class Record extends MY_Controller
         $search_val = $this->getSearchValue();
 
         $offset = $page * $this->data['page_limit'];
-        $list = $this->recordModel->getRecordList($offset, $this->data['page_limit'], $this->data["record_name"], $this->data["record_detail"], STATUS_FLAG_ON);
-        $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['record_name'], $this->data['record_detail'], STATUS_FLAG_ON);
+        $list = $this->recordModel->getRecordList($offset, $this->data['page_limit'], $this->data["name"], $this->data["record_detail"], STATUS_FLAG_ON);
+        $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['name'], $this->data['record_detail'], STATUS_FLAG_ON);
 
         foreach ($list as $key => $record){
-            $list[$key]["popup_url"] = $this->getPopup($record['record_id'],PRJ_MEMBER_TYPE_CHALLENGE);
+            $list[$key]["popup_url"] = $this->getPopup($record['id'],PRJ_MEMBER_TYPE_CHALLENGE);
         }
 
         $this->data["list"] = $list;
@@ -201,11 +201,11 @@ class Record extends MY_Controller
         $search_val = $this->getSearchValue();
 
         $offset = $page * $this->data['page_limit'];
-        $list = $this->recordModel->getRecordList($offset, $this->data['page_limit'], $this->data["record_name"], $this->data["record_detail"], STATUS_FLAG_ON);
-        $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['record_name'], $this->data['record_detail'], STATUS_FLAG_ON);
+        $list = $this->recordModel->getRecordList($offset, $this->data['page_limit'], $this->data["name"], $this->data["record_detail"], STATUS_FLAG_ON);
+        $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['name'], $this->data['record_detail'], STATUS_FLAG_ON);
 
         foreach ($list as $key => $record){
-            $list[$key]["popup_url"] = $this->getPopup($record['record_id'],PRJ_MEMBER_TYPE_CHALLENGE);
+            $list[$key]["popup_url"] = $this->getPopup($record['id'],PRJ_MEMBER_TYPE_CHALLENGE);
         }
 
         $this->data["list"] = $list;
@@ -224,13 +224,13 @@ class Record extends MY_Controller
 
 
     /**
-     * @param int $record_id
+     * @param int $id
      */
-    public function edit($record_id = 0)
+    public function edit($id = 0)
     {
 
         $this->data['error_word'] = "";
-        $this->data['record_id'] = $record_id;
+        $this->data['id'] = $id;
 
         $back_button = $this->input->post_get('back_button');
         //
@@ -247,12 +247,12 @@ class Record extends MY_Controller
 		$this->data['most_area'] = "";// 最も取り組みたい領域・分野
 		$this->data['enthusiasm'] = "";// 頑張りたいこと＆意気込み
 
-		if ($record_id > 0) {
-            $record = $this->recordModel->getByRecordId($record_id);
+		if ($id > 0) {
+            $record = $this->recordModel->getByRecordId($id);
             $this->data['record'] = $record;
             //
             if ($mode != 'edit') {
-                $this->data['record_name'] = $record['record_name'];//
+                $this->data['name'] = $record['name'];//
                 $this->data['record_detail'] = $record['record_detail'];//
 				$this->data['email'] = $record['email'];//
 				$this->data['facebook_account'] = $record['facebook_account'];//
@@ -278,50 +278,50 @@ class Record extends MY_Controller
     }
 
     /**
-     * @param int $record_id
+     * @param int $id
      */
-    public function action($record_id = 0)
+    public function action($id = 0)
     {
-        $this->data['record_id'] = $record_id;
+        $this->data['id'] = $id;
 
         $record = array(
             'user_id' => (int)sprintf('%d', $this->data['user_id']),
-            'record_name' => $this->data['record_name'],
+            'name' => $this->data['name'],
             'record_detail' => $this->data['record_detail'],
             'status' => STATUS_FLAG_ON,
         );
 
-        $this->recordModel->setRecordData($record_id, $record);
+        $this->recordModel->setRecordData($id, $record);
 
         redirect('/record/complete/');
     }
 
     /**
-     * @param int $record_id
+     * @param int $id
      */
-    public function complete($record_id = 0)
+    public function complete($id = 0)
     {
-        $this->data['record_id'] = $record_id;
+        $this->data['id'] = $id;
 
         $this->smarty->view('record/record_complete.tpl', $this->data);
     }
 
     /**
-     * @param int $record_id
+     * @param int $id
      */
-    public function picture($record_id = 0)
+    public function picture($id = 0)
     {
-        $this->data['record_id'] = $record_id;
+        $this->data['id'] = $id;
 
         $this->smarty->view('record/picture.tpl', $this->data);
     }
 
     /**
-     * @param int $record_id
+     * @param int $id
      */
-    public function vrm($record_id = 0)
+    public function vrm($id = 0)
     {
-        $this->data['record_id'] = $record_id;
+        $this->data['id'] = $id;
 
         $this->smarty->view('record/vrm.tpl', $this->data);
     }
@@ -329,13 +329,13 @@ class Record extends MY_Controller
     var $fileMaxSize = 5000000;
 
     /**
-     * @param int $record_id
+     * @param int $id
      */
-    public function picture_upload($record_id = 0)
+    public function picture_upload($id = 0)
     {
 
         $path = '/var/www/shukin/html/files/';
-        $file_name = sprintf('%d_%s.jpg', $record_id, time());
+        $file_name = sprintf('%d_%s.jpg', $id, time());
 
         $config = array(
             'file_name' => $file_name,
@@ -364,13 +364,13 @@ class Record extends MY_Controller
     }
 
     /**
-     * @param int $record_id
+     * @param int $id
      */
-    public function vrm_upload($record_id = 0)
+    public function vrm_upload($id = 0)
     {
 
         $path = '/var/www/shukin/html/files/';
-        $file_name = sprintf('%d_%s.vrm', $record_id, time());
+        $file_name = sprintf('%d_%s.vrm', $id, time());
 
         $config = array(
             'file_name' => $file_name,
@@ -399,11 +399,11 @@ class Record extends MY_Controller
     }
 
     /**
-     * @param int $record_id
+     * @param int $id
      */
-    public function picture_action($record_id = 0)
+    public function picture_action($id = 0)
     {
-        $this->data['record_id'] = $record_id;
+        $this->data['id'] = $id;
 
         $file_name = $this->input->post('file_name');
 
@@ -418,17 +418,17 @@ class Record extends MY_Controller
             );
         }
 
-        $this->recordModel->setRecordData($record_id, $record);
+        $this->recordModel->setRecordData($id, $record);
 
         redirect('/record/picture_complete/');
     }
 
     /**
-     * @param int $record_id
+     * @param int $id
      */
-    public function picture_complete($record_id = 0)
+    public function picture_complete($id = 0)
     {
-        $this->data['record_id'] = $record_id;
+        $this->data['id'] = $id;
 
         $this->smarty->view('record/picture_complete.tpl', $this->data);
     }
@@ -449,10 +449,10 @@ class Record extends MY_Controller
     {
         $p = explode('_', $file_name);
         //
-        $record_id = (int)sprintf('%d', trim($p[0]));
+        $id = (int)sprintf('%d', trim($p[0]));
 
         $this->data['file_name'] = rawurldecode($file_name);
-        $this->data['record_id'] = $record_id;
+        $this->data['id'] = $id;
 
         $this->smarty->view('record/picture_confirm.tpl', $this->data);
     }
@@ -461,10 +461,10 @@ class Record extends MY_Controller
     {
         $p = explode('_', $file_name);
         //
-        $record_id = (int)sprintf('%d', trim($p[0]));
+        $id = (int)sprintf('%d', trim($p[0]));
 
         $this->data['file_name'] = rawurldecode($file_name);
-        $this->data['record_id'] = $record_id;
+        $this->data['id'] = $id;
 
         $this->smarty->view('record/vrm_confirm.tpl', $this->data);
     }
@@ -483,12 +483,12 @@ class Record extends MY_Controller
     }
 
     /**
-     * @param int $record_id
+     * @param int $id
      */
-    public function detail($record_id = 0)
+    public function detail($id = 0)
     {
-        $this->data['record_id'] = $record_id;
-        $record = $this->recordModel->getByRecordId($record_id);
+        $this->data['id'] = $id;
+        $record = $this->recordModel->getByRecordId($id);
         if (!$record) {
             redirect('/record/');
         }
@@ -513,7 +513,7 @@ class Record extends MY_Controller
         $this->data["wallet_address"] = $record["wallet_address"];
 
         $goalList = array();
-//        $goalList = $this->recordModel->getGoalHistory($record_id);
+//        $goalList = $this->recordModel->getGoalHistory($id);
 //        foreach ($list as $item) {
 //
 //        }
@@ -534,7 +534,7 @@ class Record extends MY_Controller
         }
 
 //        $this->data["walletData"] = $walletData;
-        $this->data["popup_url"] = $this->getPopup($record_id,PRJ_MEMBER_TYPE_CHALLENGE);
+        $this->data["popup_url"] = $this->getPopup($id,PRJ_MEMBER_TYPE_CHALLENGE);
 
         $this->smarty->view('record/record_detail.tpl', $this->data);
     }
@@ -592,8 +592,8 @@ class Record extends MY_Controller
     private function getSearchValue($search = array())
     {
 
-        if ($this->data["record_name"] != "") {
-            $search["record_name"] = $this->data["record_name"];
+        if ($this->data["name"] != "") {
+            $search["name"] = $this->data["name"];
         }
         if ($this->data["record_detail"] != "") {
             $search["record_detail"] = $this->data["record_detail"];

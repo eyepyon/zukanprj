@@ -36,15 +36,15 @@ class User_model extends CI_Model
             $result = $query->row_array();
 
             // Update user data
-            $data['update_datetime'] = date("Y-m-d H:i:s");
+            $data['updated_at'] = date("Y-m-d H:i:s");
             $update = $this->db->update($this->dataDb, $data, array('user_id'=>$result['user_id']));
 
             // user id
             $userID = $result['user_id'];
         }else{
             // Insert user data
-            $data['regist_datetime'] = date("Y-m-d H:i:s");
-            $data['update_datetime'] = date("Y-m-d H:i:s");
+            $data['created_at '] = date("Y-m-d H:i:s");
+            $data['updated_at'] = date("Y-m-d H:i:s");
             $insert = $this->db->insert($this->dataDb,$data);
 
             // user id
@@ -105,7 +105,7 @@ class User_model extends CI_Model
             'write_mode' => WRITE_MODE_TEXT
         );
 
-        $data['update_datetime'] = date("Y-m-d H:i:s");
+        $data['updated_at'] = date("Y-m-d H:i:s");
         $this->db->where('user_id', $uid);
         return $this->db->update($this->dataDb, $data);
     }
@@ -120,7 +120,7 @@ class User_model extends CI_Model
             'write_mode' => WRITE_MODE_OFF
         );
 
-        $data['update_datetime'] = date("Y-m-d H:i:s");
+        $data['updated_at'] = date("Y-m-d H:i:s");
         $this->db->where('user_id', $uid);
         return $this->db->update($this->dataDb, $data);
     }
@@ -135,7 +135,7 @@ class User_model extends CI_Model
             'write_mode' => WRITE_MODE_NUMBER
         );
 
-        $data['update_datetime'] = date("Y-m-d H:i:s");
+        $data['updated_at'] = date("Y-m-d H:i:s");
         $this->db->where('user_id', $uid);
         return $this->db->update($this->dataDb, $data);
     }
@@ -187,13 +187,13 @@ class User_model extends CI_Model
      */
     function setUserData($id = 0, array $data)
     {
-        $data['update_datetime'] = date("Y-m-d H:i:s");
+        $data['updated_at'] = date("Y-m-d H:i:s");
 
         if ($id > 0) {
             $this->db->where('user_id', $id);
             return $this->db->update($this->dataDb, $data);
         } else {
-            $data['regist_datetime'] = date("Y-m-d H:i:s");
+            $data['created_at '] = date("Y-m-d H:i:s");
             $this->db->insert($this->dataDb, $data);
             return $this->db->insert_id();
         }

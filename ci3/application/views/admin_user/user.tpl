@@ -114,10 +114,10 @@
                                             {if $item.account_status == 1}有効{else}無効{/if}
                                         </td>
                                         <td>
-                                            {$item.regist_datetime|escape:'html'}
+                                            {$item.created_at |escape:'html'}
                                         </td>
                                         <td>
-                                            {$item.update_datetime|escape:'html'}
+                                            {$item.updated_at|escape:'html'}
                                         </td>
                                         <td class="center">
                                             <a href="/user/edit/{$item.admin_id}/">

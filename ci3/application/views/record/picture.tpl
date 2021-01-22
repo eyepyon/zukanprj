@@ -35,7 +35,7 @@
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 
-				{form_open_multipart("/record/picture_upload/$record_id")}
+				{form_open_multipart("/record/picture_upload/$id")}
 				<input type="file" id="input-file-now" name="image" class="dropify"/>
 				<br/>
 				<input type="submit" value="アップロード" class="btn btn-lg btn-primary btn-block"/>

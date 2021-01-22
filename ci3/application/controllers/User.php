@@ -93,8 +93,8 @@ class User extends MY_Controller
 
         // パスワード有効期限チェック
         $passLimit = "";
-        if ($admin["pass_update_datetime"]) {
-            $zanTime = strtotime(LOGIN_PASSWORD_LIMIT_DAY, strtotime($admin["pass_update_datetime"])) - time();
+        if ($admin["pass_updated_at"]) {
+            $zanTime = strtotime(LOGIN_PASSWORD_LIMIT_DAY, strtotime($admin["pass_updated_at"])) - time();
             $zanDate = ceil($zanTime / (24 * 60 * 60));
             if ($zanDate > 0) {
                 $passLimit = sprintf("あと%d日", $zanDate);
@@ -317,7 +317,7 @@ class User extends MY_Controller
 		    //
 		    $userData['pass_hash'] = $passHash;
 //		    if ($id == 0) {
-		    $userData['pass_update_datetime'] = date("Y-m-d 00:00:00");
+		    $userData['pass_updated_at'] = date("Y-m-d 00:00:00");
 //		    }
 	    }
 

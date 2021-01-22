@@ -15,7 +15,7 @@
 {block name=javascript}
 <style type="text/css">
 .bg-detail-image {
-{if $record_id > 0 && $record.picture_file != ''}
+{if $id > 0 && $record.picture_file != ''}
     background: url("https://dev.zukan.cloud/files/{$record.picture_file}{$salt_wd}");
 {else}
     background: url("https://dev.zukan.cloud/img/pic1.jpg{$salt_wd}");
@@ -44,7 +44,7 @@
 
                         <div class="form-group">
                             図鑑名
-                            <p>{$record.record_name|escape:'html'}</p>
+                            <p>{$record.name|escape:'html'}</p>
                         </div>
 
                         <div class="form-group">
@@ -86,26 +86,26 @@
                         <hr/>
 
                         {if $record.user_id == $user_id}
-                        <a href="/record/edit/{$record_id}/" class="btn btn-primary btn-user btn-block">
+                        <a href="/record/edit/{$id}/" class="btn btn-primary btn-user btn-block">
                             <i class="fas fa-fw fa-cog"></i> 情報更新
                         </a>
                         <br/>
                         {if $record.picture_file != ""}
-                        <a href="/record/picture/{$record_id}/" class="btn btn-primary btn-user btn-block">
+                        <a href="/record/picture/{$id}/" class="btn btn-primary btn-user btn-block">
                             <i class="fas fa-camera fa-fw"></i> 画像更新
                         </a>
                             {else}
-                            <a href="/record/picture/{$record_id}/" class="btn btn-success btn-user btn-block">
+                            <a href="/record/picture/{$id}/" class="btn btn-success btn-user btn-block">
                                 <i class="fas fa-camera fa-fw"></i> 画像追加
                             </a>
                         {/if}
                         <br/>
                         {if $record.vrm_file != ""}
-                        <a href="/record/vrm/{$record_id}/" class="btn btn-primary btn-user btn-block">
+                        <a href="/record/vrm/{$id}/" class="btn btn-primary btn-user btn-block">
                             <i class="fas fa-map fa-fw"></i> VRMファイル更新
                         </a>
                         {else}
-                            <a href="/record/vrm/{$record_id}/" class="btn btn-success btn-user btn-block">
+                            <a href="/record/vrm/{$id}/" class="btn btn-success btn-user btn-block">
                                 <i class="fas fa-map fa-fw"></i> VRMファイル追加
                             </a>
                         {/if}
@@ -125,7 +125,7 @@
             </tr>
             {foreach from=$goal_list item=item}
                 <tr>
-                    <td>{$item.regist_datetime}</td>
+                    <td>{$item.created_at }</td>
                     <td>
                         {if $item.tx_hash != ''}
                             <a href='http://explorer.nemchina.com//#/s_tx?hash={$item.tx_hash}' target="_blank">{$item.tx_hash}</a>

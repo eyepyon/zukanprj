@@ -24,12 +24,12 @@ class Record_model extends CI_Model
     /**
      * @param int $offset
      * @param int $limit
-     * @param string $record_name
+     * @param string $name
      * @param string $record_detail
      * @param int $status
      * @return int|array
      */
-    function getRecordList($offset = 0, $limit = 0, $record_name = "", $record_detail = "", $status = STATUS_FLAG_OFF)
+    function getRecordList($offset = 0, $limit = 0, $name = "", $record_detail = "", $status = STATUS_FLAG_OFF)
     {
 
         $this->db->select('*');
@@ -37,8 +37,8 @@ class Record_model extends CI_Model
         if ($status == STATUS_FLAG_ON) {
             $this->db->where('status', STATUS_FLAG_ON);
         }
-        if ($record_name != "") {
-            $this->db->like('record_name', $record_name, 'both');
+        if ($name != "") {
+            $this->db->like('name', $name, 'both');
         }
         if ($record_detail != "") {
             $this->db->like('record_detail', $record_detail, 'both');
@@ -48,7 +48,7 @@ class Record_model extends CI_Model
             $this->db->limit($limit, $offset);
         }
 
-        $this->db->order_by("regist_datetime", "desc");
+        $this->db->order_by("created_at ", "desc");
 //        $this->db->order_by("end_date", "asc");
 
         $resource = $this->db->get();
@@ -61,34 +61,34 @@ class Record_model extends CI_Model
     }
 
     /**
-     * @param int $record_id
+     * @param int $id
      * @param array $record
      * @return mixed
      */
-    function setRecordData($record_id = 0, array $record = array())
+    function setRecordData($id = 0, array $record = array())
     {
-        $record['update_datetime'] = date("Y-m-d H:i:s");
+        $record['updated_at'] = date("Y-m-d H:i:s");
 
-        if ($record_id > 0) {
-            $this->db->where('record_id', $record_id);
+        if ($id > 0) {
+            $this->db->where('id', $id);
             return $this->db->update($this->dataDb, $record);
         } else {
-            $record['regist_datetime'] = date("Y-m-d H:i:s");
+            $record['created_at '] = date("Y-m-d H:i:s");
             $this->db->insert($this->dataDb, $record);
             return $this->db->insert_id();
         }
     }
 
     /**
-     * @param int $record_id
+     * @param int $id
      * @return array|null
      */
-    function getByRecordId($record_id = 0)
+    function getByRecordId($id = 0)
     {
 
         $this->db->select('*');
         $this->db->from($this->dataDb);
-        $this->db->where('record_id', $record_id);
+        $this->db->where('id', $id);
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -105,22 +105,22 @@ class Record_model extends CI_Model
      */
     function insertGoalHistory(array $record = array()){
 
-        $record['update_datetime'] = date("Y-m-d H:i:s");
-        $record['regist_datetime'] = date("Y-m-d H:i:s");
+        $record['updated_at'] = date("Y-m-d H:i:s");
+        $record['created_at '] = date("Y-m-d H:i:s");
         $this->db->insert($this->goalDb, $record);
         return $this->db->insert_id();
     }
 
     /**
-     * @param int $record_id
+     * @param int $id
      * @return array
      */
-    function getGoalHistory($record_id = 0)
+    function getGoalHistory($id = 0)
     {
         $this->db->select('*');
         $this->db->from($this->goalDb);
-        $this->db->where('record_id', $record_id);
-        $this->db->order_by("regist_datetime", "desc");
+        $this->db->where('id', $id);
+        $this->db->order_by("created_at ", "desc");
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -147,7 +147,7 @@ class Record_model extends CI_Model
 //        if($apos_status != 9){
 //            $this->db->where('apos_status', $apos_status);
 //        }
-        $this->db->order_by("regist_datetime", "desc");
+        $this->db->order_by("created_at ", "desc");
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

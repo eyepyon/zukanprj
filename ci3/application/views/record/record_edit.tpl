@@ -14,7 +14,7 @@
 {block name=javascript}
 	<style type="text/css">
 		.bg-detail-image {
-		{if $record_id > 0 && $record.picture_file != ''} background: url("https://dev.zukan.cloud/files/{$record.picture_file}{$salt_wd}");
+		{if $id > 0 && $record.picture_file != ''} background: url("https://dev.zukan.cloud/files/{$record.picture_file}{$salt_wd}");
 		{else} background: url("https://dev.zukan.cloud/img/pic2.jpg{$salt_wd}");
 		{/if} background-position: center;
 			background-size: cover;
@@ -33,18 +33,18 @@
 				<div class="col-lg-7">
 					<div class="p-5">
 						<div class="text-center">
-							{if $record_id > 0}
+							{if $id > 0}
 								<h1 class="h4 text-gray-900 mb-4">図鑑更新</h1>
 							{else}
 								<h1 class="h4 text-gray-900 mb-4">図鑑作成</h1>
 							{/if}
 						</div>
-						{form_open("record/edit/$record_id")}
+						{form_open("record/edit/$id")}
 
 						<div class="form-group">
 							名前（漢字）
-							<input type="text" name="record_name"
-								   value="{set_value('record_name',$record_name)|escape:'html'}"
+							<input type="text" name="name"
+								   value="{set_value('name',$name)|escape:'html'}"
 								   class="form-control form-control-user" placeholder="名前（漢字） " required>
 						</div>
 
@@ -70,14 +70,14 @@
 
 						<div class="form-group">
 							メールアドレス
-							<input type="text" name="email" value="{set_value('email',$record_name)|escape:'html'}"
+							<input type="text" name="email" value="{set_value('email',$name)|escape:'html'}"
 								   class="form-control form-control-user" placeholder="メールアドレス" required>
 						</div>
 
 						<div class="form-group">
 							属性
-							<input type="text" name="record_name"
-								   value="{set_value('record_name',$record_name)|escape:'html'}"
+							<input type="text" name="name"
+								   value="{set_value('name',$name)|escape:'html'}"
 								   class="form-control form-control-user" placeholder="属性" required>
 						</div>
 

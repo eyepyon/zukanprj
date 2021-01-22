@@ -108,7 +108,7 @@ class Password extends MY_Controller
         //
         $userData = array(
             'pass_hash' => $passHash,
-//            'pass_update_datetime' => date("Y-m-d 00:00:00"),
+//            'pass_updated_at' => date("Y-m-d 00:00:00"),
         );
 
         $this->userModel->setUserData($this->data["admin"]['admin_id'], $userData);
