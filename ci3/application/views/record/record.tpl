@@ -34,11 +34,17 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>名前</th>
+						<th>名前（カタカナ）</th>
+						<th>Facebook</th>
+						<th>Twitter</th>
+						<th>保有する資格</th>
+						<th>所属団体/コミュニティ（会社以外）</th>
+						<th>学びたいことやってみたいこと</th>
+						<th>教えられること貢献できること</th>
+						<th>最も取り組みたい領域・分野</th>
+						<th>頑張りたいこと＆意気込み</th>
                         <th>登録日時</th>
-                        <th>画像</th>
-                        <th>VRM</th>
-                        <th>QR</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,10 +56,18 @@
                             <td>{$item.record_id|escape:'html'}</td>
                         {/if}
                             <td><a href="/record/detail/{$item.record_id|escape:'html'}/">{$item.record_name|escape:'html'}</a></td>
-                            <td>{$item.regist_datetime|escape:'html'}</td>
-                            <td><a href="/record/picture/{$item.record_id|escape:'html'}/">{if $item.picture_file != ''}<button class="btn btn-primary">画像更新</button>{else}<button class="btn btn-success">画像登録</button>{/if}</a></td>
-                            <td><a href="/record/vrm/{$item.record_id|escape:'html'}/">{if $item.vrm_file != ''}<button class="btn btn-primary">VRM更新</button>{else}<button class="btn btn-success">VRM登録</button>{/if}</a></td>
-                            <td>{$item.popup_url}</td>
+							<td>{$item.name_kana|escape:'html'}</td>
+							<td>{$item.facebook_account|escape:'html'}</td>
+							<td>{$item.twitter_account|escape:'html'}</td>
+							<td>{$item.qualification|escape:'html'}</td>
+                            <td>{$item.community|escape:'html'}</td>
+							<td>{$item.study|escape:'html'}</td>
+							<td>{$item.contribute|escape:'html'}</td>
+							<td>{$item.most_area|escape:'html'}</td>
+							<td>{$item.enthusiasm|escape:'html'}</td>
+{*                            <td><a href="/record/picture/{$item.record_id|escape:'html'}/">{if $item.picture_file != ''}<button class="btn btn-primary">画像更新</button>{else}<button class="btn btn-success">画像登録</button>{/if}</a></td>*}
+{*                            <td><a href="/record/vrm/{$item.record_id|escape:'html'}/">{if $item.vrm_file != ''}<button class="btn btn-primary">VRM更新</button>{else}<button class="btn btn-success">VRM登録</button>{/if}</a></td>*}
+{*                            <td>{$item.popup_url}</td>*}
 
                         </tr>
                         {if $item.lat != ''}
