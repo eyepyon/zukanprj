@@ -50,18 +50,22 @@
 
 						<div class="form-group">
 							Facebookアカウント
-							https://www.facebook.com/<input type="text" name="record_name"
-															value="{set_value('record_name',$record_name)|escape:'html'}"
-															class="form-control form-control-user" placeholder="図鑑名"
+							<label>
+							https://www.facebook.com/<input type="text" name="facebook_account"
+															value="{set_value('facebook_account',$facebook_account)|escape:'html'}"
+															class="form-control form-control-user" placeholder="Facebookアカウント"
 															required>
+							</label>
 						</div>
 
 						<div class="form-group">
 							Twitterアカウント
-							https://twitter.com/<input type="text" name="record_name"
-													   value="{set_value('record_name',$record_name)|escape:'html'}"
-													   class="form-control form-control-user" placeholder="図鑑名"
+							<label>
+							https://twitter.com/<input type="text" name="twitter_account"
+													   value="{set_value('twitter_account',$twitter_account)|escape:'html'}"
+													   class="form-control form-control-user" placeholder="Twitterアカウント"
 													   required>
+							</label>
 						</div>
 
 						<div class="form-group">
@@ -98,8 +102,8 @@
 
 						<div class="form-group">
 							学びたいことやってみたいこと
-							<textarea name="record_detail" class="form-control form-control-user"
-									  placeholder="学びたいことやってみたいこと">{$record_detail|escape:'html'}</textarea>
+							<textarea name="study" class="form-control form-control-user"
+									  placeholder="学びたいことやってみたいこと">{$study|escape:'html'}</textarea>
 						</div>
 
 						<div class="form-group">

@@ -207,8 +207,18 @@ class Record extends MY_Controller
             $this->data['record'] = $record;
             //
             if ($mode != 'edit') {
-                $this->data['record_name'] = $record['record_name'];
-                $this->data['record_detail'] = $record['record_detail'];
+                $this->data['record_name'] = $record['record_name'];//
+                $this->data['record_detail'] = $record['record_detail'];//
+				$this->data['email'] = $record['email'];//
+				$this->data['facebook_account'] = $record['facebook_account'];//
+				$this->data['twitter_account'] = $record['twitter_account'];//
+				$this->data['name_kana'] = $record['name_kana'];// 名前（カタカナ）
+				$this->data['qualification'] = $record['qualification'];// 保有する資格
+				$this->data['community'] = $record['community'];// 所属団体/コミュニティ（会社以外）
+				$this->data['study'] = $record['study'];// 学びたいことやってみたいこと
+				$this->data['contribute'] = $record['contribute'];// 教えられること貢献できること
+				$this->data['most_area'] = $record['most_area'];// 最も取り組みたい領域・分野
+				$this->data['enthusiasm'] = $record['enthusiasm'];// 頑張りたいこと＆意気込み
             }
         }
 
