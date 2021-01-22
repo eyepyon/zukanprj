@@ -25,7 +25,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->helper( $helpers );
 
 		if ( ENVIRONMENT == 'development' ) {
-//			$this->output->enable_profiler( true );
+			$this->output->enable_profiler( true );
 		}
 
 //		// メンテチェック
