@@ -240,16 +240,16 @@ class Record extends MY_Controller
         //
         $mode = $this->input->post('mode');
 
-		$this->data['email'] = "";//
-		$this->data['facebook_account'] = "";//
-		$this->data['twitter_account'] = "";//
-		$this->data['name_kana'] = "";// 名前（カタカナ）
-		$this->data['qualification'] = "";// 保有する資格
-		$this->data['community'] = "";// 所属団体/コミュニティ（会社以外）
-		$this->data['study'] = "";// 学びたいことやってみたいこと
-		$this->data['contribute'] = "";// 教えられること貢献できること
-		$this->data['most_area'] = "";// 最も取り組みたい領域・分野
-		$this->data['enthusiasm'] = "";// 頑張りたいこと＆意気込み
+//		$this->data['email'] = "";//
+//		$this->data['facebook_account'] = "";//
+//		$this->data['twitter_account'] = "";//
+//		$this->data['name_kana'] = "";// 名前（カタカナ）
+//		$this->data['qualification'] = "";// 保有する資格
+//		$this->data['community'] = "";// 所属団体/コミュニティ（会社以外）
+//		$this->data['study'] = "";// 学びたいことやってみたいこと
+//		$this->data['contribute'] = "";// 教えられること貢献できること
+//		$this->data['most_area'] = "";// 最も取り組みたい領域・分野
+//		$this->data['enthusiasm'] = "";// 頑張りたいこと＆意気込み
 
 		if ($id > 0) {
             $record = $this->recordModel->getByRecordId($id);
