@@ -39,6 +39,8 @@
 								<h1 class="h4 text-gray-900 mb-4">図鑑登録</h1>
 							{/if}
 						</div>
+						<?php echo validation_errors(); ?>
+
 						{form_open("record/edit/$id")}
 
 						<div class="form-group">
