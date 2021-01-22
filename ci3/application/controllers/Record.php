@@ -133,18 +133,28 @@ class Record extends MY_Controller
         $name = $this->input->post_get('name');
         $detail = $this->input->post_get('detail');
 		$name_kana = $this->input->post_get('name_kana');
+		$email = $this->input->post_get('email');
 		$facebook_account = $this->input->post_get('facebook_account');
 		$twitter_account = $this->input->post_get('twitter_account');
 		$qualification = $this->input->post_get('qualification');
 		$community = $this->input->post_get('community');
+		$study = $this->input->post_get('study');
+		$contribute = $this->input->post_get('contribute');
+		$most_area = $this->input->post_get('most_area');
+		$enthusiasm = $this->input->post_get('enthusiasm');
 
-        $this->data['name'] = $name;
+		$this->data['name'] = $name;
         $this->data['detail'] = $detail;
-		$this->data['$name_kana'] = $name_kana;
+		$this->data['name_kana'] = $name_kana;
+		$this->data['email'] = $email;
 		$this->data['facebook_account'] = $facebook_account;
 		$this->data['twitter_account'] = $twitter_account;
 		$this->data['qualification'] = $qualification;
 		$this->data['community'] = $community;
+		$this->data['study'] = $study;
+		$this->data['contribute'] = $contribute;
+		$this->data['most_area'] = $most_area;
+		$this->data['enthusiasm'] = $enthusiasm;
 
         // ページ表示数設定
         $ck_page_limit = $this->session->userdata('page_limit');
