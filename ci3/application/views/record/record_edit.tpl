@@ -39,7 +39,7 @@
 								<h1 class="h4 text-gray-900 mb-4">図鑑登録</h1>
 							{/if}
 						</div>
-						{echo validation_errors()}
+						{$validation_errors}
 
 						{form_open("record/edit/$id")}
 

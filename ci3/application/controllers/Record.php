@@ -284,6 +284,8 @@ class Record extends MY_Controller
         $this->form_validation->set_rules($this->forms);
         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 
+		$this->data['validation_errors']= validation_errors();
+
         if ($this->form_validation->run() == FALSE || $back_button == "1") {
             $this->smarty->view('record/record_edit.tpl', $this->data);
         } else {
