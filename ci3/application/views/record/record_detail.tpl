@@ -43,45 +43,75 @@
                         </div>
 
                         <div class="form-group">
-                            図鑑名
+							名前（漢字）
                             <p>{$record.name|escape:'html'}</p>
                         </div>
 
                         <div class="form-group">
-                            図鑑詳細
+                            詳細
                             <p>{$record.detail|nl2br}</p>
                         </div>
 
-                        {*<div class="form-group row">*}
-                            {*<div class="col-sm-6 mb-3 mb-sm-0">*}
-                                {*受付開始日*}
-                                {*<p>{$record.start_date|escape:'html'}</p>*}
-                            {*</div>*}
-                            {*<div class="col-sm-6">*}
-                                {*受付終了日*}
-                                {*<p>{$record.end_date|escape:'html'}</p>*}
-                            {*</div>*}
-                        {*</div>*}
+						<div class="form-group">
+							図鑑詳細
+							<p>{$record.name_kana|nl2br}</p>
+						</div>
 
-                        {*<div class="form-group">*}
-                            {*実行可能額*}
-                            {*<p>{$record.amount|escape:'html'}xem / 1回</p>*}
-                        {*</div>*}
+						<div class="form-group">
+							Facebookアカウント
+							<p>{$record.facebook_account|nl2br}</p>
+						</div>
 
-                        <hr/>
+						<div class="form-group">
+							Twitterアカウント
+							<p>{$record.twitter_account|nl2br}</p>
+						</div>
 
-                        <div class="form-group">
-                            <h5>Balance: {$walletData.account.balance/1000000|string_format:'%.6f'}Xem</h5>
-                            <p>QR;<br />
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?data={$wallet_json}&size=300x300" alt="QRコード" />
-                            </p>
-                            <p>CODE:<br />
-                                {$wallet_address}
-                            </p>
-                            <p>
-                                <a href="http://explorer.nemchina.com//#/s_account?account={$wallet_address}" target="_blank">エクスプローラー</a>
-                            </p>
-                        </div>
+						メールアドレス
+
+						<div class="form-group">
+							保有する資格
+							<p>{$record.qualification|nl2br}</p>
+						</div>
+
+						<div class="form-group">
+							所属団体/コミュニティ（会社以外）
+							<p>{$record.community|nl2br}</p>
+						</div>
+
+						<div class="form-group">
+							学びたいことやってみたいこと
+							<p>{$record.study|nl2br}</p>
+						</div>
+
+						<div class="form-group">
+							教えられること貢献できること
+							<p>{$record.contribute|nl2br}</p>
+						</div>
+
+						<div class="form-group">
+							最も取り組みたい領域・分野
+							<p>{$record.most_area|nl2br}</p>
+						</div>
+
+						<div class="form-group">
+							頑張りたいこと＆意気込み
+							<p>{$record.enthusiasm|nl2br}</p>
+						</div>
+
+						<div class="form-group">
+							登録日時
+							<p>{$record.created_at|nl2br}</p>
+						</div>
+
+						<div class="form-group">
+							更新日時
+							<p>{$record.update_at|nl2br}</p>
+						</div>
+
+
+						<hr/>
+
 
                         <hr/>
 

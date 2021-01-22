@@ -34,7 +34,7 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>名前</th>
+                        <th>名前（漢字）</th>
 						<th>名前（カタカナ）</th>
 						<th>Facebook</th>
 						<th>Twitter</th>
