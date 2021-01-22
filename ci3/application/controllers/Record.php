@@ -522,46 +522,12 @@ class Record extends MY_Controller
 
         $this->data["wallet_address"] = '';
         $this->data["wallet_url"] = "";
-
         $this->data['record'] = $record;
-
-        $this->data["wallet_json"] = '';
-        if (isset($record["wallet_address"]) && strlen($record["wallet_address"]) > 5) {
-            $this->data["wallet_json"] = urlencode('{
-  "type" : 1,
-  "data" : {
-    "addr" : "' . $record["wallet_address"] . '",
-    "name" : "dnt"
-  },
-  "v" : 2
-}');
-        }
-
-        $this->data["wallet_address"] = $record["wallet_address"];
-
         $goalList = array();
-//        $goalList = $this->recordModel->getGoalHistory($id);
-//        foreach ($list as $item) {
-//
-//        }
         $this->data["goal_list"] = $goalList;
 
-//        $walletData = $this->nemModel->account_get($record["wallet_address"]);
-//        //
-//        $mosaic_all = $this->nemModel->account_mosaic($record["wallet_address"]);
-
-        if (isset($mosaic_all["data"])) {
-            foreach ($mosaic_all["data"] as $record) {
-                log_message('debug', "mosaic" . print_r($record, true));
-
-                if (isset($record['quantity']) && isset($record['mosaicId']["name"])) {
-                    $walletData["mosaic"][$record['mosaicId']["name"]] = $record['quantity'];
-                }
-            }
-        }
-
-//        $this->data["walletData"] = $walletData;
-        $this->data["popup_url"] = $this->getPopup($id,PRJ_MEMBER_TYPE_CHALLENGE);
+//        $this->data["popup_url"] = $this->getPopup($id,PRJ_MEMBER_TYPE_CHALLENGE);
+		$this->data["popup_url"] = "";
 
         $this->smarty->view('record/detail.tpl', $this->data);
     }
