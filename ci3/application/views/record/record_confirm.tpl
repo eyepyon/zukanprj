@@ -60,7 +60,7 @@
 
 						<div class="form-group">
 							Twitter
-							<p>{https://twitter.com/$twitter_account|nl2br}</p>
+							<p>https://twitter.com/{$twitter_account|nl2br}</p>
 							<input type="hidden" name="twitter_account" value="{$twitter_account|escape:'html'}">
 						</div>
 
