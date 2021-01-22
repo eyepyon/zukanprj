@@ -36,7 +36,7 @@
 							{if $id > 0}
 								<h1 class="h4 text-gray-900 mb-4">図鑑更新</h1>
 							{else}
-								<h1 class="h4 text-gray-900 mb-4">図鑑作成</h1>
+								<h1 class="h4 text-gray-900 mb-4">図鑑登録</h1>
 							{/if}
 						</div>
 						{form_open("record/edit/$id")}

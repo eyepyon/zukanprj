@@ -49,7 +49,6 @@ class Record_model extends CI_Model
         }
 
         $this->db->order_by("created_at ", "desc");
-//        $this->db->order_by("end_date", "asc");
 
         $resource = $this->db->get();
 
