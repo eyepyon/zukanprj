@@ -45,11 +45,11 @@
 							名前（漢字）
 							<input type="text" name="record_name"
 								   value="{set_value('record_name',$record_name)|escape:'html'}"
-								   class="form-control form-control-user" placeholder="図鑑名" required>
+								   class="form-control form-control-user" placeholder="名前（漢字） " required>
 						</div>
 
 						<div class="form-group">
-							Facebookアカウント
+							Facebookアカウント<br />
 							<label>
 							https://www.facebook.com/<input type="text" name="facebook_account"
 															value="{set_value('facebook_account',$facebook_account)|escape:'html'}"
@@ -59,7 +59,7 @@
 						</div>
 
 						<div class="form-group">
-							Twitterアカウント
+							Twitterアカウント<br />
 							<label>
 							https://twitter.com/<input type="text" name="twitter_account"
 													   value="{set_value('twitter_account',$twitter_account)|escape:'html'}"
