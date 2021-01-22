@@ -31,18 +31,18 @@ class Record extends MY_Controller
             'rules' => 'trim|max_length[1500]'
         ),
         array(
-            'field' => 'メールアドレス',
-            'label' => 'email',
+            'field' => 'email',
+            'label' => 'メールアドレス',
             'rules' => 'trim|required|max_length[128]'
         ),
         array(
-            'field' => 'Facebookアカウント',
-            'label' => 'facebook',
+            'field' => 'facebook',
+            'label' => 'Facebookアカウント',
             'rules' => 'trim|required|max_length[128]'
         ),
         array(
-            'field' => 'Twitterアカウント',
-            'label' => 'twitter',
+            'field' => 'twitter',
+            'label' => 'Twitterアカウント',
             'rules' => 'trim|max_length[128]'
         ),
 		array(
