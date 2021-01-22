@@ -281,6 +281,7 @@ class Record extends MY_Controller
             }
         }
 
+		$this->form_validation->set_data($this->data);
         $this->form_validation->set_rules($this->forms);
         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 
