@@ -12,7 +12,7 @@
 class Record_model extends CI_Model
 {
     // テーブル名
-    var $dataDb = 'record_data';
+    var $dataDb = 'records';
 //    var $goalDb = 'goal_history';
 
     function __construct()

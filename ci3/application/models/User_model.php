@@ -9,7 +9,7 @@
 class User_model extends CI_Model
 {
     // テーブル名
-    var $dataDb = 'user_data';
+    var $dataDb = 'users';
 
     function __construct()
     {

@@ -302,6 +302,16 @@ class Record extends MY_Controller
             'user_id' => (int)sprintf('%d', $this->data['user_id']),
             'name' => $this->data['name'],
             'detail' => $this->data['detail'],
+			'name_kana' => $this->data['name_kana'],
+			'email' => $this->data['email'],
+			'facebook_account' => $this->data['facebook_account'],
+			'twitter_account' => $this->data['twitter_account'],
+			'qualification' => $this->data['qualification'],
+			'community' => $this->data['community'],
+			'study' => $this->data['study'],
+			'contribute' => $this->data['contribute'],
+			'most_area' => $this->data['most_area'],
+			'enthusiasm' => $this->data['enthusiasm'],
             'status' => STATUS_FLAG_ON,
         );
 
