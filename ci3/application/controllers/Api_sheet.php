@@ -1,7 +1,5 @@
 <?php
 
-require_once '/var/www/zukanprj/vendor/autoload.php';
-
 /**
  *
  *
@@ -13,6 +11,8 @@ require_once '/var/www/zukanprj/vendor/autoload.php';
  * @property Record_model $recordModel
  * @property user_model $userModel
  */
+
+require_once '/var/www/zukanprj/vendor/autoload.php';
 
 //define('SPREADSHEET_ID', '1tIAX3TAvsJWJRQ4XFl7GENGzIbBFJFm37WgD3-tILxU');
 define('SPREADSHEET_ID', '1X9lEQIp0m_JUuV6y0Ke7MxqoM8bGfvAXkNCcxHeiTJA');
@@ -83,7 +83,7 @@ class Api_sheet extends CI_Controller
 		$name = "";
 		$detail = "";
 		$status = STATUS_FLAG_OFF;
-		$record_base = $this->recordModel->RecordList($offset, $limit , $name , $detail, $status);
+		$record_base = $this->recordModel->getRecordList($offset, $limit , $name , $detail, $status);
 
 		var_dump($record_base);
 
