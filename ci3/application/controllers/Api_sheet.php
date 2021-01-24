@@ -78,8 +78,12 @@ class Api_sheet extends CI_Controller
 	 */
 	public function up_sheet(array $record)
 	{
-
-		$record_base = $this->recordModel->RecordList($offset = 0, $limit = 0, $name = "", $detail = "", $status = STATUS_FLAG_OFF);
+		$offset = 0;
+		$limit = 0;
+		$name = "";
+		$detail = "";
+		$status = STATUS_FLAG_OFF;
+		$record_base = $this->recordModel->RecordList($offset, $limit , $name , $detail, $status);
 
 		var_dump($record_base);
 
