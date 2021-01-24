@@ -118,7 +118,7 @@ class Api_sheet extends CI_Controller
 
 		$record[] = new \Google_Service_Sheets_ValueRange([
 			'range' => sprintf('Sheet%d!%s:%s',$sheetNo,$sheetRangeStart,$sheetRangeStart),
-			'values' => $addRecord();
+			'values' => $addRecord(),
 		]);
 		return $record;
 	}
