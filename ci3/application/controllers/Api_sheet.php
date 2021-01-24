@@ -2,7 +2,21 @@
 
 require_once '/var/www/zukanprj/vendor/autoload.php';
 
-define('SPREADSHEET_ID', '1tIAX3TAvsJWJRQ4XFl7GENGzIbBFJFm37WgD3-tILxU');
+/**
+ *
+ *
+ * @access public
+ * @author: aida
+ * @version: 2020-01-16 14:22
+ * @copyright FrogCompany Inc. All Rights Reserved
+ *
+ * @property Record_model $recordModel
+ * @property user_model $userModel
+ */
+
+//define('SPREADSHEET_ID', '1tIAX3TAvsJWJRQ4XFl7GENGzIbBFJFm37WgD3-tILxU');
+define('SPREADSHEET_ID', '1X9lEQIp0m_JUuV6y0Ke7MxqoM8bGfvAXkNCcxHeiTJA');
+
 define('CLIENT_SECRET_PATH', APPPATH . 'config/development/weintech-2de74aca5c3b.json');
 // スコープの設定
 //define('SCOPES', implode(' ', array(
@@ -27,6 +41,7 @@ class Api_sheet extends CI_Controller
 
 		$this->load->library('Mmapi');
 		$this->load->model('User_model', 'userModel');
+		$this->load->model('Record_model', 'recordModel');
 
 		$credentialsPath = CLIENT_SECRET_PATH;
 		putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $credentialsPath);
@@ -51,7 +66,30 @@ class Api_sheet extends CI_Controller
 	{
 		$value = new Google_Service_Sheets_ValueRange();
 		$value->setValues(['values' => [$date, $name, $comment]]);
-		$response = $this->service->spreadsheets_values->append($this->spreadsheetId, 'シート1!A1', $value, ['valueInputOption' => 'USER_ENTERED']);
+		$response = $this->service->spreadsheets_values->append(
+			$this->spreadsheetId, 'シート1!A1', $value, ['valueInputOption' => 'USER_ENTERED']
+		);
+
+		var_dump($response);
+	}
+
+	/**
+	 * @param array $record
+	 */
+	public function up_sheet(array $record)
+	{
+
+		$record_base = $this->recordModel->RecordList($offset = 0, $limit = 0, $name = "", $detail = "", $status = STATUS_FLAG_OFF);
+
+		var_dump($record_base);
+
+		exit;
+
+		$value = new Google_Service_Sheets_ValueRange();
+		$value->setValues(['values' => $record]);
+		$response = $this->service->spreadsheets_values->append(
+			$this->spreadsheetId, 'シート1!B3', $value, ['valueInputOption' => 'USER_ENTERED']
+		);
 
 		var_dump($response);
 	}
@@ -67,6 +105,40 @@ class Api_sheet extends CI_Controller
 		$this->append($date, $name, $comment);
 
 	}
+
+	/**
+	 * @param array $addRecord
+	 * @param string $sheetRangeStart
+	 * @param string $sheetRangeEnd
+	 * @param int $sheetNo
+	 * @param array $record
+	 * @return array|mixed
+	 */
+	private function __Sheet_Update($addRecord =array(),$sheetRangeStart="",$sheetRangeEnd="",$sheetNo=1,$record =array()){
+
+		$record[] = new \Google_Service_Sheets_ValueRange([
+			'range' => sprintf('Sheet%d!%s:%s',$sheetNo,$sheetRangeStart,$sheetRangeStart),
+			'values' => $addRecord();
+		]);
+		return $record;
+	}
+
+	public function batch_update(){
+		try {
+
+			$spreadsheet_service = new \Google_Service_Sheets($client);
+			$spreadsheet_id = '（スプレッドシートのID）';
+
+		$result = $spreadsheet_service->spreadsheets_values->batchUpdate($spreadsheet_id, $body);
+		echo $updated_cell_count = $result->getTotalUpdatedCells();
+
+		} catch (\Exception $e) {
+
+			// エラー処理
+
+		}
+	}
+
 
 
 	public function Update_Sheet()
