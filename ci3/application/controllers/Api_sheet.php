@@ -76,7 +76,7 @@ class Api_sheet extends CI_Controller
 	/**
 	 * @param array $record
 	 */
-	public function up_sheet(array $record)
+	public function up_sheet($record = array())
 	{
 		$offset = 0;
 		$limit = 0;
