@@ -7,7 +7,7 @@
 {block name=javascript}
 	<style type="text/css">
 		.bg-detail-image {
-		{if $id > 0 && $record.picture_file != ''} background: url("https://dev.zukan.cloud/files/{$record.picture_file}{$salt_wd}");
+		{if $id > 0 && $record.picture_file != ''} background: url("{$base_url}/files/{$record.picture_file}{$salt_wd}");
 		{else} background: url("{$base_url}/img/pic2.jpg{$salt_wd}");
 		{/if} background-position: center;
 			background-size: cover;
@@ -111,7 +111,7 @@
 						</div>
 
 						<div class="form-group">
-							所属団体/コミュニティ（会社以外
+							所属団体/コミュニティ（会社以外）
 							<p>{$community|nl2br}</p>
 							<input type="hidden" name="community" value="{$community|escape:'html'}">
 						</div>
