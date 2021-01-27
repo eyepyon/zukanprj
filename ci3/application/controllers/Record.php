@@ -90,20 +90,6 @@ class Record extends MY_Controller
 //		),
     );
 
-//    var $form_spot = array(
-//        array(
-//            'field' => 'lng',
-//            'label' => 'SFTPフォルダ',
-//            'rules' => 'trim|required|max_length[128]'
-//        ),
-//        array(
-//            'field' => 'lat',
-//            'label' => 'Spot名称',
-//            'rules' => 'trim|required|max_length[128]'
-//        ),
-//
-//    );
-
 
     public function __construct()
     {
@@ -170,7 +156,7 @@ class Record extends MY_Controller
 		$this->data['enthusiasm'] = $enthusiasm;
 		$this->data['qualification'] = $qualification;
 		$this->data['community'] = $community;
-//		$this->data['detail'] = $detail;
+		$this->data['detail'] = $detail;
 
         // ページ表示数設定
         $ck_page_limit = $this->session->userdata('page_limit');

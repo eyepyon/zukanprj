@@ -56,7 +56,7 @@
 							<td>{$item.name_kana|escape:'html'}</td>
 							<td>https://www.facebook.com/{$item.facebook_account|escape:'html'}</td>
 							<td>https://twitter.com/{$item.twitter_account|escape:'html'}</td>
-							<td>{$array_attribute[$item.$attribute]}</td>
+							<td>{$array_attribute[$item.attribute]}</td>
 
 							<td>{$item.qualification|escape:'html'}</td>
 
