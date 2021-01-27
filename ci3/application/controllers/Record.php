@@ -616,7 +616,7 @@ class Record extends MY_Controller
 		if (preg_match("/^[a-zA-Z0-9_\-]+$/", $str)) {
 			return TRUE;
 		} else {
-			$this->form_validation->set_message('fb_name_check', '正しいFacebookアカウントを入れてください。');
+			$this->form_validation->set_message('fb_name_check', '正しいTwitterアカウントを入れてください。');
 			return FALSE;
 		}
 	}
