@@ -96,29 +96,17 @@
 						<div class="form-group">
 							属性 ※
 						</div>
-						<div class="form-group row">
-							<div class="col-sm-6 mb-3 mb-sm-0" style="text-align: right">
-								<input type="radio" name="attribute" value="1" class="form-control form-control-user">
-							</div>
-							<div class="col-sm-6">
-								社会人
+						<div class="form-group">
+							<div class="custom-control custom-checkbox small">
+								<input type="radio" name="attribute" value="1" class="custom-control-input"/>
+								<label class="custom-control-label" for="customCheck">社会人</label>
 							</div>
 						</div>
-						<div class="form-group row">
-							<div class="col-sm-6 mb-3 mb-sm-0" style="text-align: right">
-								<input type="radio" name="attribute" value="2" class="form-control form-control-user">
+						<div class="form-group">
+							<div class="custom-control custom-checkbox small">
+								<input type="radio" name="attribute" value="2" class="custom-control-input"/>
+								<label class="custom-control-label" for="customCheck">学生</label>
 							</div>
-							<div class="col-sm-6">
-								学生
-							</div>
-						</div>
-
-							<div class="form-group">
-							<label>
-							</label>
-							<br/>
-							<label>
-							</label>
 						</div>
 
 						<div class="form-group">

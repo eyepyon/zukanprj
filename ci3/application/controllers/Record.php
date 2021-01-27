@@ -280,7 +280,7 @@ class Record extends MY_Controller
 
         if ($this->form_validation->run() == FALSE || $back_button == "1") {
         	if($back_button != "1"){
-				if ($mode != 'edit') {
+				if ($mode == 'edit') {
 					$this->data['validation_errors'] = validation_errors();
 				}
 			}
