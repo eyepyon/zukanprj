@@ -525,7 +525,7 @@ class Record extends MY_Controller
 //        $this->data["popup_url"] = $this->getPopup($id,PRJ_MEMBER_TYPE_CHALLENGE);
 		$this->data["popup_url"] = "";
 
-        $this->smarty->view('record/detail.tpl', $this->data);
+        $this->smarty->view('record/record_detail.tpl', $this->data);
     }
 
     /**
