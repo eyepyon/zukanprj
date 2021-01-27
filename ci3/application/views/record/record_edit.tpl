@@ -93,19 +93,15 @@
 {*								   class="form-control form-control-user" placeholder="メールアドレス" required>*}
 {*						</div>*}
 
-						<div class="form-group">
-							属性 ※
-						</div>
-						<div class="form-group">
-							<div class="custom-control custom-checkbox small">
-								<input type="radio" name="attribute" value="1" class="custom-control-input"/>
-								<label class="custom-control-label" for="customCheck">社会人</label>
+						<div>
+							<h3>属性 ※</h3>
+							<div class="md-radio md-radio-inline">
+								<input id="1" value="1" type="radio" name="attribute" checked>
+								<label for="1">社会人</label>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="custom-control custom-checkbox small">
-								<input type="radio" name="attribute" value="2" class="custom-control-input"/>
-								<label class="custom-control-label" for="customCheck">学生</label>
+							<div class="md-radio md-radio-inline">
+								<input id="2" value="2" type="radio" name="attribute">
+								<label for="2">学生</label>
 							</div>
 						</div>
 
