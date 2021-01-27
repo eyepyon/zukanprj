@@ -49,8 +49,8 @@
 
 						<div class="form-group">
 							Facebookアカウント
-							<p><a href="https://www.facebook.com/{$record.facebook_account|escape:'html'}/"
-								  target="_blank">https://www.facebook.com/{$record.facebook_account|escape:'html'}/</a>
+							<p><a href="https://www.facebook.com/{$record.facebook_account|escape:'html'}"
+								  target="_blank">https://www.facebook.com/{$record.facebook_account|escape:'html'}</a>
 							</p>
 						</div>
 

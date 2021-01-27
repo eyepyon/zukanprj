@@ -54,7 +54,7 @@
 
 						<div class="form-group">
 							Facebookアカウント
-							<p><a href="https://www.facebook.com/{$facebook_account|nl2br}/" target="_blank">https://www.facebook.com/{$facebook_account|nl2br}/</a></p>
+							<p><a href="https://www.facebook.com/{$facebook_account|nl2br}" target="_blank">https://www.facebook.com/{$facebook_account|nl2br}</a></p>
 							<input type="hidden" name="facebook_account" value="{$facebook_account|escape:'html'}">
 						</div>
 
