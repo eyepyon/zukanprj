@@ -23,42 +23,33 @@ class Record extends MY_Controller
         array(
             'field' => 'name',
             'label' => '名前',
-            'rules' => 'trim|required|max_length[250]'
-        ),
-        array(
-            'field' => 'detail',
-            'label' => '詳細',
-            'rules' => 'trim|max_length[1500]'
-        ),
-        array(
-            'field' => 'email',
-            'label' => 'メールアドレス',
-            'rules' => 'trim|required|max_length[128]'
-        ),
-        array(
-            'field' => 'facebook_account',
-            'label' => 'Facebookアカウント',
-            'rules' => 'trim|required|max_length[128]'
-        ),
-        array(
-            'field' => 'twitter_account',
-            'label' => 'Twitterアカウント',
-            'rules' => 'trim|max_length[128]'
+            'rules' => 'trim|required|max_length[100]'
         ),
 		array(
 			'field' => 'name_kana',
 			'label' => '名前（カタカナ）',
 			'rules' => 'trim|required|max_length[100]'
 		),
+        array(
+            'field' => 'facebook_account',
+            'label' => 'Facebookアカウント',
+            'rules' => 'trim|required|alpha_numeric|max_length[128]'
+        ),
+        array(
+            'field' => 'twitter_account',
+            'label' => 'Twitterアカウント',
+            'rules' => 'trim|alpha_numeric|max_length[128]'
+        ),
+//		array(
+//			'field' => 'email',
+//			'label' => 'メールアドレス',
+//			'rules' => 'trim|required|max_length[128]'
+//		),
+
 		array(
-			'field' => 'qualification',
-			'label' => '保有する資格',
-			'rules' => 'trim|max_length[1000]'
-		),
-		array(
-			'field' => 'community',
-			'label' => '所属団体/コミュニティ（会社以外）',
-			'rules' => 'trim|max_length[1000]'
+			'field' => 'attribute',
+			'label' => '属性',
+			'rules' => 'trim|exact_length[1]|greater_than_equal_to[1]'
 		),
 		array(
 			'field' => 'study',
@@ -80,6 +71,23 @@ class Record extends MY_Controller
 			'label' => '頑張りたいこと＆意気込み',
 			'rules' => 'trim|max_length[1000]'
 		),
+		array(
+			'field' => 'qualification',
+			'label' => '保有する資格',
+			'rules' => 'trim|max_length[1000]'
+		),
+		array(
+			'field' => 'community',
+			'label' => '所属団体/コミュニティ（会社以外）',
+			'rules' => 'trim|max_length[1000]'
+		),
+
+
+//		array(
+//			'field' => 'detail',
+//			'label' => '詳細',
+//			'rules' => 'trim|max_length[1500]'
+//		),
     );
 
 //    var $form_spot = array(
@@ -130,31 +138,39 @@ class Record extends MY_Controller
 
         $this->data["salt_wd"] = '?dmy='.date('U');
 
+		$array_attribute = array(
+			"","社会人","学生"
+		);
+        $this->data['array_attribute'] = $array_attribute;
+		$this->data['validation_errors']= "";
+
         $name = $this->input->post_get('name');
-        $detail = $this->input->post_get('detail');
 		$name_kana = $this->input->post_get('name_kana');
-		$email = $this->input->post_get('email');
 		$facebook_account = $this->input->post_get('facebook_account');
 		$twitter_account = $this->input->post_get('twitter_account');
-		$qualification = $this->input->post_get('qualification');
-		$community = $this->input->post_get('community');
+//		$email = $this->input->post_get('email');
+		$attribute = $this->input->post_get('attribute');
 		$study = $this->input->post_get('study');
 		$contribute = $this->input->post_get('contribute');
 		$most_area = $this->input->post_get('most_area');
 		$enthusiasm = $this->input->post_get('enthusiasm');
+		$qualification = $this->input->post_get('qualification');
+		$community = $this->input->post_get('community');
+		$detail = $this->input->post_get('detail');
 
 		$this->data['name'] = $name;
-        $this->data['detail'] = $detail;
 		$this->data['name_kana'] = $name_kana;
-		$this->data['email'] = $email;
 		$this->data['facebook_account'] = $facebook_account;
 		$this->data['twitter_account'] = $twitter_account;
-		$this->data['qualification'] = $qualification;
-		$this->data['community'] = $community;
+//		$this->data['email'] = $email;
+		$this->data['attribute'] = $attribute;
 		$this->data['study'] = $study;
 		$this->data['contribute'] = $contribute;
 		$this->data['most_area'] = $most_area;
 		$this->data['enthusiasm'] = $enthusiasm;
+		$this->data['qualification'] = $qualification;
+		$this->data['community'] = $community;
+//		$this->data['detail'] = $detail;
 
         // ページ表示数設定
         $ck_page_limit = $this->session->userdata('page_limit');
@@ -250,34 +266,24 @@ class Record extends MY_Controller
         //
         $mode = $this->input->post('mode');
 
-//		$this->data['email'] = "";//
-//		$this->data['facebook_account'] = "";//
-//		$this->data['twitter_account'] = "";//
-//		$this->data['name_kana'] = "";// 名前（カタカナ）
-//		$this->data['qualification'] = "";// 保有する資格
-//		$this->data['community'] = "";// 所属団体/コミュニティ（会社以外）
-//		$this->data['study'] = "";// 学びたいことやってみたいこと
-//		$this->data['contribute'] = "";// 教えられること貢献できること
-//		$this->data['most_area'] = "";// 最も取り組みたい領域・分野
-//		$this->data['enthusiasm'] = "";// 頑張りたいこと＆意気込み
-
 		if ($id > 0) {
             $record = $this->recordModel->getByRecordId($id);
             $this->data['record'] = $record;
             //
             if ($mode != 'edit') {
                 $this->data['name'] = $record['name'];//
-                $this->data['detail'] = $record['detail'];//
-				$this->data['email'] = $record['email'];//
+				$this->data['name_kana'] = $record['name_kana'];// 名前（カタカナ）
 				$this->data['facebook_account'] = $record['facebook_account'];//
 				$this->data['twitter_account'] = $record['twitter_account'];//
-				$this->data['name_kana'] = $record['name_kana'];// 名前（カタカナ）
-				$this->data['qualification'] = $record['qualification'];// 保有する資格
-				$this->data['community'] = $record['community'];// 所属団体/コミュニティ（会社以外）
+//				$this->data['email'] = $record['email'];//
+				$this->data['attribute'] = $record['attribute'];//;
 				$this->data['study'] = $record['study'];// 学びたいことやってみたいこと
 				$this->data['contribute'] = $record['contribute'];// 教えられること貢献できること
 				$this->data['most_area'] = $record['most_area'];// 最も取り組みたい領域・分野
 				$this->data['enthusiasm'] = $record['enthusiasm'];// 頑張りたいこと＆意気込み
+				$this->data['qualification'] = $record['qualification'];// 保有する資格
+				$this->data['community'] = $record['community'];// 所属団体/コミュニティ（会社以外）
+//				$this->data['detail'] = $record['detail'];//
             }
         }
 
@@ -287,7 +293,10 @@ class Record extends MY_Controller
 
 
         if ($this->form_validation->run() == FALSE || $back_button == "1") {
-			$this->data['validation_errors']= validation_errors();
+        	if($back_button != "1"){
+				$this->data['validation_errors']= validation_errors();
+			}
+
             $this->smarty->view('record/record_edit.tpl', $this->data);
         } else {
             $this->smarty->view('record/record_confirm.tpl', $this->data);
@@ -304,18 +313,19 @@ class Record extends MY_Controller
         $record = array(
             'user_id' => (int)sprintf('%d', $this->data['user_id']),
             'name' => $this->data['name'],
-            'detail' => $this->data['detail'],
 			'name_kana' => $this->data['name_kana'],
-			'email' => $this->data['email'],
 			'facebook_account' => $this->data['facebook_account'],
 			'twitter_account' => $this->data['twitter_account'],
-			'qualification' => $this->data['qualification'],
-			'community' => $this->data['community'],
+//			'email' => $this->data['email'],
+			'attribute' => $this->data['attribute'],
 			'study' => $this->data['study'],
 			'contribute' => $this->data['contribute'],
 			'most_area' => $this->data['most_area'],
 			'enthusiasm' => $this->data['enthusiasm'],
+			'qualification' => $this->data['qualification'],
+			'community' => $this->data['community'],
             'status' => STATUS_FLAG_ON,
+//			'detail' => $this->data['detail'],
         );
 
         $this->recordModel->setRecordData($id, $record);

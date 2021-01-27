@@ -47,7 +47,14 @@
 							名前（漢字）
 							<input type="text" name="name"
 								   value="{set_value('name',$name)|escape:'html'}"
-								   class="form-control form-control-user" placeholder="名前（漢字） " required>
+								   class="form-control form-control-user" placeholder="名前（漢字）を入れてください" required>
+						</div>
+
+						<div class="form-group">
+							名前（カタカナ）
+							<input type="text" name="name_kana"
+								   value="{set_value('name_kana',$name_kana)|escape:'html'}"
+								   class="form-control form-control-user" placeholder="名前（カタカナ）を入れてください" required>
 						</div>
 
 						<div class="form-group">
@@ -55,7 +62,7 @@
 							<label>
 							https://www.facebook.com/<input type="text" name="facebook_account"
 															value="{set_value('facebook_account',$facebook_account)|escape:'html'}"
-															class="form-control form-control-user" placeholder="Facebookアカウント"
+															class="form-control form-control-user" placeholder="Facebookアカウントを入れてください"
 															required>
 							</label>
 						</div>
@@ -65,41 +72,22 @@
 							<label>
 							https://twitter.com/<input type="text" name="twitter_account"
 													   value="{set_value('twitter_account',$twitter_account)|escape:'html'}"
-													   class="form-control form-control-user" placeholder="Twitterアカウント"
+													   class="form-control form-control-user" placeholder="Twitterアカウントを入れてください"
 													   required>
 							</label>
 						</div>
 
-						<div class="form-group">
-							メールアドレス
-							<input type="text" name="email" value="{set_value('email',$name)|escape:'html'}"
-								   class="form-control form-control-user" placeholder="メールアドレス" required>
-						</div>
+{*						<div class="form-group">*}
+{*							メールアドレス*}
+{*							<input type="text" name="email" value="{set_value('email',$name)|escape:'html'}"*}
+{*								   class="form-control form-control-user" placeholder="メールアドレス" required>*}
+{*						</div>*}
 
 						<div class="form-group">
 							属性
-							<input type="text" name="name"
-								   value="{set_value('name',$name)|escape:'html'}"
-								   class="form-control form-control-user" placeholder="属性" required>
-						</div>
-
-						<div class="form-group">
-							名前（カタカナ）
-							<input type="text" name="name_kana"
-								   value="{set_value('name_kana',$name_kana)|escape:'html'}"
-								   class="form-control form-control-user" placeholder="名前（カタカナ）" required>
-						</div>
-
-						<div class="form-group">
-							保有する資格
-							<textarea name="qualification" class="form-control form-control-user"
-									  placeholder="保有する資格">{$qualification|escape:'html'}</textarea>
-						</div>
-
-						<div class="form-group">
-							所属団体/コミュニティ（会社以外）
-							<textarea name="community" class="form-control form-control-user"
-									  placeholder="所属団体/コミュニティ（会社以外）">{$community|escape:'html'}</textarea>
+							<input type="radio" name="attribute" value="1" class="form-control form-control-user">社会人
+							<br />
+							<input type="radio" name="attribute" value="2" class="form-control form-control-user">学生
 						</div>
 
 						<div class="form-group">
@@ -125,6 +113,19 @@
 							<textarea name="enthusiasm" class="form-control form-control-user"
 									  placeholder="頑張りたいこと＆意気込み">{$enthusiasm|escape:'html'}</textarea>
 						</div>
+
+						<div class="form-group">
+							保有する資格
+							<textarea name="qualification" class="form-control form-control-user"
+									  placeholder="保有する資格">{$qualification|escape:'html'}</textarea>
+						</div>
+
+						<div class="form-group">
+							所属団体/コミュニティ（会社以外）
+							<textarea name="community" class="form-control form-control-user"
+									  placeholder="所属団体/コミュニティ（会社以外）">{$community|escape:'html'}</textarea>
+						</div>
+
 
 						<input type="hidden" name="mode" value="edit">
 						<button type="submit" class="btn btn-primary btn-user btn-block">確認</button>

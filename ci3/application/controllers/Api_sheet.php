@@ -85,7 +85,10 @@ class Api_sheet extends CI_Controller
 		$status = STATUS_FLAG_OFF;
 		$record_base = $this->recordModel->getRecordList($offset, $limit , $name , $detail, $status);
 
-		var_dump($record_base);
+		foreach ($record_base as $record){
+			$return = $this->__adjust_list($record, $return);
+		}
+		var_dump($return);
 
 		exit;
 
@@ -185,6 +188,25 @@ class Api_sheet extends CI_Controller
 			echo "Google_Exception" . $err;
 		}
 
+	}
+
+	private function __adjust_list($record = array(), $return = array())
+	{
+		$return[] = $record['user_id']; // No.
+		$return[] = $record['name']; // 名前（漢字）
+		$return[] = $record['name_kana']; //	名前（カタカナ）
+//		email
+		$return[] = $record['facebook_account']; //	Facebookアカウント
+		$return[] = $record['twitter_account']; //	Twitterアカウント
+		$return[] = $record['attribute']; //	属性(1,社会人 2,学生)
+		$return[] = $record['study']; // 学びたいことやってみたいこと
+		$return[] = $record['contribute']; // 教えられること 貢献できること
+		$return[] = $record['most_area']; // 最も取り組みたい領域・分野
+		$return[] = $record['enthusiasm']; //	頑張りたいこと＆意気込み
+		$return[] = $record['qualification']; //	保有する資格
+		$return[] = $record['community']; //	所属団体/コミュニティ（会社以外）
+		//  	detail
+		return $record;
 	}
 
 }

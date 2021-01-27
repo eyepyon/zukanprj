@@ -41,33 +41,9 @@
 						</div>
 						{form_open("record/action/$id")}
 						<div class="form-group">
-							図鑑名
+							名前（漢字）
 							<p>{$name|escape:'html'}</p>
 							<input type="hidden" name="name" value="{$name|escape:'html'}">
-						</div>
-
-						<div class="form-group">
-							図鑑詳細
-							<p>{$detail|nl2br}</p>
-							<input type="hidden" name="detail" value="{$detail|escape:'html'}">
-						</div>
-
-						<div class="form-group">
-							Facebook
-							<p>https://www.facebook.com/{$facebook_account|nl2br}/</p>
-							<input type="hidden" name="facebook_account" value="{$facebook_account|escape:'html'}">
-						</div>
-
-						<div class="form-group">
-							Twitter
-							<p>https://twitter.com/{$twitter_account|nl2br}</p>
-							<input type="hidden" name="twitter_account" value="{$twitter_account|escape:'html'}">
-						</div>
-
-						<div class="form-group">
-							保有する資格
-							<p>{$qualification|nl2br}</p>
-							<input type="hidden" name="qualification" value="{$qualification|escape:'html'}">
 						</div>
 
 						<div class="form-group">
@@ -77,15 +53,27 @@
 						</div>
 
 						<div class="form-group">
-							所属団体/コミュニティ（会社以外
-							<p>{$community|nl2br}</p>
-							<input type="hidden" name="community" value="{$community|escape:'html'}">
+							Facebookアカウント
+							<p><a href="https://www.facebook.com/{$facebook_account|nl2br}/" target="_blank">https://www.facebook.com/{$facebook_account|nl2br}/</a></p>
+							<input type="hidden" name="facebook_account" value="{$facebook_account|escape:'html'}">
 						</div>
 
 						<div class="form-group">
-							保有する資格
-							<p>{$qualification|nl2br}</p>
-							<input type="hidden" name="qualification" value="{$qualification|escape:'html'}">
+							Twitterアカウント
+							<p><a href="https://twitter.com/{$twitter_account|nl2br}" target="_blank">https://twitter.com/{$twitter_account|nl2br}</a></p>
+							<input type="hidden" name="twitter_account" value="{$twitter_account|escape:'html'}">
+						</div>
+
+						<div class="form-group">
+							属性
+							<p>
+							{if $attribute == 1}
+								社会人
+							{elseif $attribute == 2}
+								学生
+							{/if}
+							</p>
+							<input type="hidden" name="attribute" value="{$attribute|escape:'html'}">
 						</div>
 
 						<div class="form-group">
@@ -112,28 +100,17 @@
 							<input type="hidden" name="enthusiasm" value="{$enthusiasm|escape:'html'}">
 						</div>
 
-						{*<div class="form-group row">*}
-						{*<div class="col-sm-6 mb-3 mb-sm-0">*}
-						{*受付開始日:*}
-						{*{$start_date|escape:'html'}*}
-						{*<input type="hidden" name="start_date" value="{$start_date|escape:'html'}">*}
-						{*</div>*}
-						{*<div class="col-sm-6">*}
-						{*受付終了日:*}
-						{*{$end_date|escape:'html'}*}
-						{*<input type="hidden" name="end_date" value="{$end_date|escape:'html'}">*}
-						{*</div>*}
-						{*</div>*}
+						<div class="form-group">
+							保有する資格
+							<p>{$qualification|nl2br}</p>
+							<input type="hidden" name="qualification" value="{$qualification|escape:'html'}">
+						</div>
 
-						{*<div class="form-group row">*}
-						{*<div class="col-sm-6 mb-3 mb-sm-0">*}
-						{*実行可能額:*}
-						{*{$amount|escape:'html'}xem / 1回*}
-						{*<input type="hidden" name="amount" value="{$amount|escape:'html'}">*}
-						{*</div>*}
-						{*<div class="col-sm-6">*}
-						{*</div>*}
-						{*</div>*}
+						<div class="form-group">
+							所属団体/コミュニティ（会社以外
+							<p>{$community|nl2br}</p>
+							<input type="hidden" name="community" value="{$community|escape:'html'}">
+						</div>
 
 						{if $id > 0}
 							<button type="submit" class="btn btn-primary btn-user btn-block confirm_update">更新</button>

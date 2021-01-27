@@ -35,8 +35,8 @@
 		</a>
 		<div id="collapsePrj" class="collapse{$show_menu.record}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<h6 class="collapse-header">登録:</h6>
-				<a class="collapse-item" href="/record/">登録</a>
+				<h6 class="collapse-header">図鑑データ</h6>
+				<a class="collapse-item" href="/record/">一覧</a>
 				{if $loggedIn}
 				<a class="collapse-item" href="/record/edit/">新規作成</a>
 				{/if}
