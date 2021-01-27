@@ -113,7 +113,7 @@
 
 						<div class="form-group">
 							更新日時
-							<p>{$record.update_at|nl2br}</p>
+							<p>{$record.updated_at|nl2br}</p>
 						</div>
 
 						<hr/>

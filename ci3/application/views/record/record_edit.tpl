@@ -60,9 +60,8 @@
 						<div class="form-group">
 							Facebookアカウント ※
 						</div>
-
 						<div class="form-group row">
-							<div class="col-sm-6 mb-3 mb-sm-0">
+							<div class="col-sm-6 mb-3 mb-sm-0" style="float: right">
 								https://www.facebook.com/
 							</div>
 							<div class="col-sm-6">
@@ -77,10 +76,15 @@
 							Twitterアカウント
 						</div>
 						<div class="form-group row">
-							https://twitter.com/<input type="text" name="twitter_account"
+							<div class="col-sm-6 mb-3 mb-sm-0" style="float: right">
+							https://twitter.com/
+							</div>
+							<div class="col-sm-6">
+							<input type="text" name="twitter_account"
 													   value="{set_value('twitter_account',$twitter_account)|escape:'html'}"
 													   class="form-control form-control-user" placeholder="Twitterアカウントを入れてください"
 													   required>
+							</div>
 						</div>
 
 {*						<div class="form-group">*}

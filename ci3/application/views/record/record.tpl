@@ -51,7 +51,7 @@
                     <tbody>
                     {foreach from=$list item=item}
                         <tr>
-                            <td>{$item.id|escape:'html'}</td>
+                            <td>{$item.id|string_format:"%03d"}</td>
                             <td><a href="/record/detail/{$item.id|escape:'html'}/">{$item.name|escape:'html'}</a></td>
 							<td>{$item.name_kana|escape:'html'}</td>
 							<td style="white-space:nowrap;"><a href="https://www.facebook.com/{$item.facebook_account|escape:'html'}" target="_blank">https://www.facebook.com/{$item.facebook_account|escape:'html'}</a></td>
@@ -60,12 +60,12 @@
 								<a href="https://twitter.com/{$item.twitter_account|escape:'html'}" target="_blank">https://twitter.com/{$item.twitter_account|escape:'html'}</a></td>
 							{/if}
 							<td style="white-space:nowrap;">{$array_attribute[$item.attribute]}</td>
-							<td>{$item.qualification|escape:'html'}</td>
-                            <td>{$item.community|escape:'html'}</td>
 							<td>{$item.study|escape:'html'}</td>
 							<td>{$item.contribute|escape:'html'}</td>
 							<td>{$item.most_area|escape:'html'}</td>
 							<td>{$item.enthusiasm|escape:'html'}</td>
+							<td>{$item.qualification|escape:'html'}</td>
+                            <td>{$item.community|escape:'html'}</td>
 							<td>{$item.created_at|escape:'html'}</td>
 {*                            <td><a href="/record/picture/{$item.id|escape:'html'}/">{if $item.picture_file != ''}<button class="btn btn-primary">画像更新</button>{else}<button class="btn btn-success">画像登録</button>{/if}</a></td>*}
 {*                            <td><a href="/record/vrm/{$item.id|escape:'html'}/">{if $item.vrm_file != ''}<button class="btn btn-primary">VRM更新</button>{else}<button class="btn btn-success">VRM登録</button>{/if}</a></td>*}
