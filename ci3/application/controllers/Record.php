@@ -33,7 +33,7 @@ class Record extends MY_Controller
         array(
             'field' => 'facebook_account',
             'label' => 'Facebookアカウント',
-            'rules' => 'trim|required|alpha_numeric|max_length[128]'
+            'rules' => 'trim|required|max_length[128]|callback_fb_name_check'
         ),
         array(
             'field' => 'twitter_account',
@@ -591,6 +591,21 @@ class Record extends MY_Controller
         }
         return $search;
     }
+
+
+	/**
+	 * @param string $str
+	 * @return bool
+	 */
+	public function fb_name_check($str = "")
+	{
+		if (preg_match("/^[a-zA-Z0-9_-\.]+$/", $str)) {
+			return TRUE;
+		} else {
+			$this->form_validation->set_message('fb_name_check', 'Facebook"');
+			return FALSE;
+		}
+	}
 
 }
 
