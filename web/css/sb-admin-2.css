@@ -11412,19 +11412,19 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://shukin.pw/img/qr_pay.jpg");
+  background: url("https://dev.zukan.cloud/img/login_image.jpg");
   background-position: center;
   background-size: cover;
 }
 
 .bg-register-image {
-  background: url("https://soranome.live/img/drone2.jpg");
+  background: url("https://dev.zukan.cloud/img/reg_image.jpg");
   background-position: center;
   background-size: cover;
 }
 
 .bg-password-image {
-  background: url("https://source.unsplash.com/oWTW-jNGl9I/600x800");
+  background: url("https://dev.zukan.cloud/img/pass_image.jpg");
   background-position: center;
   background-size: cover;
 }
