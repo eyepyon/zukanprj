@@ -82,8 +82,7 @@
 							<div class="col-sm-6">
 							<input type="text" name="twitter_account"
 													   value="{set_value('twitter_account',$twitter_account)|escape:'html'}"
-													   class="form-control form-control-user" placeholder="Twitterアカウントを入れてください"
-													   required>
+													   class="form-control form-control-user" placeholder="Twitterアカウントを入れてください">
 							</div>
 						</div>
 
