@@ -44,37 +44,40 @@
 						{form_open("record/edit/$id")}
 
 						<div class="form-group">
-							名前（漢字）
+							名前（漢字） ※
 							<input type="text" name="name"
 								   value="{set_value('name',$name)|escape:'html'}"
 								   class="form-control form-control-user" placeholder="名前（漢字）を入れてください" required>
 						</div>
 
 						<div class="form-group">
-							名前（カタカナ）
+							名前（カタカナ） ※
 							<input type="text" name="name_kana"
 								   value="{set_value('name_kana',$name_kana)|escape:'html'}"
 								   class="form-control form-control-user" placeholder="名前（カタカナ）を入れてください" required>
 						</div>
 
-						<div class="form-group">
-							Facebookアカウント<br />
-							<label>
-							https://www.facebook.com/<input type="text" name="facebook_account"
-															value="{set_value('facebook_account',$facebook_account)|escape:'html'}"
-															class="form-control form-control-user" placeholder="Facebookアカウントを入れてください"
-															required>
-							</label>
+						<div class="form-group row">
+							Facebookアカウント ※<br />
+							<div class="col-sm-6 mb-3 mb-sm-0">
+								https://www.facebook.com/
+							</div>
+							<div class="col-sm-6">
+								<input type="text" name="facebook_account"
+									   value="{set_value('facebook_account',$facebook_account)|escape:'html'}"
+									   class="form-control form-control-user" placeholder="Facebookアカウントを入れてください"
+									   required>
+							</div>
 						</div>
 
 						<div class="form-group">
-							Twitterアカウント<br />
-							<label>
+							Twitterアカウント
+						</div>
+						<div class="form-group row">
 							https://twitter.com/<input type="text" name="twitter_account"
 													   value="{set_value('twitter_account',$twitter_account)|escape:'html'}"
 													   class="form-control form-control-user" placeholder="Twitterアカウントを入れてください"
 													   required>
-							</label>
 						</div>
 
 {*						<div class="form-group">*}
@@ -84,10 +87,14 @@
 {*						</div>*}
 
 						<div class="form-group">
-							属性
-							<input type="radio" name="attribute" value="1" class="form-control form-control-user">社会人
-							<br />
-							<input type="radio" name="attribute" value="2" class="form-control form-control-user">学生
+							属性 ※
+							<label>
+								<input type="radio" name="attribute" value="1" class="form-control form-control-user">社会人
+							</label>
+							<br/>
+							<label>
+								<input type="radio" name="attribute" value="2" class="form-control form-control-user">学生
+							</label>
 						</div>
 
 						<div class="form-group">
