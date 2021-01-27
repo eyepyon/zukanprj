@@ -57,8 +57,11 @@
 								   class="form-control form-control-user" placeholder="名前（カタカナ）を入れてください" required>
 						</div>
 
+						<div class="form-group">
+							Facebookアカウント ※
+						</div>
+
 						<div class="form-group row">
-							Facebookアカウント ※<br />
 							<div class="col-sm-6 mb-3 mb-sm-0">
 								https://www.facebook.com/
 							</div>
