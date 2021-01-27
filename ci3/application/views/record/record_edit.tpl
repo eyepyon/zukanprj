@@ -92,8 +92,10 @@
 {*								   class="form-control form-control-user" placeholder="メールアドレス" required>*}
 {*						</div>*}
 
+						<div class="form-group">
+							属性 ※
+						</div>
 						<div>
-							<h3>属性 ※</h3>
 							<div class="md-radio md-radio-inline">
 								<input id="1" value="1" type="radio" name="attribute" checked>
 								<label for="1">社会人</label>

@@ -60,7 +60,11 @@
 
 						<div class="form-group">
 							Twitterアカウント
-							<p><a href="https://twitter.com/{$twitter_account|nl2br}" target="_blank">https://twitter.com/{$twitter_account|nl2br}</a></p>
+							<p>
+							{if $twitter_account != ""}
+								<a href="https://twitter.com/{$twitter_account|nl2br}" target="_blank">https://twitter.com/{$twitter_account|nl2br}</a>
+							{/if}
+							</p>
 							<input type="hidden" name="twitter_account" value="{$twitter_account|escape:'html'}">
 						</div>
 
