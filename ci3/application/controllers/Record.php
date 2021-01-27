@@ -38,7 +38,7 @@ class Record extends MY_Controller
         array(
             'field' => 'twitter_account',
             'label' => 'Twitterアカウント',
-            'rules' => 'trim|alpha_numeric|max_length[128]'
+            'rules' => 'trim|max_length[128]|callback_tw_name_check'
         ),
 //		array(
 //			'field' => 'email',
@@ -606,6 +606,21 @@ class Record extends MY_Controller
 			return FALSE;
 		}
 	}
+
+	/**
+	 * @param string $str
+	 * @return bool
+	 */
+	public function tw_name_check($str = "")
+	{
+		if (preg_match("/^[a-zA-Z0-9_\-]+$/", $str)) {
+			return TRUE;
+		} else {
+			$this->form_validation->set_message('fb_name_check', '正しいFacebookアカウントを入れてください。');
+			return FALSE;
+		}
+	}
+
 
 }
 
