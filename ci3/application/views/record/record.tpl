@@ -34,13 +34,13 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>名前<br/>（漢字）</th>
+                        <th style="white-space:nowrap;">名前<br/>（漢字）</th>
 						<th>名前<br/>（カタカナ）</th>
 						<th>Facebook<br/>アカウント</th>
 						<th>Twitter<br/>アカウント</th>
 						<th>属性</th>
-						<th>学びたいこと<br/>やってみたいこと</th>
-						<th>教えられること<br/>貢献できること</th>
+						<th style="white-space:nowrap;">学びたいこと<br/>やってみたいこと</th>
+						<th style="white-space:nowrap;">教えられること<br/>貢献できること</th>
 						<th>最も取り組みたい<br/>領域・分野</th>
 						<th>頑張りたいこと<br/>＆意気込み</th>
 						<th>保有する資格</th>
@@ -54,8 +54,8 @@
                             <td>{$item.id|escape:'html'}</td>
                             <td><a href="/record/detail/{$item.id|escape:'html'}/">{$item.name|escape:'html'}</a></td>
 							<td>{$item.name_kana|escape:'html'}</td>
-							<td>https://www.facebook.com/{$item.facebook_account|escape:'html'}</td>
-							<td>https://twitter.com/{$item.twitter_account|escape:'html'}</td>
+							<td><a href="https://www.facebook.com/{$item.facebook_account|escape:'html'}" target="_blank">https://www.facebook.com/{$item.facebook_account|escape:'html'}</a></td>
+							<td style="white-space:nowrap;"><a href="https://twitter.com/{$item.twitter_account|escape:'html'}" target="_blank">https://twitter.com/{$item.twitter_account|escape:'html'}</a></td>
 							<td>{$array_attribute[$item.attribute]}</td>
 
 							<td>{$item.qualification|escape:'html'}</td>
