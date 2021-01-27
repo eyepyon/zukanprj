@@ -61,7 +61,7 @@
 							Facebookアカウント ※
 						</div>
 						<div class="form-group row">
-							<div class="col-sm-6 mb-3 mb-sm-0" style="float: right">
+							<div class="col-sm-6 mb-3 mb-sm-0"  style="text-align: right">
 								https://www.facebook.com/
 							</div>
 							<div class="col-sm-6">
@@ -76,7 +76,7 @@
 							Twitterアカウント
 						</div>
 						<div class="form-group row">
-							<div class="col-sm-6 mb-3 mb-sm-0" style="float: right">
+							<div class="col-sm-6 mb-3 mb-sm-0" style="text-align: right">
 							https://twitter.com/
 							</div>
 							<div class="col-sm-6">
@@ -95,12 +95,29 @@
 
 						<div class="form-group">
 							属性 ※
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6 mb-3 mb-sm-0" style="text-align: right">
+								<input type="radio" name="attribute" value="1" class="form-control form-control-user">
+							</div>
+							<div class="col-sm-6">
+								社会人
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6 mb-3 mb-sm-0" style="text-align: right">
+								<input type="radio" name="attribute" value="2" class="form-control form-control-user">
+							</div>
+							<div class="col-sm-6">
+								学生
+							</div>
+						</div>
+
+							<div class="form-group">
 							<label>
-								<input type="radio" name="attribute" value="1" class="form-control form-control-user">社会人
 							</label>
 							<br/>
 							<label>
-								<input type="radio" name="attribute" value="2" class="form-control form-control-user">学生
 							</label>
 						</div>
 
