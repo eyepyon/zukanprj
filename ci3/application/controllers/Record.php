@@ -599,7 +599,7 @@ class Record extends MY_Controller
 	 */
 	public function fb_name_check($str = "")
 	{
-		if (preg_match("/^[a-zA-Z0-9_-.]+$/", $str)) {
+		if (preg_match("/^[a-zA-Z0-9_\.\-]+$/", $str)) {
 			return TRUE;
 		} else {
 			$this->form_validation->set_message('fb_name_check', '正しいFacebookアカウントを入れてください。');
