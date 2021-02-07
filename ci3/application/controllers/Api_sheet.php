@@ -84,19 +84,29 @@ class Api_sheet extends CI_Controller
 		$status = STATUS_FLAG_ON;
 		$record_base = $this->recordModel->getRecordList($offset, $limit , $name , $detail, $status);
 
-		foreach ($record_base as $record){
-			$result[] = $this->__adjust_list($record);
-		}
+//		foreach ($record_base as $record){
+//			$result[] = $this->__adjust_list($record);
+//		}
 //		print_r($result);
 
 //		exit;
 
 		$value = new Google_Service_Sheets_ValueRange();
-		$value->setValues(['values' => $result]);
 
-		$response = $this->service->spreadsheets_values->append(
-			$this->spreadsheetId, 'シート1!B3', $value, ['valueInputOption' => 'USER_ENTERED']
-		);
+		$num = 3;
+
+		foreach ($record_base as $record) {
+
+			$result = $this->__adjust_list($record);
+			$value->setValues(['values' => $result]);
+
+			$response = $this->service->spreadsheets_values->append(
+				$this->spreadsheetId, sprintf('シート1!B%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
+			);
+			$num++;
+
+		}
+
 
 		var_dump($response);
 	}
