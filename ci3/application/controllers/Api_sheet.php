@@ -78,6 +78,7 @@ class Api_sheet extends CI_Controller
 	 */
 	public function up_sheet($record = array())
 	{
+		$return = array();
 		$offset = 0;
 		$limit = 0;
 		$name = "";
@@ -88,7 +89,7 @@ class Api_sheet extends CI_Controller
 		foreach ($record_base as $record){
 			$return = $this->__adjust_list($record, $return);
 		}
-		var_dump($return);
+		print_r($return);
 
 		exit;
 
