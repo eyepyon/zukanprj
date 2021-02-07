@@ -1,5 +1,11 @@
 <?php
 
+require_once '/var/www/zukanprj/vendor/autoload.php';
+//define('SPREADSHEET_ID', '1tIAX3TAvsJWJRQ4XFl7GENGzIbBFJFm37WgD3-tILxU');
+define('SPREADSHEET_ID', '1X9lEQIp0m_JUuV6y0Ke7MxqoM8bGfvAXkNCcxHeiTJA');
+
+define('CLIENT_SECRET_PATH', APPPATH . 'config/development/weintech-2de74aca5c3b.json');
+
 /**
  *
  *
@@ -12,12 +18,6 @@
  * @property user_model $userModel
  */
 
-require_once '/var/www/zukanprj/vendor/autoload.php';
-
-//define('SPREADSHEET_ID', '1tIAX3TAvsJWJRQ4XFl7GENGzIbBFJFm37WgD3-tILxU');
-define('SPREADSHEET_ID', '1X9lEQIp0m_JUuV6y0Ke7MxqoM8bGfvAXkNCcxHeiTJA');
-
-define('CLIENT_SECRET_PATH', APPPATH . 'config/development/weintech-2de74aca5c3b.json');
 // スコープの設定
 //define('SCOPES', implode(' ', array(
 //		Google_Service_Sheets::SPREADSHEETS)
@@ -78,7 +78,7 @@ class Api_sheet extends CI_Controller
 	 */
 	public function up_sheet($record = array())
 	{
-		$return = array();
+		$result = array();
 		$offset = 0;
 		$limit = 0;
 		$name = "";
@@ -87,9 +87,9 @@ class Api_sheet extends CI_Controller
 		$record_base = $this->recordModel->getRecordList($offset, $limit , $name , $detail, $status);
 
 		foreach ($record_base as $record){
-			$return = $this->__adjust_list($record, $return);
+			$result = $this->__adjust_list($record);
 		}
-		print_r($return);
+		print_r($result);
 
 		exit;
 
