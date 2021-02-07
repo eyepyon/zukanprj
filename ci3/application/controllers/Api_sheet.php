@@ -15,7 +15,8 @@ define('CLIENT_SECRET_PATH', APPPATH . 'config/development/weintech-2de74aca5c3b
  * @copyright FrogCompany Inc. All Rights Reserved
  *
  * @property Record_model $recordModel
- * @property user_model $userModel
+ * @property User_model $userModel
+ * @property Slack_model $slackModel
  */
 
 // スコープの設定
@@ -58,21 +59,21 @@ class Api_sheet extends CI_Controller
 
 	}
 
-	/**
-	 * @param string $date
-	 * @param string $name
-	 * @param string $comment
-	 */
-	public function append(string $date, string $name, string $comment)
-	{
-		$value = new Google_Service_Sheets_ValueRange();
-		$value->setValues(['values' => [$date, $name, $comment]]);
-		$response = $this->service->spreadsheets_values->append(
-			$this->spreadsheetId, 'シート1!A1', $value, ['valueInputOption' => 'USER_ENTERED']
-		);
-
-		var_dump($response);
-	}
+//	/**
+//	 * @param string $date
+//	 * @param string $name
+//	 * @param string $comment
+//	 */
+//	public function append(string $date, string $name, string $comment)
+//	{
+//		$value = new Google_Service_Sheets_ValueRange();
+//		$value->setValues(['values' => [$date, $name, $comment]]);
+//		$response = $this->service->spreadsheets_values->append(
+//			$this->spreadsheetId, 'シート1!A1', $value, ['valueInputOption' => 'USER_ENTERED']
+//		);
+//
+//		var_dump($response);
+//	}
 
 	public function up_sheet()
 	{
@@ -83,13 +84,6 @@ class Api_sheet extends CI_Controller
 		$detail = "";
 		$status = STATUS_FLAG_ON;
 		$record_base = $this->recordModel->getRecordList($offset, $limit , $name , $detail, $status);
-
-//		foreach ($record_base as $record){
-//			$result[] = $this->__adjust_list($record);
-//		}
-//		print_r($result);
-
-//		exit;
 
 		$value = new Google_Service_Sheets_ValueRange();
 
@@ -107,98 +101,101 @@ class Api_sheet extends CI_Controller
 
 		}
 
+		$message = "図鑑が更新されました。ご確認ください。";
+		$user_id = 0;
+		$this->slackModel->setMessageData($message, $user_id);
 
-		var_dump($response);
+//		var_dump($response);
 	}
 
 
-	public function test()
-	{
-		$sample = $this->service;
+//	public function test()
+//	{
+//		$sample = $this->service;
+//
+//		$date = date('Y/m/d');
+//		$name = '山川';
+//		$comment = 'ギターうまい';
+//		$this->append($date, $name, $comment);
+//
+//	}
 
-		$date = date('Y/m/d');
-		$name = '山川のりを';
-		$comment = 'ギターうまい';
-		$this->append($date, $name, $comment);
-
-	}
-
-	/**
-	 * @param array $addRecord
-	 * @param string $sheetRangeStart
-	 * @param string $sheetRangeEnd
-	 * @param int $sheetNo
-	 * @param array $record
-	 * @return array|mixed
-	 */
-	private function __Sheet_Update($addRecord =array(),$sheetRangeStart="",$sheetRangeEnd="",$sheetNo=1,$record =array()){
-
-		$record[] = new \Google_Service_Sheets_ValueRange([
-			'range' => sprintf('Sheet%d!%s:%s',$sheetNo,$sheetRangeStart,$sheetRangeStart),
-			'values' => $addRecord(),
-		]);
-		return $record;
-	}
-
-	public function batch_update(){
-		try {
-
-			$spreadsheet_service = new \Google_Service_Sheets($client);
-			$spreadsheet_id = '（スプレッドシートのID）';
-
-		$result = $spreadsheet_service->spreadsheets_values->batchUpdate($spreadsheet_id, $body);
-		echo $updated_cell_count = $result->getTotalUpdatedCells();
-
-		} catch (\Exception $e) {
-
-			// エラー処理
-
-		}
-	}
+//	/**
+//	 * @param array $addRecord
+//	 * @param string $sheetRangeStart
+//	 * @param string $sheetRangeEnd
+//	 * @param int $sheetNo
+//	 * @param array $record
+//	 * @return array|mixed
+//	 */
+//	private function __Sheet_Update($addRecord =array(),$sheetRangeStart="",$sheetRangeEnd="",$sheetNo=1,$record =array()){
+//
+//		$record[] = new \Google_Service_Sheets_ValueRange([
+//			'range' => sprintf('Sheet%d!%s:%s',$sheetNo,$sheetRangeStart,$sheetRangeStart),
+//			'values' => $addRecord(),
+//		]);
+//		return $record;
+//	}
+//
+//	public function batch_update(){
+//		try {
+//
+//			$spreadsheet_service = new \Google_Service_Sheets($client);
+//			$spreadsheet_id = '（スプレッドシートのID）';
+//
+//		$result = $spreadsheet_service->spreadsheets_values->batchUpdate($spreadsheet_id, $body);
+//		echo $updated_cell_count = $result->getTotalUpdatedCells();
+//
+//		} catch (\Exception $e) {
+//
+//			// エラー処理
+//
+//		}
+//	}
 
 
 
-	public function Update_Sheet()
-	{
-		// アカウント認証情報インスタンスを作成
-		$client = new Google_Client();
-		$client->setScopes(SCOPES);
-		$client->setAuthConfig(CLIENT_SECRET_PATH);
-		// シートのインスタンスを生成
-		$service = new Google_Service_Sheets($client);
-		try {
-			// スプレッドシートの ID
-			$spreadsheetId = 'スプレッドシートのID';
-			// 更新するシートの名前とセルの範囲
-			$range = 'シート1!A2:B7';
-			// 更新するデータ
-			$values = [
-				["A1", "B1"],
-				["2019/1/1", "2020/12/31"],
-				["アイウエオ", "かきくけこ"],
-				[10, 20],
-				[100, 200],
-				['=(A5+A6)', '=(B5+B6)']
-			];
-			$updateBody = new Google_Service_Sheets_ValueRange([
-				'values' => $values
-			]);
-			// valueInputOption を指定（ USER_ENTERED か RAW から選択）
-			$params = [
-				'valueInputOption' => 'USER_ENTERED'
-			];
-			$result = $service->spreadsheets_values->update($spreadsheetId, $range, $updateBody, $params);
-			// 更新したセルの数が返ってくる
-			echo $result->getUpdatedCells();
-		} catch (Google_Exception $e) {
-			// $e は json で返ってくる
-			$errors = json_decode($e->getMessage(), true);
-			$err = "code : " . $errors["error"]["code"] . "";
-			$err .= "message : " . $errors["error"]["message"];
-			echo "Google_Exception" . $err;
-		}
-
-	}
+//	public function Update_Sheet()
+//	{
+//		// アカウント認証情報インスタンスを作成
+//		$client = new Google_Client();
+//		$client->setScopes(SCOPES);
+//		$client->setAuthConfig(CLIENT_SECRET_PATH);
+//		// シートのインスタンスを生成
+//		$service = new Google_Service_Sheets($client);
+//		try {
+//			// スプレッドシートの ID
+//			$spreadsheetId = 'スプレッドシートのID';
+//			// 更新するシートの名前とセルの範囲
+//			$range = 'シート1!A2:B7';
+//			// 更新するデータ
+//			$values = [
+//				["A1", "B1"],
+//				["2019/1/1", "2020/12/31"],
+//				["アイウエオ", "かきくけこ"],
+//				[10, 20],
+//				[100, 200],
+//				['=(A5+A6)', '=(B5+B6)']
+//			];
+//			$updateBody = new Google_Service_Sheets_ValueRange([
+//				'values' => $values
+//			]);
+//			// valueInputOption を指定（ USER_ENTERED か RAW から選択）
+//			$params = [
+//				'valueInputOption' => 'USER_ENTERED'
+//			];
+//			$result = $service->spreadsheets_values->update($spreadsheetId, $range, $updateBody, $params);
+//			// 更新したセルの数が返ってくる
+//			echo $result->getUpdatedCells();
+//		} catch (Google_Exception $e) {
+//			// $e は json で返ってくる
+//			$errors = json_decode($e->getMessage(), true);
+//			$err = "code : " . $errors["error"]["code"] . "";
+//			$err .= "message : " . $errors["error"]["message"];
+//			echo "Google_Exception" . $err;
+//		}
+//
+//	}
 
 	/**
 	 * @param array $record
