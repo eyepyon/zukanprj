@@ -213,8 +213,16 @@ class Api_sheet extends CI_Controller
 		$return[] = trim($record['name']); // 名前（漢字）
 		$return[] = trim($record['name_kana']); //	名前（カタカナ）
 //		email
-		$return[] = "https://www.facebook.com/".trim($record['facebook_account']); //	Facebookアカウント
-		$return[] = "https://twitter.com/".trim($record['twitter_account']); //	Twitterアカウント
+		if(strlen(trim($record['facebook_account'])>1)) {
+			$return[] = "https://www.facebook.com/" . trim($record['facebook_account']); //	Facebookアカウント
+		}else{
+			$return[] = ""; //	Facebookアカウント
+		}
+		if(strlen(trim($record['twitter_account'])>1)){
+			$return[] = "https://twitter.com/".trim($record['twitter_account']); //	Twitterアカウント
+		}else{
+			$return[] = ""; //	Twitterアカウント
+		}
 		$return[] = $array_attribute[trim($record['attribute'])]; //	属性(1,社会人 2,学生)
 		$return[] = trim($record['study']); // 学びたいことやってみたいこと
 		$return[] = trim($record['contribute']); // 教えられること 貢献できること
