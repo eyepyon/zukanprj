@@ -15,7 +15,7 @@
 	<style type="text/css">
 		.bg-detail-image {
 		{if $id > 0 && $record.picture_file != ''} background: url("https://dev.zukan.cloud/files/{$record.picture_file}{$salt_wd}");
-		{else} background: url("https://dev.zukan.cloud/img/pic2.jpg{$salt_wd}");
+		{else} background: url("{$base_url}/img/pic2.jpg{$salt_wd}");
 		{/if} background-position: center;
 			background-size: cover;
 		}

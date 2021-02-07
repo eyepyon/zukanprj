@@ -15,9 +15,11 @@
 {block name=javascript}
 	<style type="text/css">
 		.bg-detail-image {
-		{if $id > 0 && $record.picture_file != ''} background: url("https://dev.zukan.cloud/files/{$record.picture_file}{$salt_wd}");
-		{else} background: url("https://dev.zukan.cloud/img/pic1.jpg{$salt_wd}");
-		{/if} background-position: center;
+{*		{if $id > 0 && $record.picture_file != ''} background: url("{$base_url}/files/{$record.picture_file}{$salt_wd}");*}
+{*		{else}*}
+			background: url("{$base_url}/img/pic1.jpg{$salt_wd}");
+{*		{/if}*}
+			background-position: center;
 			background-size: cover;
 		}
 	</style>
@@ -120,7 +122,7 @@
 						<hr/>
 
 						{if $record.user_id == $user_id}
-							<a href="/record/edit/{$id}/" class="btn btn-primary btn-user btn-block">
+							<a href="/record/edit/{$id}/?back_button=1" class="btn btn-primary btn-user btn-block">
 								<i class="fas fa-fw fa-cog"></i> 情報更新
 							</a>
 							<br/>
