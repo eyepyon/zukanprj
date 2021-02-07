@@ -17,7 +17,7 @@
 		.bg-detail-image {
 {*		{if $id > 0 && $record.picture_file != ''} background: url("{$base_url}/files/{$record.picture_file}{$salt_wd}");*}
 {*		{else}*}
-			background: url("{$base_url}/img/pic1.jpg{$salt_wd}");
+			background: url("{$base_url}img/pic1.jpg{$salt_wd}");
 {*		{/if}*}
 			background-position: center;
 			background-size: cover;
