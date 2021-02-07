@@ -55,6 +55,7 @@ class Api_sheet extends CI_Controller
 
 		$this->service = new Google_Service_Sheets($client);
 
+
 	}
 
 	/**
@@ -73,10 +74,7 @@ class Api_sheet extends CI_Controller
 		var_dump($response);
 	}
 
-	/**
-	 * @param array $record
-	 */
-	public function up_sheet($record = array())
+	public function up_sheet()
 	{
 		$result = array();
 		$offset = 0;
@@ -91,7 +89,7 @@ class Api_sheet extends CI_Controller
 		}
 		print_r($result);
 
-		exit;
+//		exit;
 
 		$value = new Google_Service_Sheets_ValueRange();
 		$value->setValues(['values' => $record]);
@@ -191,21 +189,31 @@ class Api_sheet extends CI_Controller
 
 	}
 
+	/**
+	 * @param array $record
+	 * @param array $return
+	 * @return array|mixed
+	 */
 	private function __adjust_list($record = array(), $return = array())
 	{
-		$return[] = $record['user_id']; // No.
-		$return[] = $record['name']; // 名前（漢字）
-		$return[] = $record['name_kana']; //	名前（カタカナ）
+		$array_attribute = array(
+			"","社会人","学生"
+		);
+
+		$return[] = sprintf("%03d",trim($record['id'])); // No.
+//		$return[] = $record['user_id']; // No.
+		$return[] = trim($record['name']); // 名前（漢字）
+		$return[] = trim($record['name_kana']); //	名前（カタカナ）
 //		email
-		$return[] = $record['facebook_account']; //	Facebookアカウント
-		$return[] = $record['twitter_account']; //	Twitterアカウント
-		$return[] = $record['attribute']; //	属性(1,社会人 2,学生)
-		$return[] = $record['study']; // 学びたいことやってみたいこと
-		$return[] = $record['contribute']; // 教えられること 貢献できること
-		$return[] = $record['most_area']; // 最も取り組みたい領域・分野
-		$return[] = $record['enthusiasm']; //	頑張りたいこと＆意気込み
-		$return[] = $record['qualification']; //	保有する資格
-		$return[] = $record['community']; //	所属団体/コミュニティ（会社以外）
+		$return[] = "https://www.facebook.com/".trim($record['facebook_account']); //	Facebookアカウント
+		$return[] = "https://twitter.com/".trim($record['twitter_account']); //	Twitterアカウント
+		$return[] = $array_attribute[trim($record['attribute'])]; //	属性(1,社会人 2,学生)
+		$return[] = trim($record['study']); // 学びたいことやってみたいこと
+		$return[] = trim($record['contribute']); // 教えられること 貢献できること
+		$return[] = trim($record['most_area']); // 最も取り組みたい領域・分野
+		$return[] = trim($record['enthusiasm']); //	頑張りたいこと＆意気込み
+		$return[] = trim($record['qualification']); //	保有する資格
+		$return[] = trim($record['community']); //	所属団体/コミュニティ（会社以外）
 		//  	detail
 		return $return;
 	}
