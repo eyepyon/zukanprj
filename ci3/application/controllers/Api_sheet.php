@@ -109,6 +109,22 @@ class Api_sheet extends CI_Controller
 	}
 
 
+	public function clearListData($last = 0){
+
+		$rows = $this->service->getLastRow();
+		$columns = $this->service->getLastColumn();
+
+		print "rows:".$rows;
+		print "columns:".$columns;
+
+//		$range = sprintf('挑戦者リスト!B3:B');
+//		$response = $this->service->spreadsheets_values->clearContents($this->spreadsheetId, $range);
+
+//		print_r($response);
+
+
+	}
+
 	public function getIdData(){
 
 		$range = sprintf('挑戦者リスト!B3:B');
