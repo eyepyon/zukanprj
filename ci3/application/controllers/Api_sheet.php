@@ -111,6 +111,7 @@ class Api_sheet extends CI_Controller
 
 	public function clearListData($last = 0){
 
+
 //		$range = sprintf('挑戦者リスト!B3:M');
 //		$response = $this->service->spreadsheets_values->clearContents($this->spreadsheetId, $range);
 //
@@ -124,7 +125,7 @@ class Api_sheet extends CI_Controller
 						'sheetId' => $this->spreadsheetId,
 						'dimension' => 'ROWS', //行を追加する
 						'startIndex' => $rowIdx,
-						'endIndex' => ($last),
+						'endIndex' => $last,
 					)
 				)
 			)
