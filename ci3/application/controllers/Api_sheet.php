@@ -101,7 +101,7 @@ class Api_sheet extends CI_Controller
 			$value->setValues(['values' => $result]);
 
 			$response = $this->service->spreadsheets_values->append(
-				$this->spreadsheetId, sprintf('シート1!B%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
+				$this->spreadsheetId, sprintf('挑戦者リスト!B%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
 			);
 			$num++;
 
