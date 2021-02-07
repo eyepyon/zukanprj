@@ -111,12 +111,29 @@ class Api_sheet extends CI_Controller
 
 	public function clearListData($last = 0){
 
-		$range = sprintf('挑戦者リスト!B3:M');
-		$response = $this->service->spreadsheets_values->clearContents($this->spreadsheetId, $range);
+//		$range = sprintf('挑戦者リスト!B3:M');
+//		$response = $this->service->spreadsheets_values->clearContents($this->spreadsheetId, $range);
+//
+//		print_r($response);
+		$rowIdx = 3;
 
-		print_r($response);
-
-
+		$datas = new Google_Service_Sheets_Request(
+			array(
+				'deleteDimension' => array(
+					'range' => array(
+						'sheetId' => $this->spreadsheetId,
+						'dimension' => 'ROWS', //行を追加する
+						'startIndex' => $rowIdx,
+						'endIndex' => ($last),
+					)
+				)
+			)
+		);
+		$fileId = 'userEnteredValue';
+		//スプレッドシートRequestオブジェクト作成
+		$req = new Google_Service_Sheets_BatchUpdateSpreadsheetRequest(['request'=>$datas]);
+		//更新する
+		$res =$this->service->spreadsheets->batchUpdate($fileId, $req);
 	}
 
 	public function getIdData(){
