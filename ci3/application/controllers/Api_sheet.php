@@ -83,11 +83,11 @@ class Api_sheet extends CI_Controller
 		$limit = 0;
 		$name = "";
 		$detail = "";
-		$status = STATUS_FLAG_OFF;
+		$status = STATUS_FLAG_ON;
 		$record_base = $this->recordModel->getRecordList($offset, $limit , $name , $detail, $status);
 
 		foreach ($record_base as $record){
-			$result = $this->__adjust_list($record);
+			$result[] = $this->__adjust_list($record);
 		}
 		print_r($result);
 
