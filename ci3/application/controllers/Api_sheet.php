@@ -111,7 +111,7 @@ class Api_sheet extends CI_Controller
 
 	public function getIdData(){
 
-		$range = sprintf('挑戦者リスト!B');
+		$range = sprintf('挑戦者リスト!B3:B');
 		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range);
 
 		print_r($response);
