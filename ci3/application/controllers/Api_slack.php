@@ -61,7 +61,8 @@ class Api_slack extends CI_Controller
 			"icon_emoji" => ":slack:",
 			"attachments" => array(
 				array(
-					"text" => "新規登録がありました。\n内容を確認ください。\n" . $message_body
+//					"text" => "新規登録がありました。\n内容を確認ください。\n" . $message_body
+					"text" => $message_body
 				)
 			)
 		);

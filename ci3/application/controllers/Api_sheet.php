@@ -78,7 +78,6 @@ class Api_sheet extends CI_Controller
 
 	public function up_sheet()
 	{
-		$result = array();
 		$offset = 0;
 		$limit = 0;
 		$name = "";
@@ -109,6 +108,16 @@ class Api_sheet extends CI_Controller
 //		var_dump($response);
 	}
 
+
+	public function getIdData(){
+
+		$range = sprintf('挑戦者リスト!B');
+		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range);
+
+		print_r($response);
+
+
+	}
 
 //	public function test()
 //	{
