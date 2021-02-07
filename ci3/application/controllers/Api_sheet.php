@@ -87,12 +87,13 @@ class Api_sheet extends CI_Controller
 		foreach ($record_base as $record){
 			$result[] = $this->__adjust_list($record);
 		}
-		print_r($result);
+//		print_r($result);
 
 //		exit;
 
 		$value = new Google_Service_Sheets_ValueRange();
-		$value->setValues(['values' => $record]);
+		$value->setValues(['values' => $result]);
+
 		$response = $this->service->spreadsheets_values->append(
 			$this->spreadsheetId, 'シート1!B3', $value, ['valueInputOption' => 'USER_ENTERED']
 		);
