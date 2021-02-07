@@ -132,7 +132,8 @@ class Api_sheet extends CI_Controller
 		);
 		$fileId = 'userEnteredValue';
 		//スプレッドシートRequestオブジェクト作成
-		$req = new Google_Service_Sheets_BatchUpdateSpreadsheetRequest(['request'=>$datas]);
+//		$req = new Google_Service_Sheets_BatchUpdateSpreadsheetRequest(['request'=>$datas]);
+		$req = new Google_Service_Sheets_BatchUpdateSpreadsheetRequest($datas);
 		//更新する
 		$res =$this->service->spreadsheets->batchUpdate($fileId, $req);
 	}
