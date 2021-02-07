@@ -207,7 +207,7 @@ class Api_sheet extends CI_Controller
 		$return[] = $record['qualification']; //	保有する資格
 		$return[] = $record['community']; //	所属団体/コミュニティ（会社以外）
 		//  	detail
-		return $record;
+		return $return;
 	}
 
 }
