@@ -38,6 +38,9 @@
 				<h6 class="collapse-header">図鑑データ</h6>
 				<a class="collapse-item" href="https://docs.google.com/spreadsheets/d/1X9lEQIp0m_JUuV6y0Ke7MxqoM8bGfvAXkNCcxHeiTJA/edit?usp=sharing" target="_blank">図鑑シート</a>
 				<a class="collapse-item" href="/record/">図鑑一覧</a>
+
+				<a class="collapse-item" href="https://docs.google.com/forms/d/1env4FhWBz_o45nPfI7F8ZmaqBzlEV4xMaabQk3TGfzI/" target="_blank">フォーム</a>
+				<a class="collapse-item" href="/record/edit/">応募フォーム</a>
 				{if $loggedIn}
 				<a class="collapse-item" href="/record/edit/">新規作成</a>
 				{/if}
@@ -57,8 +60,10 @@
 					<a class="collapse-item" href="https://docs.google.com/spreadsheets/d/1pzcOR8zRkDJJLkKkPO4wz_Q8HbYoiBOgaDLfV_CWbvU/edit?usp=sharing" target="_blank">フィードバック一覧</a>
 					<a class="collapse-item" href="https://docs.google.com/forms/d/e/1FAIpQLSfGwoaA1mJ64HEOUcp34cvTsq4cwxVO_BKA8fz58AyZm2ngYA/viewform?usp=sf_link" target="_blank">フィードバック投稿</a>
 
-				<a class="collapse-item" href="/wallet/">MYウォレット</a>
-				<a class="collapse-item" href="/user/profile/">プロフィール</a>
+					<a class="collapse-item" href="https://join.slack.com/t/w1610259168-euf770481/shared_invite/zt-kn6ek0xy-kO45wYrYUc7bsbLscucu_g" target="_blank">通知テスト用Slack</a>
+
+					<a class="collapse-item" href="/record/open/">フォーム表示設定</a>
+					<a class="collapse-item" href="/user/profile/">管理者設定</a>
 				{/if}
 			</div>
 		</div>
