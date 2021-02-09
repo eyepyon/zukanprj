@@ -36,7 +36,8 @@
 		<div id="collapsePrj" class="collapse{$show_menu.record}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">図鑑データ</h6>
-				<a class="collapse-item" href="/record/">一覧</a>
+				<a class="collapse-item" href="https://docs.google.com/spreadsheets/d/1X9lEQIp0m_JUuV6y0Ke7MxqoM8bGfvAXkNCcxHeiTJA/edit?usp=sharing" target="_blank">図鑑シート</a>
+				<a class="collapse-item" href="/record/">図鑑一覧</a>
 				{if $loggedIn}
 				<a class="collapse-item" href="/record/edit/">新規作成</a>
 				{/if}
@@ -47,12 +48,15 @@
 	<li class="nav-item">
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 			<i class="fas fa-fw fa-cog"></i>
-			<span>ユーザ設定</span>
+			<span>管理機能</span>
 		</a>
 		<div id="collapseTwo" class="collapse{$show_menu.user}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<h6 class="collapse-header">USER:</h6>
+				<h6 class="collapse-header">管理者:</h6>
 				{if $loggedIn}
+					<a class="collapse-item" href="https://docs.google.com/spreadsheets/d/1pzcOR8zRkDJJLkKkPO4wz_Q8HbYoiBOgaDLfV_CWbvU/edit?usp=sharing" target="_blank">フィードバック一覧</a>
+					<a class="collapse-item" href="https://docs.google.com/forms/d/e/1FAIpQLSfGwoaA1mJ64HEOUcp34cvTsq4cwxVO_BKA8fz58AyZm2ngYA/viewform?usp=sf_link" target="_blank">フィードバック投稿</a>
+
 				<a class="collapse-item" href="/wallet/">MYウォレット</a>
 				<a class="collapse-item" href="/user/profile/">プロフィール</a>
 				{/if}
