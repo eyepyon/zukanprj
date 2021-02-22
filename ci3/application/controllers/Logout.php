@@ -24,10 +24,10 @@ class Logout extends MY_Controller {
         // メッセージ未読数
         $this->data['message_count'] = 0;
 
-        $this->data["show_menu"]['project'] = '';
-        $this->data["show_menu"]['record'] = '';
-        $this->data["show_menu"]['user'] = '';
-		$this->data["show_menu"]['feedback'] = '';
+		$this->data["show_menu"]['record'] = ' show';
+		$this->data["show_menu"]['project'] = ' show';
+		$this->data["show_menu"]['feedback'] = ' show';
+		$this->data["show_menu"]['user'] = ' show';
 
 	}
 

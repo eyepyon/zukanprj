@@ -84,7 +84,8 @@
 					[ftpuser: librarian pass: moemoe82]<br />
 
 					<a class="collapse-item" href="/phpMyAdmin/" target="_blank">データベース管理</a>
-					サーバー情報<a class="collapse-item" href="/phpinfo.php" target="_blank">Admin</a><a class="collapse-item" href="https://www.zukan.cloud/phpinfo.php" target="_blank">LP</a>
+					<a class="collapse-item" href="/phpinfo.php" target="_blank">サーバー情報(管理)</a>
+					<a class="collapse-item" href="https://www.zukan.cloud/phpinfo.php" target="_blank">サーバー情報(LP)</a>
 
 					<a class="collapse-item" href="/record/open/">フォーム表示設定※作成中</a>
 					<a class="collapse-item" href="/user/profile/">管理者設定※作成中</a>
