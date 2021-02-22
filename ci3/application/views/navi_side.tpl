@@ -60,6 +60,9 @@
 					<a class="collapse-item" href="https://docs.google.com/spreadsheets/d/1pzcOR8zRkDJJLkKkPO4wz_Q8HbYoiBOgaDLfV_CWbvU/edit?usp=sharing" target="_blank">フィードバック一覧</a>
 					<a class="collapse-item" href="https://docs.google.com/forms/d/e/1FAIpQLSfGwoaA1mJ64HEOUcp34cvTsq4cwxVO_BKA8fz58AyZm2ngYA/viewform?usp=sf_link" target="_blank">フィードバック投稿</a>
 
+					<a class="collapse-item" href="https://track.webanalytics.marketing/" target="_blank">Analytics</a>
+					<a class="collapse-item" href="/phpMyAdmin/" target="_blank">phpMyAdmin</a>
+
 					<a class="collapse-item" href="https://join.slack.com/t/w1610259168-euf770481/shared_invite/zt-kn6ek0xy-kO45wYrYUc7bsbLscucu_g" target="_blank">通知テスト用Slack</a>
 
 					<a class="collapse-item" href="/record/open/">フォーム表示設定</a>
