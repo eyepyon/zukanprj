@@ -49,11 +49,11 @@
 	</li>
 
 	<li class="nav-item">
-		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFeed" aria-expanded="true" aria-controls="collapseTwo">
 			<i class="fas fa-fw fa-cog"></i>
 			<span>フィードバック</span>
 		</a>
-		<div id="collapseTwo" class="collapse{$show_menu.feedback}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+		<div id="collapseFeed" class="collapse{$show_menu.feedback}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">フィードバック:</h6>
 				{if $loggedIn}
@@ -74,17 +74,17 @@
 				<h6 class="collapse-header">管理者:</h6>
 				{if $loggedIn}
 					<a class="collapse-item" href="https://docs.google.com/forms/d/1env4FhWBz_o45nPfI7F8ZmaqBzlEV4xMaabQk3TGfzI/" target="_blank">フォーム編集</a>
-
-					<a class="collapse-item" href="https://track.webanalytics.marketing/" target="_blank">Analytics</a>
 					<a class="collapse-item" href="https://join.slack.com/t/w1610259168-euf770481/shared_invite/zt-kn6ek0xy-kO45wYrYUc7bsbLscucu_g" target="_blank">通知テスト用Slack</a>
-					<a class="collapse-item" href="/phpMyAdmin/" target="_blank">phpMyAdmin</a>
 
 					<a class="collapse-item" href="https://track.webanalytics.marketing/" target="_blank">Analytics</a>
-					[ user: zukan  pass: moemoe82 ]<br />
+					[user: zukan pass: moemoe82]<br />
 
-					<a class="collapse-item" href="http://www.zukan.cloud:444/login" target="_blank">Mail&LP Server</a>
-					[ mailuser: zukan  pass: moemoe82 ]<br />
-					[ ftpuser: librarian  pass: moemoe82 ]<br />
+					<a class="collapse-item" href="http://www.zukan.cloud:444/login" target="_blank">LP&メールサーバー</a>
+					[mailuser: zukan pass: moemoe82]<br />
+					[ftpuser: librarian pass: moemoe82]<br />
+
+					<a class="collapse-item" href="/phpMyAdmin/" target="_blank">データベース管理</a>
+					サーバー情報<a class="collapse-item" href="/phpinfo.php" target="_blank">Admin</a><a class="collapse-item" href="https://www.zukan.cloud/phpinfo.php" target="_blank">LP</a>
 
 					<a class="collapse-item" href="/record/open/">フォーム表示設定※作成中</a>
 					<a class="collapse-item" href="/user/profile/">管理者設定※作成中</a>
