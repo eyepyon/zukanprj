@@ -43,6 +43,7 @@
 				{if $loggedIn}
 				<a class="collapse-item" href="/record/edit/">直接入力フォーム</a>
 				{/if}
+				<a class="collapse-item" href="https://www.zukan.cloud/">LP</a>
 			</div>
 		</div>
 	</li>
