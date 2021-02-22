@@ -27,6 +27,7 @@ class Top extends MY_Controller {
         $this->data["show_menu"]['record'] = ' show';
         $this->data["show_menu"]['project'] = ' show';
 		$this->data["show_menu"]['user'] = ' show';
+		$this->data["show_menu"]['feedback'] = ' show';
 
 		$params = array();
 		//

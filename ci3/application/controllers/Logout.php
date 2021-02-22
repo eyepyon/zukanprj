@@ -27,6 +27,8 @@ class Logout extends MY_Controller {
         $this->data["show_menu"]['project'] = '';
         $this->data["show_menu"]['record'] = '';
         $this->data["show_menu"]['user'] = '';
+		$this->data["show_menu"]['feedback'] = '';
+
 	}
 
 	public function index() {

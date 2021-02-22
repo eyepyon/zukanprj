@@ -50,6 +50,11 @@ class Password extends MY_Controller
         $passLimit = "";
         $this->data["passLimit"] = $passLimit;
 
+		$this->data["show_menu"]['record'] = ' show';
+		$this->data["show_menu"]['project'] = ' show';
+		$this->data["show_menu"]['user'] = ' show';
+		$this->data["show_menu"]['feedback'] = ' show';
+
         $params = array();
 
         $this->data['time_id'] = 0;

@@ -121,6 +121,7 @@ class Record extends MY_Controller
         $this->data["show_menu"]['record'] = ' show';
         $this->data["show_menu"]['project'] = '';
         $this->data["show_menu"]['user'] = '';
+		$this->data["show_menu"]['feedback'] = '';
 
         $this->data["salt_wd"] = '?dmy='.date('U');
 
