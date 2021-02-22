@@ -39,11 +39,9 @@
 				<a class="collapse-item" href="https://docs.google.com/spreadsheets/d/1X9lEQIp0m_JUuV6y0Ke7MxqoM8bGfvAXkNCcxHeiTJA/edit?usp=sharing" target="_blank">図鑑シート</a>
 				<a class="collapse-item" href="/record/">図鑑データ</a>
 
-
-				<a class="collapse-item" href="https://docs.google.com/forms/d/e/1FAIpQLSeKD49Dt1LnrZN_NCYBcfN04XtFSwGhGPl7NUdBlzfxCuLslw/viewform" target="_blank">フォーム</a>
-				<a class="collapse-item" href="/record/edit/">直接入力フォーム</a>
+				<a class="collapse-item" href="https://docs.google.com/forms/d/e/1FAIpQLSeKD49Dt1LnrZN_NCYBcfN04XtFSwGhGPl7NUdBlzfxCuLslw/viewform" target="_blank">図鑑フォーム</a>
 				{if $loggedIn}
-				<a class="collapse-item" href="/record/edit/">新規作成</a>
+				<a class="collapse-item" href="/record/edit/">直接入力フォーム</a>
 				{/if}
 			</div>
 		</div>
@@ -54,7 +52,7 @@
 			<i class="fas fa-fw fa-cog"></i>
 			<span>フィードバック</span>
 		</a>
-		<div id="collapseTwo" class="collapse{$show_menu.user}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+		<div id="collapseTwo" class="collapse{$show_menu.feedback}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">フィードバック:</h6>
 				{if $loggedIn}
@@ -74,9 +72,6 @@
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">管理者:</h6>
 				{if $loggedIn}
-					<a class="collapse-item" href="https://docs.google.com/spreadsheets/d/1pzcOR8zRkDJJLkKkPO4wz_Q8HbYoiBOgaDLfV_CWbvU/edit?usp=sharing" target="_blank">フィードバック一覧</a>
-					<a class="collapse-item" href="https://docs.google.com/forms/d/e/1FAIpQLSfGwoaA1mJ64HEOUcp34cvTsq4cwxVO_BKA8fz58AyZm2ngYA/viewform?usp=sf_link" target="_blank">フィードバック投稿</a>
-
 					<a class="collapse-item" href="https://docs.google.com/forms/d/1env4FhWBz_o45nPfI7F8ZmaqBzlEV4xMaabQk3TGfzI/" target="_blank">フォーム編集</a>
 
 					<a class="collapse-item" href="https://track.webanalytics.marketing/" target="_blank">Analytics</a>
@@ -84,10 +79,11 @@
 					<a class="collapse-item" href="/phpMyAdmin/" target="_blank">phpMyAdmin</a>
 
 					<a class="collapse-item" href="https://track.webanalytics.marketing/" target="_blank">Analytics</a>
-					[ user: zukan  pass: moemoe82 ]
+					[ user: zukan  pass: moemoe82 ]<br />
 
-					<a class="collapse-item" href="http://www.zukan.cloud:444/login" target="_blank">MailServer/LP</a>
-					[ user: librarian  pass: moemoe82 ]
+					<a class="collapse-item" href="http://www.zukan.cloud:444/login" target="_blank">Mail&LP Server</a>
+					[ mailuser: zukan  pass: moemoe82 ]<br />
+					[ ftpuser: librarian  pass: moemoe82 ]<br />
 
 					<a class="collapse-item" href="/record/open/">フォーム表示設定※作成中</a>
 					<a class="collapse-item" href="/user/profile/">管理者設定※作成中</a>
