@@ -160,12 +160,15 @@ class Api_sheet extends CI_Controller
 					if ($record) {
 						// 最新のヒストリーから更新日時を取得
 						$lasts = $this->recordModel->getLastUpdate($record["id"]);
+						print_r($lasts);
 						if (isset($lasts['form_timestamp']) && isset($return['form_timestamp'])
 							&& (strtotime($return['form_timestamp']) > strtotime($lasts ['form_timestamp']))) {
 							// 更新されているのでデータ更新
 							$this->recordModel->setRecordData($record['id'],$return);
 							// ヒストリー
 							$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
+							print("更新");
+
 						}
 					} else {
 						// データ無いのでインサート
