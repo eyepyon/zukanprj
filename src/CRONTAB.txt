@@ -1,2 +1,5 @@
 ###
 
+*/1 * * * * /var/www/zukanprj/cgi/pull.sh 1>/dev/null
+*/1 * * * * /usr/bin/php /var/www/zukanprj/cgi/batch.php Api_slack checkNewMessage
+*/1 * * * * /usr/bin/php /var/www/zukanprj/cgi/batch.php Api_sheet getIdData

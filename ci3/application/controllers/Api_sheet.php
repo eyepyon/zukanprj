@@ -254,11 +254,11 @@ class Api_sheet extends CI_Controller
 		}
 
 		if (strpos($record[2], 'twitter.com/')) {
-			$p = explode('twitter.com/', $record[2]);
+			$p = explode('twitter.com/', $record[3]);
 			$p1 = explode('/', $p[1]);
 			$twitter_account = trim($p1[0]);
 		} else {
-			$twitter_account = trim($record[2]);
+			$twitter_account = trim($record[3]);
 		}
 
 		$return['form_timestamp'] = trim($record[0]);// タイムスタンプ
