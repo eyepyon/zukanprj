@@ -68,7 +68,9 @@ class Record_model extends CI_Model
     function setRecordData($id = 0, array $record = array())
     {
         $record['updated_at'] = date("Y-m-d H:i:s");
-
+		if(isset($record['form_timestamp'])){
+			unset($record['form_timestamp']);
+		}
         if ($id > 0) {
             $this->db->where('id', $id);
             return $this->db->update($this->dataDb, $record);
