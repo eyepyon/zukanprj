@@ -14,6 +14,7 @@ class Record_model extends CI_Model
     // テーブル名
     var $dataDb = 'records';
 //    var $goalDb = 'goal_history';
+    var $importHistoryDb = 'import_history';
 
     function __construct()
     {
@@ -48,7 +49,7 @@ class Record_model extends CI_Model
             $this->db->limit($limit, $offset);
         }
 
-        $this->db->order_by("created_at ", "desc");
+        $this->db->order_by("created_at", "desc");
 
         $resource = $this->db->get();
 
@@ -72,7 +73,7 @@ class Record_model extends CI_Model
             $this->db->where('id', $id);
             return $this->db->update($this->dataDb, $record);
         } else {
-            $record['created_at '] = date("Y-m-d H:i:s");
+            $record['created_at'] = date("Y-m-d H:i:s");
             $this->db->insert($this->dataDb, $record);
             return $this->db->insert_id();
         }
@@ -98,28 +99,105 @@ class Record_model extends CI_Model
         return null;
     }
 
-    /**
+	/**
+	 * @param string $email
+	 * @return mixed|null
+	 */
+	function getByEmail($email = "")
+	{
+
+		$this->db->select('*');
+		$this->db->from($this->dataDb);
+		$this->db->where('email', $email);
+
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			$return = $query->result_array();
+			return $return[0];
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param string $facebook_account
+	 * @return mixed|null
+	 */
+	function getByFacebookAccount($facebook_account = "")
+	{
+
+		$this->db->select('*');
+		$this->db->from($this->dataDb);
+		$this->db->where('facebook_account', $facebook_account);
+
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			$return = $query->result_array();
+			return $return[0];
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param int $record_id
+	 * @return mixed|null
+	 */
+	function getLastUpdate($record_id = 0)
+	{
+
+		$this->db->select('*');
+		$this->db->from($this->importHistoryDb);
+		$this->db->where('record_id', $record_id);
+		$this->db->order_by("form_timestamp", "desc");
+
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			$return = $query->result_array();
+			return $return[0];
+		}
+
+		return null;
+	}
+
+
+	/**
      * @param array $record
      * @return mixed
      */
-    function insertGoalHistory(array $record = array()){
+    function insertImportHistory(array $record = array()){
 
         $record['updated_at'] = date("Y-m-d H:i:s");
-        $record['created_at '] = date("Y-m-d H:i:s");
-        $this->db->insert($this->goalDb, $record);
+        $record['created_at'] = date("Y-m-d H:i:s");
+        $this->db->insert($this->importHistoryDb, $record);
         return $this->db->insert_id();
     }
+
+	/**
+	 * @param int $record_id
+	 * @param string $form_timestamp
+	 * @return mixed
+	 */
+    function setImportHistory($record_id=0,$form_timestamp = ""){
+    	$record = array(
+    		'record_id'=>$record_id,
+			'status'=>STATUS_FLAG_ON,
+			'form_timestamp '=>$form_timestamp,
+		);
+
+    	return $this->insertImportHistory($record);
+	}
 
     /**
      * @param int $id
      * @return array
      */
-    function getGoalHistory($id = 0)
+    function getImportHistory($id = 0)
     {
         $this->db->select('*');
-        $this->db->from($this->goalDb);
+        $this->db->from($this->importHistoryDb);
         $this->db->where('id', $id);
-        $this->db->order_by("created_at ", "desc");
+        $this->db->order_by("created_at", "desc");
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -132,21 +210,17 @@ class Record_model extends CI_Model
     }
 
     /**
-     * @param int $landing_status
-     * @param int $apos_status
+     * @param int $status
      * @return array
      */
-    function getHistoryList($landing_status = 9,$apos_status = 9){
+    function getHistoryList($status = 0){
 
         $this->db->select('*');
-        $this->db->from($this->goalDb);
-//        if($landing_status != 9){
-//            $this->db->where('landing_status', $landing_status);
+        $this->db->from($this->importHistoryDb);
+//        if($status != 0){
+//            $this->db->where('status', $status);
 //        }
-//        if($apos_status != 9){
-//            $this->db->where('apos_status', $apos_status);
-//        }
-        $this->db->order_by("created_at ", "desc");
+        $this->db->order_by("created_at", "desc");
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

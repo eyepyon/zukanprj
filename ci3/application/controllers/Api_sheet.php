@@ -128,101 +128,57 @@ class Api_sheet extends CI_Controller
 		$response = $this->service->spreadsheets_values->get($this->formspreadId, $range);
 
 		if(isset($response->values) && is_array($response->values) && count($response->values)>0){
-			print_r($response->values);
+
+			foreach ($response->values as $records) {
+				$return = $this->__adjust_form($records);
+
+				if (isset($return['facebook_account']) && $return['facebook_account'] != "") {
+					$record = $this->recordModel->getByFacebookAccount($return['facebook_account']);
+					if ($record) {
+						// 最新のヒストリーから更新日時を取得
+						$lasts = $this->recordModel->getLastUpdate($record["record_id"]);
+						if (isset($record['form_timestamp']) && isset($return['form_timestamp'])
+							&& (strtotime($return['form_timestamp']) > strtotime($lasts ['form_timestamp']))) {
+							// 更新されているのでデータ更新
+							$res = $this->recordModel->setRecordData($record['id'],$return);
+							// ヒストリー
+							$this->recordModel->setImportHistory($record["record_id"],$return['form_timestamp']);
+						}
+					} else {
+						// データ無いのでインサート
+						$res = $this->recordModel->setRecordData(0,$return);
+						// ヒストリー
+						$this->recordModel->setImportHistory($record["record_id"],$return['form_timestamp']);
+					}
+				}
+
+				if (isset($return['email']) && $return['email'] != "") {
+					$record = $this->recordModel->getByEmail($return['email']);
+					if ($record) {
+						// 最新のヒストリーから更新日時を取得
+						$lasts = $this->recordModel->getLastUpdate($record["record_id"]);
+						if (isset($record['form_timestamp']) && isset($return['form_timestamp'])
+							&& (strtotime($return['form_timestamp']) > strtotime($lasts ['form_timestamp']))) {
+							// 更新されているのでデータ更新
+							$res = $this->recordModel->setRecordData($record['id'],$return);
+							// ヒストリー
+							$this->recordModel->setImportHistory($record["record_id"],$return['form_timestamp']);
+						}
+					} else {
+						// データ無いのでインサート
+						$res = $this->recordModel->setRecordData(0,$return);
+						// ヒストリー
+						$this->recordModel->setImportHistory($record["record_id"],$return['form_timestamp']);
+					}
+				}
+			}
+
 		}
 
 		print "\nOK";
 //		print_r($response);
 
 	}
-
-//	public function test()
-//	{
-//		$sample = $this->service;
-//
-//		$date = date('Y/m/d');
-//		$name = '山川';
-//		$comment = 'ギターうまい';
-//		$this->append($date, $name, $comment);
-//
-//	}
-
-//	/**
-//	 * @param array $addRecord
-//	 * @param string $sheetRangeStart
-//	 * @param string $sheetRangeEnd
-//	 * @param int $sheetNo
-//	 * @param array $record
-//	 * @return array|mixed
-//	 */
-//	private function __Sheet_Update($addRecord =array(),$sheetRangeStart="",$sheetRangeEnd="",$sheetNo=1,$record =array()){
-//
-//		$record[] = new \Google_Service_Sheets_ValueRange([
-//			'range' => sprintf('Sheet%d!%s:%s',$sheetNo,$sheetRangeStart,$sheetRangeStart),
-//			'values' => $addRecord(),
-//		]);
-//		return $record;
-//	}
-//
-//	public function batch_update(){
-//		try {
-//
-//			$spreadsheet_service = new \Google_Service_Sheets($client);
-//			$spreadsheet_id = '（スプレッドシートのID）';
-//
-//		$result = $spreadsheet_service->spreadsheets_values->batchUpdate($spreadsheet_id, $body);
-//		echo $updated_cell_count = $result->getTotalUpdatedCells();
-//
-//		} catch (\Exception $e) {
-//
-//			// エラー処理
-//
-//		}
-//	}
-
-
-
-//	public function Update_Sheet()
-//	{
-//		// アカウント認証情報インスタンスを作成
-//		$client = new Google_Client();
-//		$client->setScopes(SCOPES);
-//		$client->setAuthConfig(CLIENT_SECRET_PATH);
-//		// シートのインスタンスを生成
-//		$service = new Google_Service_Sheets($client);
-//		try {
-//			// スプレッドシートの ID
-//			$spreadsheetId = 'スプレッドシートのID';
-//			// 更新するシートの名前とセルの範囲
-//			$range = 'シート1!A2:B7';
-//			// 更新するデータ
-//			$values = [
-//				["A1", "B1"],
-//				["2019/1/1", "2020/12/31"],
-//				["アイウエオ", "かきくけこ"],
-//				[10, 20],
-//				[100, 200],
-//				['=(A5+A6)', '=(B5+B6)']
-//			];
-//			$updateBody = new Google_Service_Sheets_ValueRange([
-//				'values' => $values
-//			]);
-//			// valueInputOption を指定（ USER_ENTERED か RAW から選択）
-//			$params = [
-//				'valueInputOption' => 'USER_ENTERED'
-//			];
-//			$result = $service->spreadsheets_values->update($spreadsheetId, $range, $updateBody, $params);
-//			// 更新したセルの数が返ってくる
-//			echo $result->getUpdatedCells();
-//		} catch (Google_Exception $e) {
-//			// $e は json で返ってくる
-//			$errors = json_decode($e->getMessage(), true);
-//			$err = "code : " . $errors["error"]["code"] . "";
-//			$err .= "message : " . $errors["error"]["message"];
-//			echo "Google_Exception" . $err;
-//		}
-//
-//	}
 
 	/**
 	 * @param array $record
@@ -261,16 +217,48 @@ class Api_sheet extends CI_Controller
 		return $return;
 	}
 
+	/**
+	 * @param array $record
+	 * @param array $return
+	 * @return array|mixed
+	 */
 	private function __adjust_form($record = array(), $return = array()){
 
-		$return[] = trim($record['study']); // 学びたいことやってみたいこと
-		$return[] = trim($record['contribute']); // 教えられること 貢献できること
-		$return[] = trim($record['most_area']); // 最も取り組みたい領域・分野
-		$return[] = trim($record['enthusiasm']); //	頑張りたいこと＆意気込み
-		$return[] = trim($record['qualification']); //	保有する資格
-		$return[] = trim($record['community']); //	所属団体/コミュニティ（会社以外）
+		$array_re_attribute = array(
+			"" => 0, "社会人" => 1, "学生" => 2
+		);
 
+		if (strpos($record[2], 'facebook.com/')) {
+			$p = explode('facebook.com/', $record[2]);
+			$p1 = explode('/', $p[1]);
+			$facebook_account = trim($p1[0]);
+		} else {
+			$facebook_account = trim($record[2]);
+		}
 
+		if (strpos($record[2], 'twitter.com/')) {
+			$p = explode('twitter.com/', $record[2]);
+			$p1 = explode('/', $p[1]);
+			$twitter_account = trim($p1[0]);
+		} else {
+			$twitter_account = trim($record[2]);
+		}
+
+		$return['form_timestamp'] = trim($record[0]);// タイムスタンプ
+		$return['name'] = trim($record[1]);// 名前（フルネーム・漢字）
+		$return['facebook_account'] = $facebook_account;// FacebookアカウントのURL
+		$return['twitter_account'] = $twitter_account;// TwitterアカウントのURL
+		$return['email'] = trim($record[4]);// メールアドレス
+		$return['attribute'] = $array_re_attribute[trim($record[5])];// 属性
+		$return['name_kana'] = trim($record[6]);// 名前（フルネーム・カタカナ）
+		$return['study'] = trim($record[7]);// 学びたいこと・やってみたいこと
+		$return['contribute'] = trim($record[8]);// 教えられること貢献できること
+		$return['most_area'] = trim($record[9]);// 最も取り組みたい領域・分野
+		$return['enthusiasm'] = trim($record[10]);// 頑張りたいこと＆意気込み
+		$return['qualification'] = trim($record[11]);// 保有する資格
+		$return['community'] = trim($record[12]);// 所属団体/コミュニティ（会社以外）
+
+		return $return;
 	}
 
 }
