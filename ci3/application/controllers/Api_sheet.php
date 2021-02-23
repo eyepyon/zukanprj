@@ -62,22 +62,6 @@ class Api_sheet extends CI_Controller
 
 	}
 
-//	/**
-//	 * @param string $date
-//	 * @param string $name
-//	 * @param string $comment
-//	 */
-//	public function append(string $date, string $name, string $comment)
-//	{
-//		$value = new Google_Service_Sheets_ValueRange();
-//		$value->setValues(['values' => [$date, $name, $comment]]);
-//		$response = $this->service->spreadsheets_values->append(
-//			$this->spreadsheetId, 'シート1!A1', $value, ['valueInputOption' => 'USER_ENTERED']
-//		);
-//
-//		var_dump($response);
-//	}
-
 	public function up_sheet()
 	{
 		$offset = 0;
@@ -122,6 +106,9 @@ class Api_sheet extends CI_Controller
 		print "OK";
 	}
 
+	/**
+	 * フォーム→DBにいれるやつ
+	 */
 	public function getIdData(){
 
 		$range = sprintf('登録フォーム!A2:N');
@@ -155,26 +142,30 @@ class Api_sheet extends CI_Controller
 				if (isset($return['email']) && $return['email'] != "") {
 					$record = $this->recordModel->getByEmail($return['email']);
 
-					print_r($record);
-					print_r($return);
+//					print_r($record);
+//					print_r($return);
 
 					if ($record) {
 						// 最新のヒストリーから更新日時を取得
 						$lasts = $this->recordModel->getLastUpdate($record["id"]);
-						print_r($lasts);
+//						print_r($lasts);
 						if(is_null($lasts)){
 							// 更新されているのでデータ更新
 							$this->recordModel->setRecordData($record['id'],$return);
 							// ヒストリー
 							$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
-							print("更新1");
+
+							log_message('debug', __LINE__." DBを更新しました".print_r($record,true).print_r($return,true));
+
+							//							print("更新1");
 						}elseif (isset($lasts['form_timestamp']) && isset($return['form_timestamp'])
 							&& (strtotime($return['form_timestamp']) > strtotime($lasts ['form_timestamp']))) {
 							// 更新されているのでデータ更新
 							$this->recordModel->setRecordData($record['id'],$return);
 							// ヒストリー
 							$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
-							print("更新");
+
+							log_message('debug', __LINE__." DBを更新しました".print_r($record,true).print_r($return,true));
 						}
 
 					} else {
@@ -182,14 +173,15 @@ class Api_sheet extends CI_Controller
 						$record_id = $this->recordModel->setRecordData(0,$return);
 						// ヒストリー
 						$this->recordModel->setImportHistory($record_id,$return['form_timestamp']);
+
+						log_message('debug', __LINE__." DBに投入しました".print_r($return,true));
 					}
 				}
 			}
 
 		}
-
-		print "\nOK";
-//		print_r($response);
+		log_message('debug', __LINE__." OK");
+//		print "\nOK";
 
 	}
 
