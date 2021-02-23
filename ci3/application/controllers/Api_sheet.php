@@ -136,19 +136,19 @@ class Api_sheet extends CI_Controller
 					$record = $this->recordModel->getByFacebookAccount($return['facebook_account']);
 					if ($record) {
 						// 最新のヒストリーから更新日時を取得
-						$lasts = $this->recordModel->getLastUpdate($record["record_id"]);
-						if (isset($record['form_timestamp']) && isset($return['form_timestamp'])
-							&& (strtotime($return['form_timestamp']) > strtotime($lasts ['form_timestamp']))) {
+						$lasts = $this->recordModel->getLastUpdate($record["id"]);
+						if (isset($lasts['form_timestamp']) && isset($return['form_timestamp'])
+							&& (strtotime($return['form_timestamp']) > strtotime($lasts['form_timestamp']))) {
 							// 更新されているのでデータ更新
 							$res = $this->recordModel->setRecordData($record['id'],$return);
 							// ヒストリー
-							$this->recordModel->setImportHistory($record["record_id"],$return['form_timestamp']);
+							$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
 						}
 					} else {
 						// データ無いのでインサート
 						$res = $this->recordModel->setRecordData(0,$return);
 						// ヒストリー
-						$this->recordModel->setImportHistory($record["record_id"],$return['form_timestamp']);
+						$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
 					}
 				}
 
@@ -156,19 +156,19 @@ class Api_sheet extends CI_Controller
 					$record = $this->recordModel->getByEmail($return['email']);
 					if ($record) {
 						// 最新のヒストリーから更新日時を取得
-						$lasts = $this->recordModel->getLastUpdate($record["record_id"]);
-						if (isset($record['form_timestamp']) && isset($return['form_timestamp'])
+						$lasts = $this->recordModel->getLastUpdate($record["id"]);
+						if (isset($lasts['form_timestamp']) && isset($return['form_timestamp'])
 							&& (strtotime($return['form_timestamp']) > strtotime($lasts ['form_timestamp']))) {
 							// 更新されているのでデータ更新
 							$res = $this->recordModel->setRecordData($record['id'],$return);
 							// ヒストリー
-							$this->recordModel->setImportHistory($record["record_id"],$return['form_timestamp']);
+							$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
 						}
 					} else {
 						// データ無いのでインサート
 						$res = $this->recordModel->setRecordData(0,$return);
 						// ヒストリー
-						$this->recordModel->setImportHistory($record["record_id"],$return['form_timestamp']);
+						$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
 					}
 				}
 			}
