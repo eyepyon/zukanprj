@@ -154,6 +154,9 @@ class Api_sheet extends CI_Controller
 
 				if (isset($return['email']) && $return['email'] != "") {
 					$record = $this->recordModel->getByEmail($return['email']);
+
+					print_r($record);
+
 					if ($record) {
 						// 最新のヒストリーから更新日時を取得
 						$lasts = $this->recordModel->getLastUpdate($record["id"]);
