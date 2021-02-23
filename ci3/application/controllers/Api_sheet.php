@@ -69,9 +69,10 @@ class Api_sheet extends CI_Controller
 		$name = "";
 		$detail = "";
 		$status = STATUS_FLAG_ON;
-		$record_base = $this->recordModel->getRecordList($offset, $limit , $name , $detail, $status);
-
 		$this->clearListData(100);
+		sleep(1);
+
+		$record_base = $this->recordModel->getRecordList($offset, $limit , $name , $detail, $status);
 
 		$value = new Google_Service_Sheets_ValueRange();
 

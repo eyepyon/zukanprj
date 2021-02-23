@@ -4,4 +4,4 @@
 */1 * * * * /usr/bin/php /var/www/zukanprj/cgi/batch.php Api_slack checkNewMessage
 */1 * * * * /usr/bin/php /var/www/zukanprj/cgi/batch.php Api_sheet getIdData 1>/dev/null
 
-*/1 * * * * /usr/bin/php /var/www/zukanprj/cgi/batch.php Api_sheet getIdData 1>/dev/null
+*/1 * * * * /usr/bin/php /var/www/zukanprj/cgi/batch.php Api_sheet up_sheet 1>/dev/null
