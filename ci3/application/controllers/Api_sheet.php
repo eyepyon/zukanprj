@@ -260,6 +260,7 @@ class Api_sheet extends CI_Controller
 		$return['enthusiasm'] = trim($record[10]);// 頑張りたいこと＆意気込み
 		$return['qualification'] = trim($record[11]);// 保有する資格
 		$return['community'] = trim($record[12]);// 所属団体/コミュニティ（会社以外）
+		$return['status'] = STATUS_FLAG_ON;// 所属団体/コミュニティ（会社以外）
 
 		return $return;
 	}
