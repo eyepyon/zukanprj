@@ -3,6 +3,7 @@
 require_once '/var/www/zukanprj/vendor/autoload.php';
 //define('SPREADSHEET_ID', '1tIAX3TAvsJWJRQ4XFl7GENGzIbBFJFm37WgD3-tILxU');
 define('SPREADSHEET_ID', '1X9lEQIp0m_JUuV6y0Ke7MxqoM8bGfvAXkNCcxHeiTJA');
+define('FORM_SPREAD_ID', '1HwVaAk61WJQxprH3V6jlVzLi_vjsbHxH8D5YQsNcuaw');
 
 define('CLIENT_SECRET_PATH', APPPATH . 'config/development/weintech-2de74aca5c3b.json');
 
@@ -49,6 +50,7 @@ class Api_sheet extends CI_Controller
 		putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $credentialsPath);
 
 		$this->spreadsheetId = SPREADSHEET_ID;
+		$this->formspreadId = FORM_SPREAD_ID;
 
 		$client = new Google_Client();
 		$client->useApplicationDefaultCredentials();
@@ -122,11 +124,10 @@ class Api_sheet extends CI_Controller
 
 	public function getIdData(){
 
-		$range = sprintf('挑戦者リスト!B3:B');
-		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range);
+		$range = sprintf('登録フォーム!A2:N');
+		$response = $this->service->spreadsheets_values->get($this->formspreadId, $range);
 
 		print_r($response);
-
 
 	}
 
@@ -253,6 +254,18 @@ class Api_sheet extends CI_Controller
 		$return[] = trim($record['community']); //	所属団体/コミュニティ（会社以外）
 		//  	detail
 		return $return;
+	}
+
+	private function __adjust_form($record = array(), $return = array()){
+
+		$return[] = trim($record['study']); // 学びたいことやってみたいこと
+		$return[] = trim($record['contribute']); // 教えられること 貢献できること
+		$return[] = trim($record['most_area']); // 最も取り組みたい領域・分野
+		$return[] = trim($record['enthusiasm']); //	頑張りたいこと＆意気込み
+		$return[] = trim($record['qualification']); //	保有する資格
+		$return[] = trim($record['community']); //	所属団体/コミュニティ（会社以外）
+
+
 	}
 
 }
