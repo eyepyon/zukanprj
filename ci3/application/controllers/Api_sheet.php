@@ -132,25 +132,25 @@ class Api_sheet extends CI_Controller
 			foreach ($response->values as $records) {
 				$return = $this->__adjust_form($records);
 
-				if (isset($return['facebook_account']) && $return['facebook_account'] != "") {
-					$record = $this->recordModel->getByFacebookAccount($return['facebook_account']);
-					if ($record) {
-						// 最新のヒストリーから更新日時を取得
-						$lasts = $this->recordModel->getLastUpdate($record["id"]);
-						if (isset($lasts['form_timestamp']) && isset($return['form_timestamp'])
-							&& (strtotime($return['form_timestamp']) > strtotime($lasts['form_timestamp']))) {
-							// 更新されているのでデータ更新
-							$res = $this->recordModel->setRecordData($record['id'],$return);
-							// ヒストリー
-							$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
-						}
-					} else {
-						// データ無いのでインサート
-						$res = $this->recordModel->setRecordData(0,$return);
-						// ヒストリー
-						$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
-					}
-				}
+//				if (isset($return['facebook_account']) && $return['facebook_account'] != "") {
+//					$record = $this->recordModel->getByFacebookAccount($return['facebook_account']);
+//					if ($record) {
+//						// 最新のヒストリーから更新日時を取得
+//						$lasts = $this->recordModel->getLastUpdate($record["id"]);
+//						if (isset($lasts['form_timestamp']) && isset($return['form_timestamp'])
+//							&& (strtotime($return['form_timestamp']) > strtotime($lasts['form_timestamp']))) {
+//							// 更新されているのでデータ更新
+//							$res = $this->recordModel->setRecordData($record['id'],$return);
+//							// ヒストリー
+//							$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
+//						}
+//					} else {
+//						// データ無いのでインサート
+//						$record_id = $this->recordModel->setRecordData(0,$return);
+//						// ヒストリー
+//						$this->recordModel->setImportHistory($record_id,$return['form_timestamp']);
+//					}
+//				}
 
 				if (isset($return['email']) && $return['email'] != "") {
 					$record = $this->recordModel->getByEmail($return['email']);
@@ -160,15 +160,15 @@ class Api_sheet extends CI_Controller
 						if (isset($lasts['form_timestamp']) && isset($return['form_timestamp'])
 							&& (strtotime($return['form_timestamp']) > strtotime($lasts ['form_timestamp']))) {
 							// 更新されているのでデータ更新
-							$res = $this->recordModel->setRecordData($record['id'],$return);
+							$this->recordModel->setRecordData($record['id'],$return);
 							// ヒストリー
 							$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
 						}
 					} else {
 						// データ無いのでインサート
-						$res = $this->recordModel->setRecordData(0,$return);
+						$record_id = $this->recordModel->setRecordData(0,$return);
 						// ヒストリー
-						$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
+						$this->recordModel->setImportHistory($record_id,$return['form_timestamp']);
 					}
 				}
 			}
