@@ -127,7 +127,12 @@ class Api_sheet extends CI_Controller
 		$range = sprintf('登録フォーム!A2:N');
 		$response = $this->service->spreadsheets_values->get($this->formspreadId, $range);
 
-		print_r($response);
+		if(isset($response->values) && is_array($response->values) && count($response->values)>0){
+			print_r($response->values);
+		}
+
+		print "\nOK";
+//		print_r($response);
 
 	}
 
