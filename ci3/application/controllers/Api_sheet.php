@@ -113,6 +113,11 @@ class Api_sheet extends CI_Controller
 		print "OK";
 	}
 
+	public function checkUpdater($last = 0)
+	{
+
+	}
+
 	/**
 	 * フォーム→DBにいれるやつ
 	 */
@@ -208,12 +213,12 @@ class Api_sheet extends CI_Controller
 		$return[] = trim($record['name']); // 名前（漢字）
 		$return[] = trim($record['name_kana']); //	名前（カタカナ）
 //		email
-		if(strlen(trim($record['facebook_account'])>1)) {
+		if(strlen(trim($record['facebook_account']))>1) {
 			$return[] = "https://www.facebook.com/" . trim($record['facebook_account']); //	Facebookアカウント
 		}else{
 			$return[] = ""; //	Facebookアカウント
 		}
-		if(strlen(trim($record['twitter_account'])>1)){
+		if(strlen(trim($record['twitter_account']))>1){
 			$return[] = "https://twitter.com/".trim($record['twitter_account']); //	Twitterアカウント
 		}else{
 			$return[] = ""; //	Twitterアカウント
