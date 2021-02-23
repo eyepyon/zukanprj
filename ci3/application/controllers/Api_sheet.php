@@ -78,6 +78,8 @@ class Api_sheet extends CI_Controller
 		foreach ($record_base as $record) {
 
 			$result = $this->__adjust_list($record);
+
+			print_r($result);
 			$value->setValues(['values' => $result]);
 
 			$response = $this->service->spreadsheets_values->append(
