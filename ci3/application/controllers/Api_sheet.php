@@ -291,7 +291,7 @@ class Api_sheet extends CI_Controller
 			"" => 0, "社会人" => 1, "学生" => 2
 		);
 
-		if (strpos($record[2], 'facebook.com/')) {
+		if (strpos($record[4], 'facebook.com/')) {
 			$p = explode('facebook.com/', $record[4]);
 			$p1 = explode('/', $p[1]);
 			$facebook_account = trim($p1[0]);
@@ -299,7 +299,7 @@ class Api_sheet extends CI_Controller
 			$facebook_account = trim($record[4]);
 		}
 
-		if (strpos($record[2], 'twitter.com/')) {
+		if (strpos($record[5], 'twitter.com/')) {
 			$p = explode('twitter.com/', $record[5]);
 			$p1 = explode('/', $p[1]);
 			$twitter_account = trim($p1[0]);
