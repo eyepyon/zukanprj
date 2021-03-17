@@ -296,7 +296,7 @@ class Api_sheet extends CI_Controller
 			$p1 = explode('/', $p[1]);
 			$facebook_account = trim($p1[0]);
 		} else {
-			$facebook_account = trim($record[2]);
+			$facebook_account = trim($record[4]);
 		}
 
 		if (strpos($record[2], 'twitter.com/')) {
@@ -304,7 +304,7 @@ class Api_sheet extends CI_Controller
 			$p1 = explode('/', $p[1]);
 			$twitter_account = trim($p1[0]);
 		} else {
-			$twitter_account = trim($record[3]);
+			$twitter_account = trim($record[5]);
 		}
 
 		$return['form_timestamp'] = trim($record[0]);// タイムスタンプ
