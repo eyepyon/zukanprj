@@ -3,7 +3,10 @@
 require_once '/var/www/zukanprj/vendor/autoload.php';
 //define('SPREADSHEET_ID', '1tIAX3TAvsJWJRQ4XFl7GENGzIbBFJFm37WgD3-tILxU');
 define('SPREADSHEET_ID', '1X9lEQIp0m_JUuV6y0Ke7MxqoM8bGfvAXkNCcxHeiTJA');
-define('FORM_SPREAD_ID', '1HwVaAk61WJQxprH3V6jlVzLi_vjsbHxH8D5YQsNcuaw');
+//define('FORM_SPREAD_ID', '1HwVaAk61WJQxprH3V6jlVzLi_vjsbHxH8D5YQsNcuaw');
+define('FORM_SPREAD_ID', '1oEls_L7LQIxDadGGW4o77RKJxUhVh0Kc1V11EhPioZ0'); // NEW
+
+// https://docs.google.com/spreadsheets/d/1oEls_L7LQIxDadGGW4o77RKJxUhVh0Kc1V11EhPioZ0/edit#gid=1372403603
 
 define('CLIENT_SECRET_PATH', APPPATH . 'config/development/weintech-2de74aca5c3b.json');
 
@@ -242,7 +245,7 @@ class Api_sheet extends CI_Controller
 	 * @param array $return
 	 * @return array|mixed
 	 */
-	private function __adjust_form($record = array(), $return = array()){
+	private function __adjust_formOLD($record = array(), $return = array()){
 
 		$array_re_attribute = array(
 			"" => 0, "社会人" => 1, "学生" => 2
@@ -281,6 +284,52 @@ class Api_sheet extends CI_Controller
 
 		return $return;
 	}
+
+	private function __adjust_form($record = array(), $return = array()){
+
+		$array_re_attribute = array(
+			"" => 0, "社会人" => 1, "学生" => 2
+		);
+
+		if (strpos($record[2], 'facebook.com/')) {
+			$p = explode('facebook.com/', $record[4]);
+			$p1 = explode('/', $p[1]);
+			$facebook_account = trim($p1[0]);
+		} else {
+			$facebook_account = trim($record[2]);
+		}
+
+		if (strpos($record[2], 'twitter.com/')) {
+			$p = explode('twitter.com/', $record[5]);
+			$p1 = explode('/', $p[1]);
+			$twitter_account = trim($p1[0]);
+		} else {
+			$twitter_account = trim($record[3]);
+		}
+
+		$return['form_timestamp'] = trim($record[0]);// タイムスタンプ
+		$return['email'] = trim($record[1]);// メールアドレス
+		$return['name'] = trim($record[2]);// 名前（フルネーム・漢字）
+		$return['name_kana'] = trim($record[3]);// 名前（フルネーム・カタカナ）
+		$return['facebook_account'] = $facebook_account;// FacebookアカウントのURL
+		$return['twitter_account'] = $twitter_account;// TwitterアカウントのURL
+		$return['attribute'] = $array_re_attribute[trim($record[6])];// 属性
+		$return['study'] = trim($record[7]);// 学びたいこと・やってみたいこと
+		$return['contribute'] = trim($record[8]);// 教えられること貢献できること
+		$return['most_area'] = trim($record[9]);// 最も取り組みたい領域・分野
+		$return['enthusiasm'] = trim($record[10]);// 頑張りたいこと＆意気込み
+		$return['qualification'] = trim($record[11]);// 保有する資格
+		$return['community'] = trim($record[12]);// 所属団体/コミュニティ（会社以外）
+		$return['challenge_now'] = trim($record[13]);// あなたの現在の挑戦・支援の取り組みは行えていますか？ [挑戦]
+		$return['support_now'] = trim($record[14]);// あなたの現在の挑戦・支援の取り組みは行えていますか？ [支援]
+		$return['happiness_rank'] = trim($record[15]);// あなたの幸福度に近い数値をご記入ください。（全体・上限を10としたとき）
+		$return['join_prj'] = trim($record[16]);// 少人数　みんなで挑戦プロジェクト参加意向
+//		$return['community'] = trim($record[17]);// 上記確認事項に同意する
+		$return['status'] = STATUS_FLAG_ON;//
+
+		return $return;
+	}
+
 
 }
 
