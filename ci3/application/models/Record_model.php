@@ -22,21 +22,25 @@ class Record_model extends CI_Model
 
     }
 
-    /**
-     * @param int $offset
-     * @param int $limit
-     * @param string $name
-     * @param string $detail
-     * @param int $status
-     * @return int|array
-     */
-    function getRecordList($offset = 0, $limit = 0, $name = "", $detail = "", $status = STATUS_FLAG_OFF)
+	/**
+	 * @param int $sheet_type
+	 * @param int $offset
+	 * @param int $limit
+	 * @param string $name
+	 * @param string $detail
+	 * @param int $status
+	 * @return int
+	 */
+    function getRecordList($sheet_type=PRJ_SHEET_TYPE_NONE,$offset = 0, $limit = 0, $name = "", $detail = "", $status = STATUS_FLAG_OFF)
     {
 
         $this->db->select('*');
         $this->db->from($this->dataDb);
-        if ($status == STATUS_FLAG_ON) {
-            $this->db->where('status', STATUS_FLAG_ON);
+		if ($status == STATUS_FLAG_ON) {
+			$this->db->where('status', STATUS_FLAG_ON);
+		}
+        if ($sheet_type != PRJ_SHEET_TYPE_NONE) {
+            $this->db->where('sheet_type', $sheet_type);
         }
         if ($name != "") {
             $this->db->like('name', $name, 'both');
@@ -103,14 +107,18 @@ class Record_model extends CI_Model
 
 	/**
 	 * @param string $email
+	 * @param int $sheet_type
 	 * @return mixed|null
 	 */
-	function getByEmail($email = "")
+	function getByEmail($email = "",$sheet_type=PRJ_SHEET_TYPE_NONE)
 	{
 
 		$this->db->select('*');
 		$this->db->from($this->dataDb);
 		$this->db->where('email', $email);
+		if ($sheet_type != PRJ_SHEET_TYPE_NONE) {
+			$this->db->where('sheet_type', $sheet_type);
+		}
 
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {

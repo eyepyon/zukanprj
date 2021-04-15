@@ -179,14 +179,15 @@ class Record extends MY_Controller
     public function index($page = 0)
     {
         $this->data['error_word'] = "";
+		$sheet_type = 0;
 
         $search = $this->input->post_get('search');
         $this->data['search'] = $search;
         $search_val = $this->getSearchValue();
 
         $offset = $page * $this->data['page_limit'];
-        $list = $this->recordModel->getRecordList($offset, $this->data['page_limit'], $this->data["name"], $this->data["detail"], STATUS_FLAG_ON);
-        $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['name'], $this->data['detail'], STATUS_FLAG_ON);
+        $list = $this->recordModel->getRecordList($sheet_type,$offset, $this->data['page_limit'], $this->data["name"], $this->data["detail"], STATUS_FLAG_ON);
+        $total_rows = $this->recordModel->getRecordList($sheet_type,0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['name'], $this->data['detail'], STATUS_FLAG_ON);
 
         foreach ($list as $key => $record){
             $list[$key]["popup_url"] = $this->getPopup($record['id'],PRJ_MEMBER_TYPE_CHALLENGE);
@@ -212,14 +213,14 @@ class Record extends MY_Controller
     public function page($page = 0)
     {
         $this->data['error_word'] = "";
-
+		$sheet_type = 0;
         $search = $this->input->post_get('search');
         $this->data['search'] = $search;
         $search_val = $this->getSearchValue();
 
         $offset = $page * $this->data['page_limit'];
-        $list = $this->recordModel->getRecordList($offset, $this->data['page_limit'], $this->data["name"], $this->data["detail"], STATUS_FLAG_ON);
-        $total_rows = $this->recordModel->getRecordList(0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['name'], $this->data['detail'], STATUS_FLAG_ON);
+        $list = $this->recordModel->getRecordList($sheet_type,$offset, $this->data['page_limit'], $this->data["name"], $this->data["detail"], STATUS_FLAG_ON);
+        $total_rows = $this->recordModel->getRecordList($sheet_type,0, ALL_COUNT_FLAG_AT_LIMIT, $this->data['name'], $this->data['detail'], STATUS_FLAG_ON);
 
         foreach ($list as $key => $record){
             $list[$key]["popup_url"] = $this->getPopup($record['id'],PRJ_MEMBER_TYPE_CHALLENGE);
