@@ -134,9 +134,16 @@ class Api_sheet extends CI_Controller
 
 	public function checkUpdater($last = 0)
 	{
+		$sheet_type = 2;
+		$this->spreadsheetId = $this->prj_sheet_type_spreadsheet_id_array[$sheet_type];
 
+		$range = sprintf('挑戦者リスト!B1:B1');
+		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range);
+
+		if (isset($response->values) && is_array($response->values) && count($response->values) > 0) {
+			print_r($response->values);
+		}
 	}
-
 	/**
 	 * フォーム→DBにいれるやつ
 	 */
