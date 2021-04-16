@@ -139,7 +139,7 @@ class Api_sheet extends CI_Controller
 
 		$range = sprintf('挑戦者リスト!B1:B1');
 		$options = [
-			'ValueRenderOption' => 'UNFORMATTED_VALUE'
+			'DateTimeRenderOptionbookmark_border' => 'SERIAL_NUMBER'
 		];
 		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range,$options);
 
