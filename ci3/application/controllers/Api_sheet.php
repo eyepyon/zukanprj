@@ -139,10 +139,11 @@ class Api_sheet extends CI_Controller
 
 		$range = sprintf('挑戦者リスト!B1:B1');
 		$options = [
-			'ranges'=>[ $range ],
+			'range'=>[ $range ],
 			'dateTimeRenderOption' => 'SERIAL_NUMBER'
 		];
-		$response = $this->service->spreadsheets_values->batchGet($this->spreadsheetId, $options);
+		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $options);
+//		$response = $this->service->spreadsheets_values->batchGet($this->spreadsheetId, $options);
 		print_r($response);
 		if (isset($response->values) && is_array($response->values) && count($response->values) > 0) {
 
