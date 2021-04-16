@@ -143,9 +143,9 @@ class Api_sheet extends CI_Controller
 		];
 		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range , $options);
 //		$response = $this->service->spreadsheets_values->batchGet($this->spreadsheetId, $options);
-		print_r($response);
+		print_r($response->values[0]);
 		if (isset($response->values) && is_array($response->values) && count($response->values) > 0) {
-
+//			print_r($response);
 		}
 	}
 	/**
