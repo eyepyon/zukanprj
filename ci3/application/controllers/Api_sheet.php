@@ -142,7 +142,7 @@ class Api_sheet extends CI_Controller
 			'range'=>$range,
 			'dateTimeRenderOption' => 'SERIAL_NUMBER'
 		];
-		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $options);
+		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range);
 //		$response = $this->service->spreadsheets_values->batchGet($this->spreadsheetId, $options);
 		print_r($response);
 		if (isset($response->values) && is_array($response->values) && count($response->values) > 0) {
