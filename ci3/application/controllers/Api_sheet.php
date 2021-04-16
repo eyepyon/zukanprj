@@ -138,7 +138,10 @@ class Api_sheet extends CI_Controller
 		$this->spreadsheetId = $this->prj_sheet_type_spreadsheet_id_array[$sheet_type];
 
 		$range = sprintf('挑戦者リスト!B1:B1');
-		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range);
+		$options = [
+			'valueInputOption' => 'UNFORMATTED_VALUE'
+		];
+		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range,$options);
 
 		if (isset($response->values) && is_array($response->values) && count($response->values) > 0) {
 			print_r($response->values);
