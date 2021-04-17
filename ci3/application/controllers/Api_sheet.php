@@ -136,13 +136,18 @@ class Api_sheet extends CI_Controller
 	{
 		$check_param = "";
 //		$this->spreadsheetId = $this->prj_sheet_type_spreadsheet_id_array[$sheet_type];
-		$this->spreadsheetId = $this->sheetModel->getSpreadSheetId($sheet_type);
+//		$this->spreadsheetId = $this->sheetModel->getSpreadSheetId($sheet_type);
+		$this->formspreadId = $this->sheetModel->getFormSpreadId($sheet_type);
 
-		$range = sprintf('挑戦者リスト!B1:B1');
+		$range = sprintf('登録フォーム!Z1:Z1');
 		$options = [
 			'valueRenderOption' => 'UNFORMATTED_VALUE'
 		];
-		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range, $options);
+//		$range = sprintf('挑戦者リスト!B1:B1');
+//		$options = [
+//			'valueRenderOption' => 'UNFORMATTED_VALUE'
+//		];
+		$response = $this->service->spreadsheets_values->get($this->formspreadId, $range, $options);
 //		$response = $this->service->spreadsheets_values->batchGet($this->spreadsheetId, $options);
 //		print_r($response->values[0][0]);
 		if (isset($response->values[0]) && is_array($response->values[0]) && count($response->values[0]) > 0) {
@@ -173,9 +178,9 @@ class Api_sheet extends CI_Controller
 		if ($check_param > $last_array["versions"]) {
 			// 更新有りバッチ起動
 			$this->up_sheet();
-			sleep(1);// 念の為
-			// 再取得
-			$check_param = $this->__getCheckParam($sheet_type);
+//			sleep(1);// 念の為
+//			// 再取得
+//			$check_param = $this->__getCheckParam($sheet_type);
 			// DB更新！
 			$this->sheetModel->setVersionValue($sheet_type, $check_param);
 			// 正常終了
