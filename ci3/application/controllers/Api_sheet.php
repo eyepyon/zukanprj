@@ -181,7 +181,7 @@ class Api_sheet extends CI_Controller
 //		$this->formspreadId = $this->prj_sheet_type_form_spread_id_array[$sheet_type];
 		$this->formspreadId = $this->sheetModel->getFormSpreadId($sheet_type);
 
-		$range = sprintf('登録フォーム!A2:N');
+		$range = sprintf('登録フォーム!A2:T'); // TODO
 		$response = $this->service->spreadsheets_values->get($this->formspreadId, $range);
 
 		if(isset($response->values) && is_array($response->values) && count($response->values)>0){
