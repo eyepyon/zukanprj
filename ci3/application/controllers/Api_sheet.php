@@ -272,7 +272,9 @@ class Api_sheet extends CI_Controller
 		$return[] = $array_attribute[trim($record['attribute'])]; //	属性(1,社会人 2,学生)
 		$return[] = trim($record['study']); // 学びたいことやってみたいこと
 		$return[] = trim($record['contribute']); // 教えられること 貢献できること
+		$return[] = trim($record['participating_team']); //所属している分科TEAMを教えてください。
 		$return[] = trim($record['most_area']); // 最も取り組みたい領域・分野
+		$return[] = trim($record['contribute_role']); //	貢献したい役割
 		$return[] = trim($record['enthusiasm']); //	頑張りたいこと＆意気込み
 		$return[] = trim($record['qualification']); //	保有する資格
 		$return[] = trim($record['community']); //	所属団体/コミュニティ（会社以外）
@@ -361,15 +363,17 @@ class Api_sheet extends CI_Controller
 		$return['attribute'] = $array_re_attribute[trim($record[6])];// 属性
 		$return['study'] = trim($record[7]);// 学びたいこと・やってみたいこと
 		$return['contribute'] = trim($record[8]);// 教えられること貢献できること
-		$return['most_area'] = trim($record[9]);// 最も取り組みたい領域・分野
-		$return['enthusiasm'] = trim($record[10]);// 頑張りたいこと＆意気込み
-		$return['qualification'] = trim($record[11]);// 保有する資格
-		$return['community'] = trim($record[12]);// 所属団体/コミュニティ（会社以外）
-		$return['challenge_now'] = trim($record[13]);// あなたの現在の挑戦・支援の取り組みは行えていますか？ [挑戦]
-		$return['support_now'] = trim($record[14]);// あなたの現在の挑戦・支援の取り組みは行えていますか？ [支援]
-		$return['happiness_rank'] = trim($record[15]);// あなたの幸福度に近い数値をご記入ください。（全体・上限を10としたとき）
-		$return['join_prj'] = trim($record[16]);// 少人数　みんなで挑戦プロジェクト参加意向
-//		$return['community'] = trim($record[17]);// 上記確認事項に同意する
+		$return['participating_team'] = trim($record[9]);// 所属している分科TEAM
+		$return['most_area'] = trim($record[10]);// 最も取り組みたい領域・分野
+		$return['contribute_role'] = trim($record[11]); //貢献したい役割
+		$return['enthusiasm'] = trim($record[12]);// 頑張りたいこと＆意気込み
+		$return['qualification'] = trim($record[13]);// 保有する資格
+		$return['community'] = trim($record[14]);// 所属団体/コミュニティ（会社以外）
+		$return['challenge_now'] = trim($record[15]);// あなたの現在の挑戦・支援の取り組みは行えていますか？ [挑戦]
+		$return['support_now'] = trim($record[16]);// あなたの現在の挑戦・支援の取り組みは行えていますか？ [支援]
+		$return['happiness_rank'] = trim($record[17]);// あなたの幸福度に近い数値をご記入ください。（全体・上限を10としたとき）
+		$return['join_prj'] = trim($record[18]);// 少人数　みんなで挑戦プロジェクト参加意向
+//		$return['community'] = trim($record[19]);// 上記確認事項に同意する
 		$return['status'] = STATUS_FLAG_ON;//
 
 		return $return;
