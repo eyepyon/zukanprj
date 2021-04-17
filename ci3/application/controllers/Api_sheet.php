@@ -134,16 +134,20 @@ class Api_sheet extends CI_Controller
 		print "OK";
 	}
 
-	public function checkUpdater($last = 0)
+	/**
+	 * @param int $sheet_type
+	 * @return string
+	 */
+	private function __getCheckParam($sheet_type = 0)
 	{
-		$sheet_type = 2;
+		$check_param = "";
 		$this->spreadsheetId = $this->prj_sheet_type_spreadsheet_id_array[$sheet_type];
 
 		$range = sprintf('挑戦者リスト!B1:B1');
 		$options = [
 			'valueRenderOption' => 'UNFORMATTED_VALUE'
 		];
-		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range , $options);
+		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range, $options);
 //		$response = $this->service->spreadsheets_values->batchGet($this->spreadsheetId, $options);
 //		print_r($response->values[0][0]);
 		if (isset($response->values[0]) && is_array($response->values[0]) && count($response->values[0]) > 0) {
@@ -151,27 +155,37 @@ class Api_sheet extends CI_Controller
 
 			print_r($ver_array[0]);
 
-			if(isset($ver_array[0])){
-				$check_param = sprintf("%s",$ver_array[0]);
-
-				$last_array = $this->sheetModel->getByType($sheet_type);
-
-				print "\nCHECK:".$check_param;
-				print "\nLAST:".$last_array["versions"];
-				print_r( $last_array["versions"]);
-				if($check_param > $last_array["versions"]){
-					// 更新有りバッチ起動
-					$this->up_sheet();
-					// DB更新！
-					$this->sheetModel->setVersionValue($sheet_type,$check_param);
-					// 正常終了
-
-				}
-
+			if (isset($ver_array[0])) {
+				$check_param = sprintf("%s", $ver_array[0]);
 			}
-
-
 		}
+		return $check_param;
+	}
+
+	/**
+	 * @param int $last
+	 */
+	public function checkUpdater($last = 0)
+	{
+		$sheet_type = 2;
+		$check_param = $this->__getCheckParam($sheet_type);
+
+		$last_array = $this->sheetModel->getByType($sheet_type);
+
+		print "\nCHECK:" . $check_param;
+		print "\nLAST:" . $last_array["versions"];
+		print_r($last_array["versions"]);
+		if ($check_param > $last_array["versions"]) {
+			// 更新有りバッチ起動
+			$this->up_sheet();
+			sleep(1);// 念の為
+			// 再取得
+			$check_param = $this->__getCheckParam($sheet_type);
+			// DB更新！
+			$this->sheetModel->setVersionValue($sheet_type, $check_param);
+			// 正常終了
+		}
+
 	}
 	/**
 	 * フォーム→DBにいれるやつ
