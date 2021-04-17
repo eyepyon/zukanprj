@@ -21,6 +21,7 @@ define('CLIENT_SECRET_PATH', APPPATH . 'config/development/weintech-2de74aca5c3b
  * @property Record_model $recordModel
  * @property User_model $userModel
  * @property Slack_model $slackModel
+ * @property Sheet_model $sheetModel
  */
 
 // スコープの設定
@@ -53,6 +54,7 @@ class Api_sheet extends CI_Controller
 		$this->load->model('User_model', 'userModel');
 		$this->load->model('Record_model', 'recordModel');
 		$this->load->model('Slack_model', 'slackModel');
+		$this->load->model('Sheet_model', 'sheetModel');
 
 		$this->prj_sheet_type_array = $this->config->item('prj_sheet_type_array');
 		$this->prj_sheet_type_spreadsheet_id_array = $this->config->item('prj_sheet_type_spreadsheet_id_array');
@@ -143,9 +145,26 @@ class Api_sheet extends CI_Controller
 		];
 		$response = $this->service->spreadsheets_values->get($this->spreadsheetId, $range , $options);
 //		$response = $this->service->spreadsheets_values->batchGet($this->spreadsheetId, $options);
-		print_r($response->values[0]);
-		if (isset($response->values) && is_array($response->values) && count($response->values) > 0) {
-//			print_r($response);
+//		print_r($response->values[0][0]);
+		if (isset($response->values[0]) && is_array($response->values[0]) && count($response->values[0]) > 0) {
+			$ver_array = $response->values[0];
+
+			print_r($ver_array[0]);
+
+			if(isset($ver_array[0])){
+				$check_param = sprintf("%s",$ver_array[0]);
+
+				$last_param = $this->sheetModel->getByType($sheet_type);
+
+				print "\nCHECK:".$check_param;
+				print "\nLAST:".$last_param;
+				if($check_param > $last_param){
+
+				}
+
+			}
+
+
 		}
 	}
 	/**
