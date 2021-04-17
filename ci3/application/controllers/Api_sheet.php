@@ -154,12 +154,17 @@ class Api_sheet extends CI_Controller
 			if(isset($ver_array[0])){
 				$check_param = sprintf("%s",$ver_array[0]);
 
-				$last_param = $this->sheetModel->getByType($sheet_type);
+				$last_array = $this->sheetModel->getByType($sheet_type);
 
 				print "\nCHECK:".$check_param;
-				print "\nLAST:";
-				print_r( $last_param);
-				if($check_param > $last_param){
+				print "\nLAST:".$last_array["versions"];
+				print_r( $last_array["versions"]);
+				if($check_param > $last_array["versions"]){
+					// 更新有りバッチ起動
+					$this->up_sheet();
+					// DB更新！
+					$this->sheetModel->setVersionValue($sheet_type,$check_param);
+					// 正常終了
 
 				}
 
