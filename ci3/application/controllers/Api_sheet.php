@@ -157,7 +157,8 @@ class Api_sheet extends CI_Controller
 				$last_param = $this->sheetModel->getByType($sheet_type);
 
 				print "\nCHECK:".$check_param;
-				print "\nLAST:".$last_param;
+				print "\nLAST:";
+				print_r( $last_param);
 				if($check_param > $last_param){
 
 				}
