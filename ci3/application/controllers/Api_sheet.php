@@ -1,12 +1,6 @@
 <?php
 
 require_once '/var/www/zukanprj/vendor/autoload.php';
-//define('SPREADSHEET_ID', '1tIAX3TAvsJWJRQ4XFl7GENGzIbBFJFm37WgD3-tILxU');
-define('SPREADSHEET_ID', '1X9lEQIp0m_JUuV6y0Ke7MxqoM8bGfvAXkNCcxHeiTJA');
-//define('FORM_SPREAD_ID', '1HwVaAk61WJQxprH3V6jlVzLi_vjsbHxH8D5YQsNcuaw');
-define('FORM_SPREAD_ID', '1oEls_L7LQIxDadGGW4o77RKJxUhVh0Kc1V11EhPioZ0'); // NEW
-
-// https://docs.google.com/spreadsheets/d/1oEls_L7LQIxDadGGW4o77RKJxUhVh0Kc1V11EhPioZ0/edit#gid=1372403603
 
 define('CLIENT_SECRET_PATH', APPPATH . 'config/development/weintech-2de74aca5c3b.json');
 
@@ -43,8 +37,8 @@ class Api_sheet extends CI_Controller
 	protected $formspreadId;
 
 	protected $prj_sheet_type_array;
-	protected $prj_sheet_type_spreadsheet_id_array;
-	protected $prj_sheet_type_form_spread_id_array;
+//	protected $prj_sheet_type_spreadsheet_id_array;
+//	protected $prj_sheet_type_form_spread_id_array;
 
 	public function __construct()
 	{
@@ -57,14 +51,14 @@ class Api_sheet extends CI_Controller
 		$this->load->model('Sheet_model', 'sheetModel');
 
 		$this->prj_sheet_type_array = $this->config->item('prj_sheet_type_array');
-		$this->prj_sheet_type_spreadsheet_id_array = $this->config->item('prj_sheet_type_spreadsheet_id_array');
-		$this->prj_sheet_type_form_spread_id_array = $this->config->item('prj_sheet_type_form_spread_id_array');
+//		$this->prj_sheet_type_spreadsheet_id_array = $this->config->item('prj_sheet_type_spreadsheet_id_array');
+//		$this->prj_sheet_type_form_spread_id_array = $this->config->item('prj_sheet_type_form_spread_id_array');
 
 		$credentialsPath = CLIENT_SECRET_PATH;
 		putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $credentialsPath);
 
-		$this->spreadsheetId = SPREADSHEET_ID;
-		$this->formspreadId = FORM_SPREAD_ID;
+		$this->spreadsheetId = "";
+		$this->formspreadId = "";
 
 		$client = new Google_Client();
 		$client->useApplicationDefaultCredentials();
@@ -84,8 +78,8 @@ class Api_sheet extends CI_Controller
 		$detail = "";
 		$status = STATUS_FLAG_ON;
 		$sheet_type = 2;
-		$this->spreadsheetId = $this->prj_sheet_type_spreadsheet_id_array[$sheet_type];
-
+//		$this->spreadsheetId = $this->prj_sheet_type_spreadsheet_id_array[$sheet_type];
+		$this->spreadsheetId = $this->sheetModel->getSpreadSheetId($sheet_type);
 		$this->clearListData($this->spreadsheetId,100);
 		sleep(1);
 
@@ -141,7 +135,8 @@ class Api_sheet extends CI_Controller
 	private function __getCheckParam($sheet_type = 0)
 	{
 		$check_param = "";
-		$this->spreadsheetId = $this->prj_sheet_type_spreadsheet_id_array[$sheet_type];
+//		$this->spreadsheetId = $this->prj_sheet_type_spreadsheet_id_array[$sheet_type];
+		$this->spreadsheetId = $this->sheetModel->getSpreadSheetId($sheet_type);
 
 		$range = sprintf('挑戦者リスト!B1:B1');
 		$options = [
@@ -193,7 +188,8 @@ class Api_sheet extends CI_Controller
 	public function getIdData(){
 
 		$sheet_type = 2;
-		$this->formspreadId = $this->prj_sheet_type_form_spread_id_array[$sheet_type];
+//		$this->formspreadId = $this->prj_sheet_type_form_spread_id_array[$sheet_type];
+		$this->formspreadId = $this->sheetModel->getFormSpreadId($sheet_type);
 
 		$range = sprintf('登録フォーム!A2:N');
 		$response = $this->service->spreadsheets_values->get($this->formspreadId, $range);

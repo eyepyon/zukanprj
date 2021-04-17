@@ -52,6 +52,31 @@ class Sheet_model extends CI_Model
 		return $return[0];
 	}
 
+	/**
+	 * @param int $type
+	 * @return mixed|string
+	 */
+	function getSpreadSheetId($type = 0){
+
+		$return = $this->getByType($type);
+		if(isset($return["spreadsheet_id"])){
+			return $return["spreadsheet_id"];
+		}
+		return "";
+	}
+
+	/**
+	 * @param int $type
+	 * @return mixed|string
+	 */
+	function getFormSpreadId($type = 0){
+
+		$return = $this->getByType($type);
+		if(isset($return["formspread_id"])){
+			return $return["formspread_id"];
+		}
+		return "";
+	}
 
 	/**
 	 * @param int $type
