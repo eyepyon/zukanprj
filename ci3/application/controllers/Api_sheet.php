@@ -37,8 +37,6 @@ class Api_sheet extends CI_Controller
 	protected $formspreadId;
 
 	protected $prj_sheet_type_array;
-//	protected $prj_sheet_type_spreadsheet_id_array;
-//	protected $prj_sheet_type_form_spread_id_array;
 
 	public function __construct()
 	{
@@ -51,8 +49,6 @@ class Api_sheet extends CI_Controller
 		$this->load->model('Sheet_model', 'sheetModel');
 
 		$this->prj_sheet_type_array = $this->config->item('prj_sheet_type_array');
-//		$this->prj_sheet_type_spreadsheet_id_array = $this->config->item('prj_sheet_type_spreadsheet_id_array');
-//		$this->prj_sheet_type_form_spread_id_array = $this->config->item('prj_sheet_type_form_spread_id_array');
 
 		$credentialsPath = CLIENT_SECRET_PATH;
 		putenv('GOOGLE_APPLICATION_CREDENTIALS=' . $credentialsPath);
@@ -78,7 +74,6 @@ class Api_sheet extends CI_Controller
 		$detail = "";
 		$status = STATUS_FLAG_ON;
 		$sheet_type = 2;
-//		$this->spreadsheetId = $this->prj_sheet_type_spreadsheet_id_array[$sheet_type];
 		$this->spreadsheetId = $this->sheetModel->getSpreadSheetId($sheet_type);
 		$this->clearListData($this->spreadsheetId,100);
 		sleep(1);
@@ -135,25 +130,17 @@ class Api_sheet extends CI_Controller
 	private function __getCheckParam($sheet_type = 0)
 	{
 		$check_param = "";
-//		$this->spreadsheetId = $this->prj_sheet_type_spreadsheet_id_array[$sheet_type];
-//		$this->spreadsheetId = $this->sheetModel->getSpreadSheetId($sheet_type);
 		$this->formspreadId = $this->sheetModel->getFormSpreadId($sheet_type);
 
 		$range = sprintf('登録フォーム!Z1:Z1');
 		$options = [
 			'valueRenderOption' => 'UNFORMATTED_VALUE'
 		];
-//		$range = sprintf('挑戦者リスト!B1:B1');
-//		$options = [
-//			'valueRenderOption' => 'UNFORMATTED_VALUE'
-//		];
 		$response = $this->service->spreadsheets_values->get($this->formspreadId, $range, $options);
-//		$response = $this->service->spreadsheets_values->batchGet($this->spreadsheetId, $options);
-//		print_r($response->values[0][0]);
 		if (isset($response->values[0]) && is_array($response->values[0]) && count($response->values[0]) > 0) {
 			$ver_array = $response->values[0];
 
-			print_r($ver_array[0]);
+//			print_r($ver_array[0]);
 
 			if (isset($ver_array[0])) {
 				$check_param = sprintf("%s", $ver_array[0]);
@@ -178,15 +165,13 @@ class Api_sheet extends CI_Controller
 		if ($check_param > $last_array["versions"]) {
 			// 更新有りバッチ起動
 			$this->up_sheet();
-//			sleep(1);// 念の為
-//			// 再取得
-//			$check_param = $this->__getCheckParam($sheet_type);
 			// DB更新！
 			$this->sheetModel->setVersionValue($sheet_type, $check_param);
 			// 正常終了
 		}
 
 	}
+
 	/**
 	 * フォーム→DBにいれるやつ
 	 */
@@ -216,36 +201,12 @@ class Api_sheet extends CI_Controller
 
 				$return["sheet_type"]= $sheet_type;
 
-//				if (isset($return['facebook_account']) && $return['facebook_account'] != "") {
-//					$record = $this->recordModel->getByFacebookAccount($return['facebook_account']);
-//					if ($record) {
-//						// 最新のヒストリーから更新日時を取得
-//						$lasts = $this->recordModel->getLastUpdate($record["id"]);
-//						if (isset($lasts['form_timestamp']) && isset($return['form_timestamp'])
-//							&& (strtotime($return['form_timestamp']) > strtotime($lasts['form_timestamp']))) {
-//							// 更新されているのでデータ更新
-//							$res = $this->recordModel->setRecordData($record['id'],$return);
-//							// ヒストリー
-//							$this->recordModel->setImportHistory($record["id"],$return['form_timestamp']);
-//						}
-//					} else {
-//						// データ無いのでインサート
-//						$record_id = $this->recordModel->setRecordData(0,$return);
-//						// ヒストリー
-//						$this->recordModel->setImportHistory($record_id,$return['form_timestamp']);
-//					}
-//				}
-
 				if (isset($return['email']) && $return['email'] != "") {
 					$record = $this->recordModel->getByEmail($return['email'],$sheet_type);
-
-//					print_r($record);
-//					print_r($return);
 
 					if ($record) {
 						// 最新のヒストリーから更新日時を取得
 						$lasts = $this->recordModel->getLastUpdate($record["id"]);
-//						print_r($lasts);
 						if(is_null($lasts)){
 							// 更新されているのでデータ更新
 							$this->recordModel->setRecordData($record['id'],$return);
@@ -315,54 +276,59 @@ class Api_sheet extends CI_Controller
 		$return[] = trim($record['enthusiasm']); //	頑張りたいこと＆意気込み
 		$return[] = trim($record['qualification']); //	保有する資格
 		$return[] = trim($record['community']); //	所属団体/コミュニティ（会社以外）
+		$return[] = trim($record['challenge_now']); //	あなたの現在の挑戦・支援の取り組みは行えていますか？ [挑戦]
+		$return[] = trim($record['support_now']); //	あなたの現在の挑戦・支援の取り組みは行えていますか？ [支援]
+		$return[] = trim($record['happiness_rank']); //	あなたの幸福度に近い数値をご記入ください。（全体・上限を10としたとき）
+		$return[] = trim($record['join_prj']); //	少人数　みんなで挑戦プロジェクト参加意向
+
 		//  	detail
 		return $return;
 	}
 
-	/**
-	 * @param array $record
-	 * @param array $return
-	 * @return array|mixed
-	 */
-	private function __adjust_formOLD($record = array(), $return = array()){
-
-		$array_re_attribute = array(
-			"" => 0, "社会人" => 1, "学生" => 2
-		);
-
-		if (strpos($record[2], 'facebook.com/')) {
-			$p = explode('facebook.com/', $record[2]);
-			$p1 = explode('/', $p[1]);
-			$facebook_account = trim($p1[0]);
-		} else {
-			$facebook_account = trim($record[2]);
-		}
-
-		if (strpos($record[2], 'twitter.com/')) {
-			$p = explode('twitter.com/', $record[3]);
-			$p1 = explode('/', $p[1]);
-			$twitter_account = trim($p1[0]);
-		} else {
-			$twitter_account = trim($record[3]);
-		}
-
-		$return['form_timestamp'] = trim($record[0]);// タイムスタンプ
-		$return['name'] = trim($record[1]);// 名前（フルネーム・漢字）
-		$return['facebook_account'] = $facebook_account;// FacebookアカウントのURL
-		$return['twitter_account'] = $twitter_account;// TwitterアカウントのURL
-		$return['email'] = trim($record[4]);// メールアドレス
-		$return['attribute'] = $array_re_attribute[trim($record[5])];// 属性
-		$return['name_kana'] = trim($record[6]);// 名前（フルネーム・カタカナ）
-		$return['study'] = trim($record[7]);// 学びたいこと・やってみたいこと
-		$return['contribute'] = trim($record[8]);// 教えられること貢献できること
-		$return['most_area'] = trim($record[9]);// 最も取り組みたい領域・分野
-		$return['enthusiasm'] = trim($record[10]);// 頑張りたいこと＆意気込み
-		$return['qualification'] = trim($record[11]);// 保有する資格
-		$return['community'] = trim($record[12]);// 所属団体/コミュニティ（会社以外）
-		$return['status'] = STATUS_FLAG_ON;// 所属団体/コミュニティ（会社以外）
-
-		return $return;
-	}
+//	/**
+//	 * @param array $record
+//	 * @param array $return
+//	 * @return array|mixed
+//	 */
+//	private function __adjust_formOLD($record = array(), $return = array()){
+//
+//		$array_re_attribute = array(
+//			"" => 0, "社会人" => 1, "学生" => 2
+//		);
+//
+//		if (strpos($record[2], 'facebook.com/')) {
+//			$p = explode('facebook.com/', $record[2]);
+//			$p1 = explode('/', $p[1]);
+//			$facebook_account = trim($p1[0]);
+//		} else {
+//			$facebook_account = trim($record[2]);
+//		}
+//
+//		if (strpos($record[2], 'twitter.com/')) {
+//			$p = explode('twitter.com/', $record[3]);
+//			$p1 = explode('/', $p[1]);
+//			$twitter_account = trim($p1[0]);
+//		} else {
+//			$twitter_account = trim($record[3]);
+//		}
+//
+//		$return['form_timestamp'] = trim($record[0]);// タイムスタンプ
+//		$return['name'] = trim($record[1]);// 名前（フルネーム・漢字）
+//		$return['facebook_account'] = $facebook_account;// FacebookアカウントのURL
+//		$return['twitter_account'] = $twitter_account;// TwitterアカウントのURL
+//		$return['email'] = trim($record[4]);// メールアドレス
+//		$return['attribute'] = $array_re_attribute[trim($record[5])];// 属性
+//		$return['name_kana'] = trim($record[6]);// 名前（フルネーム・カタカナ）
+//		$return['study'] = trim($record[7]);// 学びたいこと・やってみたいこと
+//		$return['contribute'] = trim($record[8]);// 教えられること貢献できること
+//		$return['most_area'] = trim($record[9]);// 最も取り組みたい領域・分野
+//		$return['enthusiasm'] = trim($record[10]);// 頑張りたいこと＆意気込み
+//		$return['qualification'] = trim($record[11]);// 保有する資格
+//		$return['community'] = trim($record[12]);// 所属団体/コミュニティ（会社以外）
+//		$return['status'] = STATUS_FLAG_ON;// 所属団体/コミュニティ（会社以外）
+//
+//		return $return;
+//	}
 
 	private function __adjust_form($record = array(), $return = array()){
 
@@ -439,52 +405,47 @@ class Api_sheet extends CI_Controller
 		$return['twitter_account'] = $twitter_account;// TwitterアカウントのURL
 		$return['attribute'] = $array_re_attribute[trim($record[6])];// 属性
 		$return['study'] = trim($record[7]);// 学びたいこと・やってみたいこと
-
-		$return['study'] = sprintf("%s",trim($record[7]));// "[SNS運用の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[WEBデザインの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[グラフィックデザインの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[プロダクトデザインの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[写真撮影/動画撮影の経験年数]"
-
-		$return['contribute'] = trim($record[8]);// 教えられること貢献できること
-
-		$return['study'] = sprintf("%s",trim($record[7]));// "[オフラインイベント企画・運営の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[オンラインイベント企画・運営の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[Youtube・SNS等LIVE動画配信の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[オンラインコミュニティ設計・運営の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[PR/ブランディングの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[マーケティングの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[ライティング/執筆の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[Webサイト制作の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[フロントエンドエンジニアの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[ゲームエンジニアの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[制御・組み込み系エンジニアの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[サーバーエンジニアの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[ネットワークエンジニアの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[データベースエンジニアの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[機械学習の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[ディープラーニングの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[会社・組織経営の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[経営企画の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[人事/採用の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[ファイナンスの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[経理の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[営業の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[知財の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[法務/法律の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[語学（英語）の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[語学（その他）の経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[コーチングの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[講師・研修ファシリテーションの経験年数]"
-		$return['study'] = sprintf("%s",trim($record[7]));// "[カウンセリングの経験年数]"
-
-		$return['most_area'] = trim($record[9]);// 最も取り組みたい領域・分野
-		$return['enthusiasm'] = trim($record[10]);// 頑張りたいこと＆意気込み
-		$return['qualification'] = trim($record[11]);// 保有する資格
-		$return['community'] = trim($record[12]);// 所属団体/コミュニティ（会社以外）
-
-		$return['chanow'] = trim($record[13]);// "[マーケティング経験者]得意なスキル・受賞歴"
-//		$return['community'] = trim($record[17]);// 上記確認事項に同意する
+		$return['sns_operation_experience'] = sprintf("%s",trim($record[8]));// "[SNS運用の経験年数]"
+		$return['web_design_experience'] = sprintf("%s",trim($record[9]));// "[WEBデザインの経験年数]"
+		$return['graphic_design_experience'] = sprintf("%s",trim($record[10]));// "[グラフィックデザインの経験年数]"
+		$return['product_design_experience'] = sprintf("%s",trim($record[11]));// "[プロダクトデザインの経験年数]"
+		$return['photo_video_experience'] = sprintf("%s",trim($record[12]));// "[写真撮影/動画撮影の経験年数]"
+		$return['contribute'] = trim($record[13]);// 教えられること貢献できること
+		$return['offline_event_experience'] = sprintf("%s",trim($record[14]));// "[オフラインイベント企画・運営の経験年数]"
+		$return['online_event_experience'] = sprintf("%s",trim($record[15]));// "[オンラインイベント企画・運営の経験年数]"
+		$return['live_streaming_experience'] = sprintf("%s",trim($record[16]));// "[Youtube・SNS等LIVE動画配信の経験年数]"
+		$return['online_community_operation_experience'] = sprintf("%s",trim($record[17]));// "[オンラインコミュニティ設計・運営の経験年数]"
+		$return['pr_branding_experience'] = sprintf("%s",trim($record[18]));// "[PR/ブランディングの経験年数]"
+		$return['marketing_experience'] = sprintf("%s",trim($record[19]));// "[マーケティングの経験年数]"
+		$return['writing_experience'] = sprintf("%s",trim($record[20]));// "[ライティング/執筆の経験年数]"
+		$return['website_production_experience'] = sprintf("%s",trim($record[21]));// "[Webサイト制作の経験年数]"
+		$return['frontend_engineer_experience'] = sprintf("%s",trim($record[22]));// "[フロントエンドエンジニアの経験年数]"
+		$return['game_engineer_experience'] = sprintf("%s",trim($record[23]));// "[ゲームエンジニアの経験年数]"
+		$return['embedded_engineer_experience'] = sprintf("%s",trim($record[24]));// "[制御・組み込み系エンジニアの経験年数]"
+		$return['server_side_engineer_experience'] = sprintf("%s",trim($record[25]));// "[サーバーエンジニアの経験年数]"
+		$return['network_engineer_experience'] = sprintf("%s",trim($record[26]));// "[ネットワークエンジニアの経験年数]"
+		$return['database_engineer_experience'] = sprintf("%s",trim($record[27]));// "[データベースエンジニアの経験年数]"
+		$return['machine_learning_experience'] = sprintf("%s",trim($record[28]));// "[機械学習の経験年数]"
+		$return['deep_learning_experience'] = sprintf("%s",trim($record[29]));// "[ディープラーニングの経験年数]"
+		$return['company_management_experience'] = sprintf("%s",trim($record[30]));// "[会社・組織経営の経験年数]"
+		$return['corporate_planning_experience'] = sprintf("%s",trim($record[31]));// "[経営企画の経験年数]"
+		$return['hr_experience'] = sprintf("%s",trim($record[32]));// "[人事/採用の経験年数]"
+		$return['finance_experience'] = sprintf("%s",trim($record[33]));// "[ファイナンスの経験年数]"
+		$return['accounting_experience'] = sprintf("%s",trim($record[34]));// "[経理の経験年数]"
+		$return['sales_experience'] = sprintf("%s",trim($record[35]));// "[営業の経験年数]"
+		$return['intellectual_property_experience'] = sprintf("%s",trim($record[36]));// "[知財の経験年数]"
+		$return['legal_experience'] = sprintf("%s",trim($record[37]));// "[法務/法律の経験年数]"
+		$return['english_experience'] = sprintf("%s",trim($record[38]));// "[語学（英語）の経験年数]"
+		$return['language_experience'] = sprintf("%s",trim($record[39]));// "[語学（その他）の経験年数]"
+		$return['coaching_experience'] = sprintf("%s",trim($record[40]));// "[コーチングの経験年数]"
+		$return['training_facilitation_experience'] = sprintf("%s",trim($record[41]));// "[講師・研修ファシリテーションの経験年数]"
+		$return['counseling_experience'] = sprintf("%s",trim($record[42]));// "[カウンセリングの経験年数]"
+		$return['most_area'] = trim($record[43]);// 最も取り組みたい領域・分野
+		$return['enthusiasm'] = trim($record[44]);// 頑張りたいこと＆意気込み
+		$return['qualification'] = trim($record[45]);// 保有する資格
+		$return['community'] = trim($record[46]);// 所属団体/コミュニティ（会社以外）
+		$return['award_history'] = trim($record[47]);// "[マーケティング経験者]得意なスキル・受賞歴"
+//		$return['community'] = trim($record[48]);// 上記確認事項に同意する
 		$return['status'] = STATUS_FLAG_ON;//
 
 		return $return;
