@@ -70,8 +70,6 @@ define( 'DELETE_STATUS_DELETE', 1 );
 define( 'DELETE_STATUS_WAIT_COMMIT', 2 );
 
 
-
-
 //define( 'BATCH_LOCK_ACTIVE', STATUS_FLAG_ON );//	セマフォロック使うか？TODO 一時的にRESOURCEに移動
 //define( 'BATCH_LOCK_ACTIVE', STATUS_FLAG_OFF );//	セマフォロック使うか？
 define( 'BATCH_SEM_TARGET_ID_BATCH', 88 );//	送受信
@@ -103,7 +101,7 @@ $config['prj_sheet_type_array'] = array(
 define( 'PRJ_SHEET_TYPE_KANTO_ZUKAN_SPREADSHEET_ID', '1tIAX3TAvsJWJRQ4XFl7GENGzIbBFJFm37WgD3-tILxU'  );//
 define( 'PRJ_SHEET_TYPE_TSUNAGU_SPREADSHEET_ID', '1X9lEQIp0m_JUuV6y0Ke7MxqoM8bGfvAXkNCcxHeiTJA'  );//　
 define( 'PRJ_SHEET_TYPE_TSUNAGU_LONG_SPREADSHEET_ID', 'TSUNAGUv2'  );//　
-define( 'PRJ_SHEET_TYPE_WEIN_TEAM_SPREADSHEET_ID', 'XX'  );//　
+define( 'PRJ_SHEET_TYPE_WEIN_TEAM_SPREADSHEET_ID', '1d-iXwLd4pa8MJIq2WSTseQx82k49qBBChOohrTlZko0'  );//　
 
 $config['prj_sheet_type_spreadsheet_id_array'] = array(
 	''=>'---',
@@ -115,7 +113,7 @@ $config['prj_sheet_type_spreadsheet_id_array'] = array(
 define( 'PRJ_SHEET_TYPE_KANTO_ZUKAN_FORM_SPREAD_ID', '1HwVaAk61WJQxprH3V6jlVzLi_vjsbHxH8D5YQsNcuaw'  );//
 define( 'PRJ_SHEET_TYPE_TSUNAGU_FORM_SPREAD_ID', '1oEls_L7LQIxDadGGW4o77RKJxUhVh0Kc1V11EhPioZ0'  );//　
 define( 'PRJ_SHEET_TYPE_TSUNAGU_LONG_FORM_SPREAD_ID', 'TSUNAGUv2'  );//　
-define( 'PRJ_SHEET_TYPE_WEIN_TEAM_SPREAD_ID', 'xx'  );//　
+define( 'PRJ_SHEET_TYPE_WEIN_TEAM_SPREAD_ID', '1BnAYnsoMk58rU-yC0cqGTcUlNo-brUdzZ2tfo1lIaJo'  );//　
 $config['prj_sheet_type_form_spread_id_array'] = array(
 	''=>'---',
 	PRJ_SHEET_TYPE_KANTO_ZUKAN => PRJ_SHEET_TYPE_KANTO_ZUKAN_FORM_SPREAD_ID,

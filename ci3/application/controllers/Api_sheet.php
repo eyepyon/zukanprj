@@ -177,7 +177,7 @@ class Api_sheet extends CI_Controller
 	 */
 	public function getIdData(){
 
-		$sheet_type = 2;
+		$sheet_type = 4;
 //		$this->formspreadId = $this->prj_sheet_type_form_spread_id_array[$sheet_type];
 		$this->formspreadId = $this->sheetModel->getFormSpreadId($sheet_type);
 
