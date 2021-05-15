@@ -97,8 +97,8 @@ class Api_sheet extends CI_Controller
 		print_r($record_base);
 		foreach ($record_base as $record) {
 
-//			$result = $this->__adjust_team_list($record);
-			$result = $this->__adjust_list($record);
+			$result = $this->__adjust_team_list($record);
+//			$result = $this->__adjust_list($record);
 
 			print_r($result);
 			$value->setValues(['values' => $result]);
