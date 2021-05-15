@@ -73,7 +73,7 @@ class Api_sheet extends CI_Controller
 		$name = "";
 		$detail = "";
 		$status = STATUS_FLAG_ON;
-		$sheet_type = 4;
+		$sheet_type = 2;
 		$this->spreadsheetId = $this->sheetModel->getSpreadSheetId($sheet_type);
 
 
