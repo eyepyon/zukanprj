@@ -99,7 +99,7 @@ class Api_sheet extends CI_Controller
 
 			$result = $this->__adjust_team_list($record);
 
-//			print_r($result);
+			print_r($result);
 			$value->setValues(['values' => $result]);
 
 //			$response = $this->service->spreadsheets_values->append(
@@ -108,6 +108,8 @@ class Api_sheet extends CI_Controller
 			$response = $this->service->spreadsheets_values->update(
 				$this->spreadsheetId, sprintf('挑戦者リスト!A%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
 			);
+			$updated_cell_count = $response->getUpdatedCells();
+	print 		$updated_cell_count;
 
 			print_r($response);
 
@@ -144,7 +146,7 @@ class Api_sheet extends CI_Controller
 		$check_param = "";
 		$this->formspreadId = $this->sheetModel->getFormSpreadId($sheet_type);
 
-		$range = sprintf('登録フォーム!BW1:BW1');
+		$range = sprintf('登録フォーム!BW1:BW1');// 中間フォームの更新日時のところにあわせる
 		$options = [
 			'valueRenderOption' => 'UNFORMATTED_VALUE'
 		];
@@ -300,20 +302,22 @@ class Api_sheet extends CI_Controller
 		$return[] = trim($record['want_to_join']); // 参加したいもの、関わりたいものを教えてください
 		$return[] = trim($record['study']); // 学びたいこと・やってみたいこと
 		$return[] = trim($record['want_to_school']); // 参加したいスクール
-		$return[] = trim($record['school_year']); // 学年
-		$return[] = trim($record['school_name']); // 現在通っている学校名
-		$return[] = trim($record['school_department']); // 所属している学部を教えてください
+
 		$return[] = $array_attribute[trim($record['attribute'])]; //	属性(1,社会人 2,学生)
 
-		$return[] = trim($record['intern']); // 現在アルバイトやインターンをしていますか
-		$return[] = trim($record['intern_organization']); // 「している」を選択された方は、企業名（組織名）を教えてください
-		$return[] = trim($record['occupation']); // 現在のご職業
-		$return[] = trim($record['company_name']); // 所属する会社名/組織名
-		$return[] = trim($record['company_department']); // 所属する組織・会社における所属する部署名
+//		$return[] = trim($record['school_year']); // 学年
+		$return[] = trim($record['school_name']); // 現在通っている学校名
+//		$return[] = trim($record['school_department']); // 所属している学部を教えてください
+//		$return[] = trim($record['intern']); // 現在アルバイトやインターンをしていますか
+//		$return[] = trim($record['intern_organization']); // 「している」を選択された方は、企業名（組織名）を教えてください
 
-		$return[] = trim($record['company_position']); // 会社における役職名や立場について教えてください
-		$return[] = trim($record['last_school_name']); // 最終学歴の出身大学
-		$return[] = trim($record['last_school_department']); // ）所属していた学部を
+		$return[] = trim($record['occupation']); // 現在のご職業
+//		$return[] = trim($record['company_name']); // 所属する会社名/組織名
+//		$return[] = trim($record['company_department']); // 所属する組織・会社における所属する部署名
+//		$return[] = trim($record['company_position']); // 会社における役職名や立場について教えてください
+//		$return[] = trim($record['last_school_name']); // 最終学歴の出身大学
+//		$return[] = trim($record['last_school_department']); // ）所属していた学部を
+
 		$return[] = trim($record['contribute']); // 教えられること貢献できること
 		$return[] = trim($record['contribute_level']); // 教えられること貢献できること
 		$return[] = trim($record['contribute_2']); // 二番目に教えられること貢献できること
@@ -321,15 +325,12 @@ class Api_sheet extends CI_Controller
 		$return[] = trim($record['contribute_3']); // 三番目に教えられること貢献できること
 		$return[] = trim($record['contribute_level_3']); // 三番目に貢献できる領域におけるレベル
 
-//
-//		$return[] = trim($record['study']); // 学びたいことやってみたいこと
-//		$return[] = trim($record['contribute']); // 教えられること 貢献できること
-//		$return[] = trim($record['participating_team']); //所属している分科TEAMを教えてください。
-//		$return[] = trim($record['most_area']); // 最も取り組みたい領域・分野
-//		$return[] = trim($record['contribute_role']); //	貢献したい役割
-//		$return[] = trim($record['enthusiasm']); //	頑張りたいこと＆意気込み
-//		$return[] = trim($record['qualification']); //	保有する資格
-//		$return[] = trim($record['community']); //	所属団体/コミュニティ（会社以外）
+		$return[] = trim($record['participating_team']); //所属している分科TEAMを教えてください。
+		$return[] = trim($record['most_area']); // 最も取り組みたい領域・分野
+		$return[] = trim($record['contribute_role']); //	貢献したい役割
+		$return[] = trim($record['enthusiasm']); //	頑張りたいこと＆意気込み
+		$return[] = trim($record['qualification']); //	保有する資格
+		$return[] = trim($record['community']); //	所属団体/コミュニティ（会社以外）
 //		$return[] = trim($record['challenge_now']); //	あなたの現在の挑戦・支援の取り組みは行えていますか？ [挑戦]
 //		$return[] = trim($record['support_now']); //	あなたの現在の挑戦・支援の取り組みは行えていますか？ [支援]
 //		$return[] = trim($record['happiness_rank']); //	あなたの幸福度に近い数値をご記入ください。（全体・上限を10としたとき）
