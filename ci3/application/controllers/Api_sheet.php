@@ -99,16 +99,17 @@ class Api_sheet extends CI_Controller
 
 			$result = $this->__adjust_team_list($record);
 
-			print_r($result);
+//			print_r($result);
 			$value->setValues(['values' => $result]);
 
 //			$response = $this->service->spreadsheets_values->append(
 //				$this->spreadsheetId, sprintf('挑戦者リスト!B%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
 //			);
 			$response = $this->service->spreadsheets_values->update(
-				$this->spreadsheetId, sprintf('挑戦者リスト!B%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
+				$this->spreadsheetId, sprintf('挑戦者リスト!A%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
 			);
 
+			print_r($response);
 
 			$num++;
 
@@ -127,7 +128,7 @@ class Api_sheet extends CI_Controller
 	 */
 	public function clearListData($spreadsheetId = "",$last = 0){
 
-		$range = sprintf('挑戦者リスト!B3:%d',$last);
+		$range = sprintf('挑戦者リスト!A3:%d',$last);
 		$clearRange = new Google_Service_Sheets_ClearValuesRequest();
 		$this->service->spreadsheets_values->clear($spreadsheetId, $range, $clearRange);
 
@@ -143,7 +144,7 @@ class Api_sheet extends CI_Controller
 		$check_param = "";
 		$this->formspreadId = $this->sheetModel->getFormSpreadId($sheet_type);
 
-		$range = sprintf('登録フォーム!Z1:Z1');
+		$range = sprintf('登録フォーム!BW1:BW1');
 		$options = [
 			'valueRenderOption' => 'UNFORMATTED_VALUE'
 		];
