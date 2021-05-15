@@ -79,7 +79,7 @@ class Api_sheet extends CI_Controller
 
 		$response = $this->service->spreadsheets->get($this->spreadsheetId);
 		$allSheets = $response->getSheets();
-		if(sheetsExistCkc($allSheets, '挑戦者リスト')) {
+		if($this->__sheetsExistCheck($allSheets, '挑戦者リスト')) {
 			echo "exist";
 		} else {
 			echo "not exist";
