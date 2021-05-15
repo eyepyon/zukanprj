@@ -103,16 +103,16 @@ class Api_sheet extends CI_Controller
 			print_r($result);
 			$value->setValues(['values' => $result]);
 
-			$response = $this->service->spreadsheets_values->append(
-				$this->spreadsheetId, sprintf('挑戦者リスト!B%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
-			);
-//			$response = $this->service->spreadsheets_values->update(
+//			$response = $this->service->spreadsheets_values->append(
 //				$this->spreadsheetId, sprintf('挑戦者リスト!B%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
 //			);
-			$updated_cell_count = $response->getUpdatedCells();
-	print 		$updated_cell_count;
+			$response = $this->service->spreadsheets_values->update(
+				$this->spreadsheetId, sprintf('挑戦者リスト!B%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
+			);
 
-			print_r($response);
+			$updated_cell_count = $response->getUpdatedCells();
+			print $updated_cell_count;
+			print_r(json_decode($response,true));
 
 			$num++;
 
