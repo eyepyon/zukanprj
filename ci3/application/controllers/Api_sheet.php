@@ -154,7 +154,7 @@ class Api_sheet extends CI_Controller
 	 */
 	public function checkUpdater($last = 0)
 	{
-		$sheet_type = 2;
+		$sheet_type = 4;
 		$check_param = $this->__getCheckParam($sheet_type);
 
 		$last_array = $this->sheetModel->getByType($sheet_type);
