@@ -75,15 +75,26 @@ class Api_sheet extends CI_Controller
 		$status = STATUS_FLAG_ON;
 		$sheet_type = 4;
 		$this->spreadsheetId = $this->sheetModel->getSpreadSheetId($sheet_type);
-		$this->clearListData($this->spreadsheetId,100);
+
+
+		$response = $this->service->spreadsheets->get($this->spreadsheetId);
+		$allSheets = $response->getSheets();
+		if(sheetsExistCkc($allSheets, '挑戦者リスト')) {
+			echo "exist";
+		} else {
+			echo "not exist";
+			exit;
+		}
+
+		$this->clearListData($this->spreadsheetId,200);
 		sleep(1);
 
 		$record_base = $this->recordModel->getRecordList($sheet_type,$offset, $limit , $name , $detail, $status);
 
 		$value = new Google_Service_Sheets_ValueRange();
 
-		$num = 3;
-
+		$num = 2;
+		print_r($record_base);
 		foreach ($record_base as $record) {
 
 			$result = $this->__adjust_team_list($record);
@@ -267,15 +278,15 @@ class Api_sheet extends CI_Controller
 		}else{
 			$return[] = ""; //	Facebookアカウント
 		}
-		$return[] = trim($record['study']); // 学びたいことやってみたいこと
-		$return[] = trim($record['study']); // 学びたいことやってみたいこと
-		$return[] = trim($record['study']); // 学びたいことやってみたいこと
+//		$return[] = trim($record['study']); // 学びたいことやってみたいこと
+//		$return[] = trim($record['study']); // 学びたいことやってみたいこと
+//		$return[] = trim($record['study']); // 学びたいことやってみたいこと
 
-		if(strlen(trim($record['twitter_account']))>1){
-			$return[] = "https://twitter.com/".trim($record['twitter_account']); //	Twitterアカウント
-		}else{
-			$return[] = ""; //	Twitterアカウント
-		}
+//		if(strlen(trim($record['twitter_account']))>1){
+//			$return[] = "https://twitter.com/".trim($record['twitter_account']); //	Twitterアカウント
+//		}else{
+//			$return[] = ""; //	Twitterアカウント
+//		}
 
 		$return[] = trim($record['line_account']); // LineアカウントのURL
 //		$return[] = trim($record['sex']);// 性別
@@ -605,6 +616,20 @@ class Api_sheet extends CI_Controller
 		$return['status'] = STATUS_FLAG_ON;//
 
 		return $return;
+	}
+
+	/**
+	 * @param $sheetsList
+	 * @param $sheetName
+	 * @return bool
+	 */
+	private function __sheetsExistCheck($sheetsList, $sheetName) {
+		foreach($sheetsList as $sheet) {
+			if($sheet->properties->title === $sheetName) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
