@@ -292,7 +292,7 @@ class Api_sheet extends CI_Controller
 //			$return[] = ""; //	Twitterアカウント
 //		}
 
-		$return[] = trim($record['line_account']); // LineアカウントのURL
+//		$return[] = trim($record['line_account']); // LineアカウントのURL
 //		$return[] = trim($record['sex']);// 性別
 //		$return[] = trim($record['tel']);// 携帯電話
 //		$return[] = trim($record['birthday']); // 生年月日
