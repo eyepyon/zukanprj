@@ -271,7 +271,7 @@ class Api_sheet extends CI_Controller
 		$array_attribute = array(
 			"","社会人","学生"
 		);
-
+		$return[] = "START";
 		$return[] = sprintf("%03d",trim($record['id'])); // No.
 //		$return[] = $record['user_id']; // No.
 		$return[] = trim($record['name']); // 名前（漢字）
@@ -337,6 +337,7 @@ class Api_sheet extends CI_Controller
 //		$return[] = trim($record['happiness_rank']); //	あなたの幸福度に近い数値をご記入ください。（全体・上限を10としたとき）
 //		$return[] = trim($record['join_prj']); //	少人数　みんなで挑戦プロジェクト参加意向
 
+		unset($return[0]);
 		//  	detail
 		return $return;
 	}
