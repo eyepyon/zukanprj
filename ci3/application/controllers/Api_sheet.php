@@ -93,7 +93,7 @@ class Api_sheet extends CI_Controller
 
 		$value = new Google_Service_Sheets_ValueRange();
 
-		$num = 2;
+		$num = 3;
 		print_r($record_base);
 		foreach ($record_base as $record) {
 
@@ -106,7 +106,7 @@ class Api_sheet extends CI_Controller
 //				$this->spreadsheetId, sprintf('挑戦者リスト!B%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
 //			);
 			$response = $this->service->spreadsheets_values->update(
-				$this->spreadsheetId, sprintf('挑戦者リスト!A%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
+				$this->spreadsheetId, sprintf('挑戦者リスト!B%d',$num), $value, ['valueInputOption' => 'USER_ENTERED']
 			);
 			$updated_cell_count = $response->getUpdatedCells();
 	print 		$updated_cell_count;
