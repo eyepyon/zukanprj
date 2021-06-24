@@ -15,6 +15,7 @@ use Lcobucci\JWT\Builder;
  */
 class Api_zoom extends CI_Controller
 {
+	private const ZOOM_API_URI = 'https://api.zoom.us/v2/';
 
 	public function __construct()
 	{
@@ -22,8 +23,6 @@ class Api_zoom extends CI_Controller
 
 		$this->load->library('Mmapi');
 		$this->load->model('Zoom_model', 'zoomModel');
-
-		$this->data['base_url'] = $this->config->item('base_url');
 	}
 
 	public function index(){
@@ -56,7 +55,7 @@ class Api_zoom extends CI_Controller
 		$method = 'GET';
 		$path = 'users';
 		$client_params = [
-			'base_uri' => $this->data['base_url'],
+			'base_uri' => self::ZOOM_API_URI,
 		];
 		$result = $this->sendRequest($method, $path, $client_params);
 		$user_id = $result['users'][0]['id'];
@@ -86,7 +85,7 @@ class Api_zoom extends CI_Controller
 		$method = 'POST';
 		$path = 'users/'. $user_id .'/meetings';
 		$client_params = [
-			'base_uri' => $this->data['base_url'],
+			'base_uri' => self::ZOOM_API_URI,
 			'json' => $params
 		];
 		$result = $this->sendRequest($method, $path, $client_params);
